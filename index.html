@@ -59,6 +59,78 @@
 
   <!-- SINGLE INTERACTIVE ANDROID SMARTPHONE STAGE -->
   <main id="singlePhoneStage" class="device-stage single-stage">
+    <!-- Left Executive Telemetry & Quick Navigator Rail (Wide Screens) -->
+    <aside class="desktop-companion-rail">
+      <!-- Personnel Dossier Card -->
+      <div class="companion-glass-card">
+        <div class="companion-card-header">
+          <span class="companion-card-title">Personnel Dossier</span>
+          <span class="companion-header-tag">Active Duty</span>
+        </div>
+        <div class="companion-profile-row">
+          <div class="companion-avatar">
+            <img src="assets/koala/sara_avatar.svg" alt="Sara Sharma">
+          </div>
+          <div class="companion-profile-info">
+            <h3>Sub-Insp. Sara Sharma</h3>
+            <p>Battalion 42 • Sector Delta</p>
+          </div>
+        </div>
+        <div class="companion-stat-pills-grid">
+          <div class="companion-stat-box">
+            <span class="c-lbl">Resilience Score</span>
+            <span class="c-val" id="railResilienceScore" style="color:#34D399;">84%</span>
+          </div>
+          <div class="companion-stat-box">
+            <span class="c-lbl">Stress Risk</span>
+            <span class="c-val" id="railStressRisk" style="color:#60A5FA;">Low (0.18)</span>
+          </div>
+          <div class="companion-stat-box">
+            <span class="c-lbl">Rest Rhythm</span>
+            <span class="c-val" id="railRestRhythm">8.0 hrs</span>
+          </div>
+          <div class="companion-stat-box">
+            <span class="c-lbl">Check-In Streak</span>
+            <span class="c-val" id="railStreak">5 Days</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Screen Launcher -->
+      <div class="companion-glass-card">
+        <div class="companion-card-header">
+          <span class="companion-card-title">Direct Screen Jumps</span>
+          <span style="font-size:11px; color:rgba(255,255,255,0.4);">Interactive</span>
+        </div>
+        <div class="companion-screen-nav-list">
+          <button class="companion-nav-btn" onclick="navigateToScreen('04')">
+            <span>🏠 Home Dashboard</span>
+            <span class="badge">Screen 04</span>
+          </button>
+          <button class="companion-nav-btn" onclick="startCheckinFlow()">
+            <span>🧘 Daily Check-in Flow</span>
+            <span class="badge">Steps 1-3</span>
+          </button>
+          <button class="companion-nav-btn" onclick="navigateToScreen('08')">
+            <span>🌿 Self Care &amp; Pacer</span>
+            <span class="badge">Screen 08</span>
+          </button>
+          <button class="companion-nav-btn" onclick="navigateToScreen('10')">
+            <span>📈 Journal &amp; Dynamic Wave</span>
+            <span class="badge">Screen 10</span>
+          </button>
+          <button class="companion-nav-btn" onclick="navigateToScreen('11')">
+            <span>🚨 Emergency SOS &amp; Help</span>
+            <span class="badge">Screen 11</span>
+          </button>
+          <button class="companion-nav-btn" onclick="navigateToScreen('13')" style="border-color:rgba(16,185,129,0.3); color:#34D399;">
+            <span>🛡️ Welfare Officer Portal</span>
+            <span class="badge" style="background:#10B981; color:#FFFFFF;">Admin</span>
+          </button>
+        </div>
+      </div>
+    </aside>
+
     <div class="android-phone">
       <div class="phone-viewport">
         <!-- Android Status Bar -->
@@ -1302,6 +1374,59 @@
 
       </div>
     </div>
+
+    <!-- Right Telemetry & Operations Companion Rail (Wide Screens) -->
+    <aside class="desktop-companion-rail">
+      <!-- Behavioral Analytics Telemetry Card -->
+      <div class="companion-glass-card">
+        <div class="companion-card-header">
+          <span class="companion-card-title">Behavioral Engine</span>
+          <span class="companion-header-tag" style="background:rgba(59,130,246,0.15); color:#60A5FA; border-color:rgba(59,130,246,0.3);">Online v2.4</span>
+        </div>
+        <div style="font-size:12px; color:rgba(255,255,255,0.7); line-height:1.45;">
+          Predictive behavioral analytics continuously evaluates voluntary indicators, sleep fragmentation, and operational rhythm to mitigate burnout.
+        </div>
+        <div class="companion-stat-pills-grid">
+          <div class="companion-stat-box">
+            <span class="c-lbl">Climate Stress</span>
+            <span class="c-val" style="font-size:13px; color:#FBBF24;">Hypoxia -18°C</span>
+          </div>
+          <div class="companion-stat-box">
+            <span class="c-lbl">Unit Check-In</span>
+            <span class="c-val" style="color:#34D399;">88% Rate</span>
+          </div>
+        </div>
+        <div style="font-size:11px; color:rgba(255,255,255,0.45); font-style:italic;">
+          End-to-end client-side privacy verified. All individual logs strictly encrypted.
+        </div>
+      </div>
+
+      <!-- Quick Interactive Simulation Tools -->
+      <div class="companion-glass-card">
+        <div class="companion-card-header">
+          <span class="companion-card-title">Live Simulator Controls</span>
+          <span style="font-size:11px; color:rgba(255,255,255,0.4);">Quick Actions</span>
+        </div>
+        <div class="companion-screen-nav-list">
+          <button class="companion-nav-btn" onclick="incrementWaterHabit();">
+            <span>💧 Drink Glass of Water</span>
+            <span class="badge">+1 Glass</span>
+          </button>
+          <button class="companion-nav-btn" onclick="incrementMeditationHabit();">
+            <span>🧘 Log Meditation Minutes</span>
+            <span class="badge">+10 Min</span>
+          </button>
+          <button class="companion-nav-btn" onclick="openActivitySession('Tactical Box Breathing (4-4-4)', '3 min', 'Autonomic down-regulation for calm and heart rate stability');">
+            <span>⏱️ Launch Guided Pacer Modal</span>
+            <span class="badge">Open Modal</span>
+          </button>
+          <button class="companion-nav-btn" onclick="document.getElementById('aiEngineModeBtn').click();" style="border-color:rgba(99,102,241,0.3); color:#A5B4FC;">
+            <span>🧠 Open SIH Judge Demo</span>
+            <span class="badge" style="background:#6366F1; color:#FFFFFF;">AI Engine</span>
+          </button>
+        </div>
+      </div>
+    </aside>
   </main>
 
   <!-- 13-SCREEN DESIGN GALLERY MATRIX (SIDE-BY-SIDE INSPECTION MODE) -->

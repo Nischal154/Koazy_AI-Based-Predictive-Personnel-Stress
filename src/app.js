@@ -493,6 +493,20 @@ export function updateHomeDashboardStats() {
       if (dot) dot.className = 'state-dot green';
     }
   }
+
+  // Sync Desktop Companion Rail if present
+  const railResilience = document.getElementById('railResilienceScore');
+  const railRisk = document.getElementById('railStressRisk');
+  const railRest = document.getElementById('railRestRhythm');
+  const railStreak = document.getElementById('railStreak');
+
+  if (railResilience) railResilience.textContent = `${readiness}%`;
+  if (railRisk) {
+    railRisk.textContent = isRisk ? 'Elevated (0.65)' : 'Low (0.18)';
+    railRisk.style.color = isRisk ? '#F87171' : '#60A5FA';
+  }
+  if (railRest) railRest.textContent = sleepHours;
+  if (railStreak) railStreak.textContent = `${profile.streakDays || 5} Days`;
 }
 window.updateHomeDashboardStats = updateHomeDashboardStats;
 

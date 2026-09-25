@@ -3061,51 +3061,135 @@ body, button, input, textarea, select {
 ========================================================= */
 .home-functional-mood-card {
   background: #FFFFFF;
-  border-radius: 20px;
-  padding: 16px;
-  margin-bottom: 16px;
+  border-radius: 22px;
+  padding: 16px 18px;
+  margin-bottom: 14px;
   border: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.functional-mood-top {
+.home-functional-mood-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.functional-mood-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.functional-mood-badge {
+.functional-mood-pill {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  background: #E8F5E9;
-  color: #1B5E20;
+  gap: 7px;
+  background: #F0FDF4;
+  border: 1px solid #DCFCE7;
   padding: 5px 12px;
   border-radius: 99px;
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 800;
+  color: #166534;
   letter-spacing: 0.2px;
 }
 
-.functional-mood-badge.warning {
-  background: #FFEBEE;
-  color: #C62828;
+.state-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
 }
 
-.functional-mood-time {
-  font-size: 11px;
+.state-dot.green {
+  background: #16A34A;
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.25);
+  animation: pulseGreen 2.5s infinite;
+}
+
+.state-dot.blue {
+  background: #2563EB;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
+}
+
+.state-dot.coral {
+  background: #DC2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.25);
+  animation: pulseCoral 2s infinite;
+}
+
+@keyframes pulseGreen {
+  0%, 100% { box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.2); }
+  50% { box-shadow: 0 0 0 5px rgba(22, 163, 74, 0.45); }
+}
+
+@keyframes pulseCoral {
+  0%, 100% { box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.2); }
+  50% { box-shadow: 0 0 0 5px rgba(220, 38, 38, 0.45); }
+}
+
+.functional-update-time {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #94A3B8;
+  letter-spacing: 0.2px;
+}
+
+.functional-metric-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.f-metric-row {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.f-metric-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11.5px;
+  color: #475569;
   font-weight: 600;
-  color: #8C96A1;
 }
 
-.functional-mood-desc {
-  font-size: 12.5px;
-  color: #4A5568;
-  line-height: 1.45;
-  margin: 0;
+.f-metric-info strong {
+  font-weight: 800;
+  color: #0F172A;
+  font-size: 12px;
+}
+
+.f-metric-bar-track {
+  width: 100%;
+  height: 6px;
+  background: #F1F5F9;
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.f-metric-bar-fill {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.f-metric-bar-fill.green {
+  background: linear-gradient(90deg, #22C55E 0%, #16A34A 100%);
+}
+
+.f-metric-bar-fill.blue {
+  background: linear-gradient(90deg, #38BDF8 0%, #2563EB 100%);
+}
+
+.f-metric-bar-fill.coral {
+  background: linear-gradient(90deg, #F87171 0%, #DC2626 100%);
 }
 
 /* 4-Metric Functional Stats Grid on Home */
@@ -3119,133 +3203,140 @@ body, button, input, textarea, select {
 .metric-quad-card {
   background: #FFFFFF;
   border: 1px solid rgba(0, 0, 0, 0.06);
-  border-radius: 18px;
-  padding: 12px 14px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  border-radius: 20px;
+  padding: 13px 14px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  min-height: 78px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  gap: 6px;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s ease;
+  user-select: none;
 }
 
 .metric-quad-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
+  border-color: rgba(0, 0, 0, 0.1);
 }
 
-.metric-quad-header {
+.metric-quad-card:active {
+  transform: scale(0.97);
+}
+
+.quad-icon-badge {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 4px;
-}
-
-.metric-quad-label {
-  font-size: 10.5px;
-  font-weight: 800;
-  color: #718096;
-  text-transform: uppercase;
-  letter-spacing: 0.4px;
-}
-
-.metric-quad-icon {
-  font-size: 14px;
-}
-
-.metric-quad-value {
-  font-size: 18px;
-  font-weight: 800;
-  color: #1A202C;
-  line-height: 1.1;
-  display: flex;
-  align-items: baseline;
-  gap: 4px;
-}
-
-.metric-quad-sub {
-  font-size: 10px;
-  font-weight: 700;
-  color: #38A169;
-  margin-top: 2px;
-}
-
-.metric-quad-sub.alert {
-  color: #E53E3E;
-}
-
-/* =========================================================
-   INTERACTIVE Q&A SESSION IN DAILY CHECK-IN
-========================================================= */
-.checkin-qa-card {
-  background: #FFFFFF;
-  border-radius: 20px;
-  padding: 14px 16px;
-  margin-bottom: 14px;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-}
-
-.checkin-qa-title {
-  font-size: 13.5px;
-  font-weight: 800;
-  color: #1A1E24;
+  justify-content: center;
+  font-size: 15px;
   margin-bottom: 2px;
 }
 
-.checkin-qa-sub {
+.quad-num {
+  font-size: 20px;
+  font-weight: 800;
+  color: #0F172A;
+  line-height: 1.1;
+  font-family: 'Google Sans Flex', 'Plus Jakarta Sans', sans-serif;
+  letter-spacing: -0.3px;
+}
+
+.quad-label {
   font-size: 11px;
-  color: #718096;
-  margin-bottom: 10px;
+  font-weight: 700;
+  color: #64748B;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* =========================================================
+   INTERACTIVE Q&A SESSION IN DAILY CHECK-IN (SCREEN 06)
+========================================================= */
+.checkin-qa-card {
+  background: #FFFFFF;
+  border-radius: 22px;
+  padding: 16px 18px;
+  margin-bottom: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+}
+
+.checkin-qa-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #0F172A;
+  margin-bottom: 3px;
+}
+
+.qa-tag-badge {
+  font-size: 9.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: #EFF6FF;
+  color: #2563EB;
+  padding: 3px 8px;
+  border-radius: 99px;
+  border: 1px solid #DBEAFE;
+}
+
+.checkin-qa-sub {
+  font-size: 11.5px;
+  color: #64748B;
+  margin-bottom: 12px;
+  line-height: 1.4;
 }
 
 .qa-chips-flex {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 7px;
 }
 
 .qa-choice-chip {
-  background: #F7FAFC;
-  border: 1.5px solid #EDF2F7;
-  color: #2D3748;
-  padding: 7px 12px;
+  background: #F8FAFC;
+  border: 1.5px solid #E2E8F0;
+  color: #334155;
+  padding: 7px 13px;
   border-radius: 99px;
   font-size: 11.5px;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
   font-family: inherit;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
 }
 
 .qa-choice-chip:hover {
-  background: #EDF2F7;
-  border-color: #CBD5E0;
+  background: #F1F5F9;
+  border-color: #CBD5E1;
+  transform: translateY(-1px);
 }
 
+.qa-choice-chip.active,
 .qa-choice-chip.selected {
-  background: #1A202C;
-  color: #FFFFFF;
-  border-color: #1A202C;
-  box-shadow: 0 3px 10px rgba(26, 32, 44, 0.25);
+  background: #0F172A !important;
+  color: #FFFFFF !important;
+  border-color: #0F172A !important;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.25);
+  transform: translateY(-1px);
 }
 
-.qa-choice-chip.alert.selected {
-  background: #E53E3E;
-  color: #FFFFFF;
-  border-color: #E53E3E;
-  box-shadow: 0 3px 10px rgba(229, 62, 62, 0.3);
-}
-
-/* Vitality / Energy Slider Box */
 .vitality-slider-wrap {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-top: 6px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid #F1F5F9;
 }
 
 .vitality-slider-header {
@@ -3257,8 +3348,9 @@ body, button, input, textarea, select {
 .vitality-level-badge {
   font-size: 11.5px;
   font-weight: 800;
-  color: #2B6CB0;
-  background: #EBF8FF;
+  color: #2563EB;
+  background: #EFF6FF;
+  border: 1px solid #DBEAFE;
   padding: 3px 10px;
   border-radius: 99px;
   transition: all 0.2s ease;
@@ -3266,66 +3358,72 @@ body, button, input, textarea, select {
 
 .interactive-energy-slider {
   width: 100%;
-  accent-color: #EB7958;
+  accent-color: #FF6F61;
   cursor: pointer;
   height: 6px;
   border-radius: 99px;
+  margin: 4px 0;
 }
 
 /* =========================================================
    DYNAMIC SELF CARE & CALM (SCREEN 08)
 ========================================================= */
 .selfcare-personalized-banner {
-  background: linear-gradient(135deg, #E6FFFA 0%, #EBF8FF 100%);
-  border: 1px solid #B2F5EA;
-  border-radius: 16px;
-  padding: 10px 14px;
-  margin-bottom: 14px;
+  background: linear-gradient(135deg, #ECFDF5 0%, #EFF6FF 100%);
+  border: 1px solid #A7F3D0;
+  border-radius: 20px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.06);
 }
 
 .selfcare-badge-icon {
-  font-size: 18px;
+  font-size: 24px;
+  flex-shrink: 0;
 }
 
 .selfcare-badge-text h5 {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 800;
-  color: #234E52;
+  color: #065F46;
   margin: 0 0 2px;
+  font-family: inherit;
 }
 
 .selfcare-badge-text p {
-  font-size: 10.5px;
-  color: #2C7A7B;
+  font-size: 11px;
+  color: #047857;
   margin: 0;
+  line-height: 1.35;
 }
 
 .activity-item {
   background: #FFFFFF;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  border-radius: 18px;
-  padding: 12px 14px;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  border-radius: 20px;
+  padding: 13px 15px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 13px;
   margin-bottom: 10px;
   cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
 }
 
 .activity-item:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
-  border-color: #CBD5E0;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  border-color: #CBD5E1;
 }
 
 .activity-item.highlighted {
-  border-color: #38B2AC;
-  background: #F0FFF4;
+  border-color: #10B981;
+  background: #F0FDF4;
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.08);
 }
 
 .activity-tag-pill {
@@ -3333,19 +3431,134 @@ body, button, input, textarea, select {
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.4px;
-  padding: 2px 6px;
+  padding: 2.5px 7px;
   border-radius: 6px;
   margin-bottom: 4px;
   display: inline-block;
 }
 
-/* Interactive Session Fullscreen Modal */
+.activity-info h4 {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #0F172A;
+  margin: 0 0 3px;
+}
+
+.activity-info p {
+  font-size: 11px;
+  color: #64748B;
+  margin: 0;
+  line-height: 1.35;
+}
+
+.activity-duration {
+  font-size: 11px;
+  font-weight: 800;
+  color: #64748B;
+  background: #F1F5F9;
+  padding: 4px 8px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   DYNAMIC WAVE GRAPH & TOOLTIP (SCREEN 10)
+========================================================= */
+.activities-wave-card {
+  position: relative;
+  background: linear-gradient(135deg, #FF6F61 0%, #FF8A73 100%);
+  border-radius: 26px;
+  padding: 18px 16px 14px;
+  margin-bottom: 20px;
+  color: #FFFFFF;
+  box-shadow: 0 10px 30px rgba(255, 111, 97, 0.35);
+  overflow: hidden;
+}
+
+.wave-tooltip-box {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  background: rgba(15, 23, 42, 0.9);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #FFFFFF;
+  padding: 5px 12px;
+  border-radius: 99px;
+  font-size: 10.5px;
+  font-weight: 700;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.wave-graph-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 100px;
+  margin-bottom: 8px;
+}
+
+.wave-y-axis {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  font-size: 9.5px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.75);
+  user-select: none;
+  width: 28px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.wave-chart-svg-wrap {
+  flex: 1;
+  height: 100%;
+  position: relative;
+}
+
+.wave-chart-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.wave-x-axis {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 36px;
+  padding-right: 12px;
+  font-size: 10px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.85);
+  user-select: none;
+}
+
+.wave-point-interactive {
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.wave-point-interactive:hover {
+  transform: scale(1.22);
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
+}
+
+/* =========================================================
+   INTERACTIVE GUIDED ACTIVITY MODAL
+========================================================= */
 .activity-session-modal {
   position: fixed;
   inset: 0;
-  background: rgba(18, 19, 22, 0.85);
-  backdrop-filter: blur(10px);
-  z-index: 100;
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 2000;
   display: none;
   align-items: center;
   justify-content: center;
@@ -3359,45 +3572,16 @@ body, button, input, textarea, select {
 
 .activity-session-card {
   background: #FFFFFF;
-  border-radius: 26px;
-  padding: 24px 20px;
+  border-radius: 28px;
+  padding: 24px 22px;
   width: 100%;
   max-width: 320px;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-}
-
-/* =========================================================
-   DYNAMIC WAVE GRAPH & TOOLTIP (SCREEN 10)
-========================================================= */
-.wave-tooltip-box {
-  position: absolute;
-  top: 6px;
-  right: 10px;
-  background: rgba(26, 32, 44, 0.88);
-  backdrop-filter: blur(4px);
-  color: #FFFFFF;
-  padding: 4px 10px;
-  border-radius: 8px;
-  font-size: 10px;
-  font-weight: 700;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  z-index: 5;
-}
-
-.wave-point-interactive {
-  cursor: pointer;
-  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
-
-.wave-point-interactive:hover {
-  transform: scale(1.18);
-  filter: drop-shadow(0 3px 8px rgba(0,0,0,0.35));
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 
