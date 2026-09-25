@@ -1,0 +1,96 @@
+/* KOAZY Design Tokens - Card-Based Layout with Google Sans Flex */
+:root {
+  /* Google Sans Flex Primary Typography */
+  --font-family: 'Google Sans Flex', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Card Accent Tones */
+  --coral-primary: #FF6E6A;
+  --coral-hover: #FA5853;
+  --coral-btn: #EB7958;
+  --yellow-evening: #FFC043;
+  --yellow-light: #FDEBAE;
+  --selfcare-blue: #3E3BE6;
+  --support-lime: #EEFA16;
+
+  /* Mood Card Pastels (check_1) */
+  --mood-great: #C9EBD2;
+  --mood-good: #C8DAF8;
+  --mood-okay: #FDEBAE;
+  --mood-confused: #E0CEF8;
+  --mood-sad: #FFD8C4;
+  --mood-stress: #FFA899;
+
+  /* Category Tag / Card Colors (check_2) */
+  --cat-others: #D4F4DF;
+  --cat-family: #E4D8F8;
+  --cat-deployment: #FDF1B8;
+  --cat-sleep: #D7E7FC;
+  --cat-workload: #FFE2D1;
+  --cat-duty: #FF7555;
+
+  /* Activity Graph / Trackers (analytics) */
+  --tracker-sleep-bg: #4E54C8;
+  --tracker-goals-bg: #FFE600;
+  --activities-card-bg: #FF6559;
+  --progress-card-bg: #D4F2DE;
+  --progress-ring-green: #34A853;
+
+  /* Floating Bottom Navigation */
+  --nav-bar-dark: #121316;
+  --nav-item-active-bg: rgba(255, 255, 255, 0.16);
+
+  /* Sage & Eucalyptus Greens (Legacy support) */
+  --sage-50: #F4F7F5;
+  --sage-100: #E7EFEA;
+  --sage-200: #D0E1D7;
+  --sage-300: #ABC6B7;
+  --sage-400: #7FA793;
+  --sage-500: #57846E;
+  --sage-600: #446C58;
+  --sage-700: #335343;
+  --sage-800: #23392E;
+
+  /* Oat & Sand Warmth */
+  --sand-50: #FAF8F5;
+  --sand-100: #F4EFEA;
+  --sand-200: #E8DDD4;
+  --sand-300: #D8C5B6;
+
+  /* Comfort Accents */
+  --comfort-rose: #F6D6CF;
+  --comfort-rose-dark: #C96854;
+  --comfort-sky: #DDEBF1;
+  --comfort-sky-dark: #4A7A8C;
+  --comfort-sun: #FDE8BE;
+  --comfort-sun-dark: #A6731B;
+  --comfort-lavender: #E4DEF4;
+  --comfort-lavender-dark: #655496;
+
+  /* Typography & Neutrals */
+  --text-primary: #1C2024;
+  --text-secondary: #5F6B76;
+  --text-muted: #8F9AA3;
+  --text-inverse: #FFFFFF;
+
+  /* Surface & Cards */
+  --surface-canvas: #FFFFFF;
+  --surface-card: #FFFFFF;
+  --surface-card-subtle: #F8F9FA;
+  --surface-border: rgba(0, 0, 0, 0.06);
+  --surface-border-strong: rgba(0, 0, 0, 0.12);
+
+  /* Card Shadows */
+  --shadow-card: 0 4px 16px -2px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.03);
+  --shadow-float: 0 12px 32px -4px rgba(18, 19, 22, 0.22);
+  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 6px 18px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 12px 30px rgba(0, 0, 0, 0.1);
+
+  /* Radii */
+  --radius-xs: 8px;
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-full: 9999px;
+}

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 100" fill="none">
+  <!-- Body curled up -->
+  <ellipse cx="60" cy="62" rx="46" ry="30" fill="#8E99A5"/>
+  
+  <!-- Left Ear -->
+  <circle cx="28" cy="46" r="16" fill="#84909E"/>
+  <circle cx="28" cy="46" r="10" fill="#F0CED4"/>
+
+  <!-- Head resting down -->
+  <ellipse cx="48" cy="56" rx="26" ry="24" fill="#9DA9B7"/>
+
+  <!-- Sleeping Closed Eye -->
+  <path d="M38 52 Q44 58 50 52" stroke="#242B33" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+  <!-- Cheeks Blush -->
+  <circle cx="38" cy="61" r="5" fill="#FFA5A5" opacity="0.6"/>
+
+  <!-- Big Nose -->
+  <ellipse cx="56" cy="58" rx="7" ry="10" transform="rotate(15 56 58)" fill="#242B33"/>
+
+  <!-- Resting Paws curled under chin -->
+  <ellipse cx="50" cy="74" rx="10" ry="7" fill="#84909E"/>
+
+  <!-- Back rounded hip -->
+  <ellipse cx="88" cy="64" rx="20" ry="22" fill="#84909E"/>
+
+  <!-- Z Z Z floats -->
+  <text x="76" y="32" font-family="'Google Sans Flex', 'Plus Jakarta Sans', sans-serif" font-size="14" font-weight="800" fill="#E0E7FF">z</text>
+  <text x="88" y="24" font-family="'Google Sans Flex', 'Plus Jakarta Sans', sans-serif" font-size="18" font-weight="800" fill="#C7D2FE">z</text>
+  <text x="102" y="15" font-family="'Google Sans Flex', 'Plus Jakarta Sans', sans-serif" font-size="22" font-weight="900" fill="#FFFFFF">Z</text>
+</svg>

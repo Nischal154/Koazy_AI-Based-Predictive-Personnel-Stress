@@ -1,0 +1,1763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KOAZY — AI-Powered Personnel Wellbeing & Early-Support System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="src/styles/tokens.css">
+  <link rel="stylesheet" href="src/styles/android-frame.css">
+  <link rel="stylesheet" href="src/styles/app.css">
+  <link rel="stylesheet" href="src/styles/ai-engine.css">
+  <link rel="stylesheet" href="src/styles/emergency.css">
+  <link rel="stylesheet" href="src/styles/welfare-dashboard.css">
+</head>
+<body>
+
+  <!-- Top Prototype Control Header -->
+  <header class="prototype-header">
+    <div class="prototype-brand">
+      <div class="prototype-logo-badge">K</div>
+      <div class="prototype-title-wrap">
+        <h1>KOAZY — Personnel Stress & Welfare System</h1>
+        <p>SIH 26186 • Stage 1 Personal Mobile Experience & Welfare Officer Portal</p>
+      </div>
+    </div>
+
+    <div class="prototype-controls">
+      <div class="mode-toggle-group">
+        <button id="singlePhoneModeBtn" class="mode-btn active" title="Interact with the app in a realistic Android smartphone frame">
+          📱 Interactive Phone
+        </button>
+        <button id="galleryModeBtn" class="mode-btn" title="Inspect all 13 primary Android screen designs side-by-side">
+          🗂️ 13-Screen Gallery Matrix
+        </button>
+        <button id="aiEngineModeBtn" class="mode-btn" title="Inspect SIH Judge AI Decision Engine & Case Studies">
+          🧠 AI Engine & Judge Demo
+        </button>
+      </div>
+
+      <select id="screenJumpSelect" class="screen-select-dropdown" aria-label="Jump directly to screen">
+        <option value="01">Screen 01: Intro</option>
+        <option value="02">Screen 02: Login</option>
+        <option value="03">Screen 03: Sign Up</option>
+        <option value="04" selected>Screen 04: Home Dashboard</option>
+        <option value="05">Screen 05: Current State of Mind</option>
+        <option value="06">Screen 06: Check-in Questions</option>
+        <option value="07">Screen 07: Check-in Result</option>
+        <option value="08">Screen 08: Self Care</option>
+        <option value="09">Screen 09: Talk to Koazy</option>
+        <option value="10">Screen 10: My Journal &amp; Analytics</option>
+        <option value="11">Screen 11: Emergency SOS &amp; Helpline</option>
+        <option value="12">Screen 12: Profile &amp; Privacy</option>
+        <option value="13">Screen 13: Welfare Officer Dashboard</option>
+      </select>
+    </div>
+  </header>
+
+  <!-- SINGLE INTERACTIVE ANDROID SMARTPHONE STAGE -->
+  <main id="singlePhoneStage" class="device-stage single-stage">
+    <div class="android-phone">
+      <div class="phone-viewport">
+        <!-- Android Status Bar -->
+        <div class="android-status-bar">
+          <div class="status-time" id="liveClock">09:41</div>
+          <div class="status-bar-camera-notch">
+            <div class="status-bar-camera-lens"></div>
+          </div>
+          <div class="status-icons">
+            <svg class="status-signal-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L12 22l7.03-4.39C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9z" opacity="0.2"/><path d="M2 20h20L12 4 2 20z"/></svg>
+            <span style="font-size:10px; font-weight:800;">5G</span>
+            <svg class="status-wifi-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98C20.93 5.9 16.69 4 12 4z"/></svg>
+            <div class="status-battery-pill">
+              <div class="status-battery-level"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Simulated Emergency Telephone Call Screen Overlay -->
+        <div id="phoneCallOverlay" class="phone-call-overlay">
+          <div class="call-header-info">
+            <div class="call-avatar-glow">📞</div>
+            <div class="call-party-name" id="callPartyName">24/7 Armed Forces & CAPF Helpline</div>
+            <div class="call-target-number" id="callTargetNumber">Connected (1800-555-KOAZY)</div>
+            <div class="call-timer-badge">
+              <span class="call-dot-live"></span>
+              <span id="callTimerDisplay">00:00</span>
+            </div>
+          </div>
+
+          <!-- Audio waveform visualizer -->
+          <div style="display:flex; flex-direction:column; align-items:center;">
+            <div class="call-audio-visualizer">
+              <div class="call-audio-bar"></div>
+              <div class="call-audio-bar"></div>
+              <div class="call-audio-bar"></div>
+              <div class="call-audio-bar"></div>
+              <div class="call-audio-bar"></div>
+              <div class="call-audio-bar"></div>
+            </div>
+            <div class="call-audio-subtext">
+              Confidential voice channel established. Listening operator connected.
+            </div>
+          </div>
+
+          <!-- In-Call Controls -->
+          <div style="display:flex; flex-direction:column; align-items:center; width:100%;">
+            <div class="call-controls-grid">
+              <button class="call-control-circle" onclick="toggleCallMute(this)">
+                <span>🎤</span>
+                <span>Mute</span>
+              </button>
+              <button class="call-control-circle active" onclick="toggleCallSpeaker(this)">
+                <span>🔊</span>
+                <span>Speaker</span>
+              </button>
+              <button class="call-control-circle" onclick="alert('Encrypted military audio channel verified.')">
+                <span>🔒</span>
+                <span>Secure</span>
+              </button>
+            </div>
+            <button class="btn-end-call" onclick="endHelplineCall()" title="End Call">
+              📵
+            </button>
+          </div>
+        </div>
+
+        <!-- Phone Content Scroll Area -->
+        <div class="phone-content" id="activeScreenContainer">
+
+          <!-- SCREEN 01: INTRO -->
+          <section id="screen-01" class="screen screen-intro">
+            <div>
+              <div class="intro-badge">
+                <img src="assets/icons/sparkle.svg" width="13" height="13" alt="sparkle">
+                <span>Safe • Private • Empathic</span>
+              </div>
+              <h2 class="intro-title">Getting Happier,<br><span>With Koazy</span></h2>
+              <p class="intro-desc">
+                A private, quiet space to check in with yourself, recognize your wellbeing patterns, and access gentle support.
+              </p>
+            </div>
+
+            <div class="intro-mascot-container">
+              <div class="intro-mascot-glow"></div>
+              <img src="assets/mascot/koala_happy.svg" class="intro-mascot-img" alt="Koazy Mascot">
+            </div>
+
+            <div class="intro-footer">
+              <button class="btn-primary" onclick="navigateToScreen('04')">
+                <span>Let's be happier</span>
+                <span>→</span>
+              </button>
+              <button class="btn-secondary" onclick="navigateToScreen('02')">
+                <span>I already have an account</span>
+              </button>
+            </div>
+          </section>
+
+          <!-- SCREEN 02: LOGIN -->
+          <section id="screen-02" class="screen">
+            <div class="app-top-bar">
+              <button class="back-circle-btn" onclick="navigateToScreen('01')" aria-label="Go back">
+                <img src="assets/icons/arrow_back.svg" alt="Back">
+              </button>
+              <div class="app-top-title">Welcome Back</div>
+              <div style="width:36px"></div>
+            </div>
+
+            <div class="auth-container">
+              <div class="auth-header">
+                <h2>Sign In</h2>
+                <p>Access your private wellbeing companion</p>
+              </div>
+
+              <div class="input-group">
+                <label class="input-label" for="loginEmail">Service ID / Email</label>
+                <input type="email" id="loginEmail" class="input-field" placeholder="sara.sharma@forces.gov.in" value="sara.sharma@forces.gov.in">
+              </div>
+
+              <div class="input-group">
+                <label class="input-label" for="loginPass">Password</label>
+                <input type="password" id="loginPass" class="input-field" placeholder="••••••••••••" value="password123">
+              </div>
+
+              <div style="display:flex; justify-content:flex-end; margin-bottom: 20px;">
+                <a href="javascript:void(0)" style="font-size:12px; color:var(--sage-700); font-weight:700; text-decoration:none;">Forgot Password?</a>
+              </div>
+
+              <button class="btn-primary" onclick="navigateToScreen('04')">Sign In</button>
+
+              <div style="margin-top: 20px; text-align:center; font-size:13px; color:var(--text-secondary);">
+                Don't have an account? <a href="javascript:void(0)" onclick="navigateToScreen('03')" style="color:var(--sage-700); font-weight:700; text-decoration:none;">Create Account</a>
+              </div>
+
+              <div class="trust-badge-card">
+                <img src="assets/icons/shield.svg" alt="shield">
+                <span>End-to-end encrypted check-ins. Your emotional state is never shared without your permission.</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- SCREEN 03: SIGN UP -->
+          <section id="screen-03" class="screen">
+            <div class="app-top-bar">
+              <button class="back-circle-btn" onclick="navigateToScreen('02')" aria-label="Go back">
+                <img src="assets/icons/arrow_back.svg" alt="Back">
+              </button>
+              <div class="app-top-title">Join Koazy</div>
+              <div style="width:36px"></div>
+            </div>
+
+            <div class="auth-container">
+              <div class="auth-header">
+                <h2>Create Profile</h2>
+                <p>A safe space designed for your service wellbeing</p>
+              </div>
+
+              <div class="input-group">
+                <label class="input-label" for="signupName">Full Name</label>
+                <input type="text" id="signupName" class="input-field" placeholder="Officer / Personnel Name" value="Sara Sharma">
+              </div>
+
+              <div class="input-group">
+                <label class="input-label" for="signupEmail">Service Email / ID</label>
+                <input type="email" id="signupEmail" class="input-field" placeholder="sara.sharma@forces.gov.in" value="sara.sharma@forces.gov.in">
+              </div>
+
+              <div class="input-group">
+                <label class="input-label" for="signupPass">Create Password</label>
+                <input type="password" id="signupPass" class="input-field" placeholder="••••••••••••" value="koazyPass123">
+              </div>
+
+              <button class="btn-primary" onclick="navigateToScreen('04')">Get Started</button>
+
+              <div style="margin-top: 20px; text-align:center; font-size:13px; color:var(--text-secondary);">
+                Already registered? <a href="javascript:void(0)" onclick="navigateToScreen('02')" style="color:var(--sage-700); font-weight:700; text-decoration:none;">Log In</a>
+              </div>
+            </div>
+          </section>
+
+          <!-- SCREEN 04: HOME DASHBOARD -->
+          <section id="screen-04" class="screen active">
+            <!-- Greeting Bar -->
+            <div class="home-greeting-bar">
+              <div class="home-user-greeting">Good Morning, Sara</div>
+              <div class="home-avatar-pill" onclick="navigateToScreen('12')" title="View Profile">
+                <img src="assets/koala/sara_avatar.svg" alt="Sara Sharma">
+              </div>
+            </div>
+
+            <!-- Date Ribbon (Day Selector: Fri 11, Sat 12, Sun 13, Mon 14, Tue 15, Wed 16) -->
+            <div class="date-ribbon">
+              <div class="date-day-chip" onclick="selectDateChip(this)">
+                <span class="day-name">Fri</span>
+                <span class="day-num">11</span>
+              </div>
+              <div class="date-day-chip" onclick="selectDateChip(this)">
+                <span class="day-name">Sat</span>
+                <span class="day-num">12</span>
+              </div>
+              <div class="date-day-chip" onclick="selectDateChip(this)">
+                <span class="day-name">Sun</span>
+                <span class="day-num">13</span>
+              </div>
+              <div class="date-day-chip active" onclick="selectDateChip(this)">
+                <span class="day-name">Mon</span>
+                <span class="day-num">14</span>
+              </div>
+              <div class="date-day-chip" onclick="selectDateChip(this)">
+                <span class="day-name">Tue</span>
+                <span class="day-num">15</span>
+              </div>
+              <div class="date-day-chip" onclick="selectDateChip(this)">
+                <span class="day-name">Wed</span>
+                <span class="day-num">16</span>
+              </div>
+            </div>
+
+            <!-- My Wellbeing Section -->
+            <div class="section-heading-row">
+              <span class="section-title">My Wellbeing</span>
+              <a href="javascript:void(0)" onclick="navigateToScreen('10')" class="section-link-muted">See all</a>
+            </div>
+
+            <!-- Split Card Layout (My Wellbeing Card + Evening Side Card) -->
+            <div class="wellbeing-card-container">
+              <!-- Left Coral Card with Peeking Koala -->
+              <div class="wellbeing-main-card" onclick="startCheckinFlow()" title="Tap to start Daily Check-in">
+                <h3 class="wellbeing-card-headline" id="homeHeroHeadline">Good morning!<br>How are you feeling today?</h3>
+                <img src="assets/koala/koala_peeking.svg" class="wellbeing-peeking-art" alt="Peeking Koala">
+              </div>
+
+              <!-- Right Yellow Side Card (Evening Toggle) -->
+              <div class="wellbeing-side-card" onclick="toggleDayEveningMode()" id="homeEveningToggleCard" title="Switch between Morning and Evening reflection">
+                <span class="side-card-vertical-text" id="homeEveningText">EVENING</span>
+              </div>
+            </div>
+
+            <!-- Quick Stats Section -->
+            <div class="section-heading-row">
+              <span class="section-title">Quick Stats</span>
+            </div>
+
+            <div class="quick-stats-grid">
+              <!-- Left: Indigo Self Care Card -->
+              <div class="stat-card-selfcare" onclick="navigateToScreen('08')" title="Open Self Care">
+                <div class="stat-selfcare-title">Self<br>Care</div>
+              </div>
+
+              <!-- Right: Lime Talk to Support Card -->
+              <div class="stat-card-support" onclick="navigateToScreen('11')" title="Open Support">
+                <div class="stat-support-title">Talk to Support</div>
+                <img src="assets/icons/support_person.svg" class="stat-support-art" alt="Support person">
+              </div>
+            </div>
+          </section>
+
+          <!-- SCREEN 05: TAKE A MOMENT — STEP 1 (check_1) -->
+          <section id="screen-05" class="screen">
+            <div class="checkin-screen-wrapper">
+              <!-- Top Navigation & Progress -->
+              <div class="checkin-header-bar">
+                <button class="back-circle-btn" onclick="navigateToScreen('04')" aria-label="Go back">
+                  <img src="assets/icons/arrow_back.svg" alt="Back">
+                </button>
+                <div class="checkin-header-title">Take a Moment</div>
+                <div class="checkin-step-pill-right">
+                  <div class="checkin-progress-track">
+                    <div class="checkin-progress-fill-coral" style="width: 33%;"></div>
+                  </div>
+                  <span class="checkin-step-indicator-text">1/3</span>
+                </div>
+              </div>
+
+              <!-- Main Heading -->
+              <h2 class="checkin-main-title">How do you<br>feel today?</h2>
+
+              <!-- 6 Mood Cards in 2 Columns -->
+              <div class="mood-cards-grid">
+                <div class="mood-card-item great" onclick="selectMoodCard('Great', '😊', this)">
+                  <div class="mood-item-title">Great</div>
+                  <img src="assets/koala/koala_great.svg" class="mood-item-art" alt="Great">
+                </div>
+
+                <div class="mood-card-item good active" onclick="selectMoodCard('Good', '😊', this)">
+                  <div class="mood-item-title">Good</div>
+                  <img src="assets/koala/koala_good.svg" class="mood-item-art" alt="Good">
+                </div>
+
+                <div class="mood-card-item okay" onclick="selectMoodCard('Okay', '🙂', this)">
+                  <div class="mood-item-title">Okay</div>
+                  <img src="assets/koala/koala_okay.svg" class="mood-item-art" alt="Okay">
+                </div>
+
+                <div class="mood-card-item confused" onclick="selectMoodCard('Confused', '🤔', this)">
+                  <div class="mood-item-title">Confused</div>
+                  <img src="assets/koala/koala_confused.svg" class="mood-item-art" alt="Confused">
+                </div>
+
+                <div class="mood-card-item sad" onclick="selectMoodCard('Sad', '😢', this)">
+                  <div class="mood-item-title">Sad</div>
+                  <img src="assets/koala/koala_sad.svg" class="mood-item-art" alt="Sad">
+                </div>
+
+                <div class="mood-card-item stress" onclick="selectMoodCard('Stress', '😣', this)">
+                  <div class="mood-item-title">Stress</div>
+                  <img src="assets/koala/koala_stress.svg" class="mood-item-art" alt="Stress">
+                </div>
+              </div>
+
+              <!-- Bottom Button -->
+              <div style="margin-top:auto; padding-top:10px;">
+                <button class="btn-terracotta" onclick="goToStep2()">
+                  <span>Next</span>
+                  <span>→</span>
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <!-- SCREEN 06: TAKE A MOMENT — STEPS 2 & 3 (check_2 and check_3) -->
+          <section id="screen-06" class="screen">
+            <div class="checkin-screen-wrapper">
+              <!-- Top Navigation & Progress -->
+              <div class="checkin-header-bar">
+                <button class="back-circle-btn" onclick="goToStep1()" aria-label="Go back">
+                  <img src="assets/icons/arrow_back.svg" alt="Back">
+                </button>
+                <div class="checkin-header-title">Take a Moment</div>
+                <div class="checkin-step-pill-right">
+                  <div class="checkin-progress-track">
+                    <div id="checkinStepProgressFill" class="checkin-progress-fill-coral" style="width: 66%;"></div>
+                  </div>
+                  <span id="checkinStepNumText" class="checkin-step-indicator-text">2/3</span>
+                </div>
+              </div>
+
+              <!-- Step 2 Content Container (What's on your mind today?) -->
+              <div id="checkinSubStep2" style="display:flex; flex-direction:column; flex:1;">
+                <h2 class="checkin-main-title">What's on your<br>mind today?</h2>
+                <div class="checkin-main-subtitle">Select any that apply</div>
+
+                <!-- Category Cards -->
+                <div class="category-cards-grid">
+                  <div class="cat-card-item others" onclick="toggleCategoryChip('Others', this)">
+                    <span class="cat-item-name">Others ...</span>
+                    <span class="cat-item-icon"></span>
+                  </div>
+
+                  <div class="cat-card-item family active" onclick="toggleCategoryChip('Family', this)">
+                    <span class="cat-item-name">Family</span>
+                    <span class="cat-item-icon">
+                      <img src="assets/icons/family_home.svg" alt="Family">
+                    </span>
+                  </div>
+
+                  <div class="cat-card-item deployment" onclick="toggleCategoryChip('Deployment', this)">
+                    <span class="cat-item-name">Deployment</span>
+                    <span class="cat-item-icon">
+                      <img src="assets/icons/deployment_star.svg" alt="Deployment">
+                    </span>
+                  </div>
+
+                  <div class="cat-card-item sleep" onclick="toggleCategoryChip('Sleep', this)">
+                    <span class="cat-item-name">Sleep</span>
+                    <span class="cat-item-icon">
+                      <img src="assets/icons/sleep_moon_icon.svg" alt="Sleep">
+                    </span>
+                  </div>
+
+                  <div class="cat-card-item workload" onclick="toggleCategoryChip('Workload', this)">
+                    <span class="cat-item-name">Workload</span>
+                    <span class="cat-item-icon">
+                      <img src="assets/icons/workload_briefcase.svg" alt="Workload">
+                    </span>
+                  </div>
+
+                  <div class="cat-card-item duty" onclick="toggleCategoryChip('Duty', this)">
+                    <span class="cat-item-name">Duty</span>
+                    <span class="cat-item-icon">
+                      <img src="assets/icons/duty_medal.svg" alt="Duty">
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Voluntary Health & Daily Indicators Card (Sleep, Food Intake, Family Safety) -->
+                <div class="indicators-card-box">
+                  <!-- Sleep Rest -->
+                  <div class="indicator-group">
+                    <div class="indicator-group-label">
+                      <span>🌙 Sleep Hours</span>
+                    </div>
+                    <div class="indicator-chips-row">
+                      <button type="button" class="indicator-chip alert" id="sleep_less5" onclick="setHealthIndicator('sleep', '<5h', this)">&lt; 5h (Deficit)</button>
+                      <button type="button" class="indicator-chip" id="sleep_6_7" onclick="setHealthIndicator('sleep', '6-7h', this)">6-7h</button>
+                      <button type="button" class="indicator-chip selected" id="sleep_8plus" onclick="setHealthIndicator('sleep', '8h+', this)">8h+ Rested</button>
+                    </div>
+                  </div>
+
+                  <!-- Food Intake / Nutrition -->
+                  <div class="indicator-group">
+                    <div class="indicator-group-label">
+                      <span>🍲 Food Intake</span>
+                    </div>
+                    <div class="indicator-chips-row">
+                      <button type="button" class="indicator-chip selected" id="food_regular" onclick="setHealthIndicator('food', 'regular', this)">Regular Meals</button>
+                      <button type="button" class="indicator-chip alert" id="food_skipped" onclick="setHealthIndicator('food', 'skipped', this)">Skipped Meal</button>
+                      <button type="button" class="indicator-chip" id="food_low" onclick="setHealthIndicator('food', 'low', this)">Poor Appetite</button>
+                    </div>
+                  </div>
+
+                  <!-- Family Safety & Well-being -->
+                  <div class="indicator-group">
+                    <div class="indicator-group-label">
+                      <span>🏡 Family Safety / Well-being</span>
+                    </div>
+                    <div class="indicator-chips-row">
+                      <button type="button" class="indicator-chip selected" id="family_safe" onclick="setHealthIndicator('family', 'safe', this)">Safe &amp; Well</button>
+                      <button type="button" class="indicator-chip alert" id="family_concern" onclick="setHealthIndicator('family', 'concern', this)">Family Concern</button>
+                    </div>
+                  </div>
+                </div>
+
+                <a href="javascript:void(0)" onclick="goToStep3()" class="skip-for-now-link">Skip for now →</a>
+
+                <div style="margin-top:auto; padding-top:10px;">
+                  <button class="btn-terracotta" onclick="goToStep3()">
+                    <span>Next</span>
+                    <span>→</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Step 3 Content Container (How has your day been?) -->
+              <div id="checkinSubStep3" style="display:none; flex-direction:column; flex:1;">
+                <h2 class="checkin-main-title">How has your day<br>been?</h2>
+                <div class="checkin-main-subtitle" style="color:#C96854;">Is there something you want to talk about?</div>
+
+                <!-- Dashed Purple Textarea Card -->
+                <div class="dashed-reflection-card">
+                  <textarea id="checkinReflectionNote" class="dashed-reflection-textarea" placeholder='You can share whatever feels important to you... "No filter tap..."' oninput="handleCheckinNoteInput(this.value)"></textarea>
+                </div>
+
+                <!-- Want to talk instead? Card -->
+                <div class="action-card-counselor" onclick="navigateToScreen('09')" title="Chat with Counselor Koazy">
+                  <img src="assets/koala/koala_counselor.svg" class="action-counselor-art" alt="Counselor">
+                  <div>
+                    <div class="action-counselor-title">Want to talk instead?</div>
+                    <div class="action-counselor-sub">Direct confidential voice conversation with one of the counselors</div>
+                  </div>
+                </div>
+
+                <!-- Record a voice note Card -->
+                <div class="action-card-voicenote" id="voiceNoteCard" onmousedown="startVoiceRecording()" onmouseup="stopVoiceRecording()" ontouchstart="startVoiceRecording()" ontouchend="stopVoiceRecording()" title="Hold to record a voice note">
+                  <div class="voicenote-icon-circle">
+                    <img src="assets/koala/koala_mic.svg" alt="Voice Note">
+                  </div>
+                  <div>
+                    <div class="voicenote-title">Record a voice note</div>
+                    <div class="voicenote-sub">"Keep it for yourself"</div>
+                    <div class="voicenote-hint" id="voiceRecordingStatus">HOLD to Start Recording</div>
+                  </div>
+                </div>
+
+                <div style="margin-top:auto; padding-top:10px;">
+                  <button class="btn-terracotta" onclick="submitCheckinForm()">
+                    <span>Submit</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- SCREEN 07: CHECK-IN RESULT (Check_end) -->
+          <section id="screen-07" class="screen">
+            <div class="check-end-container">
+              <!-- Top bar with Back Button -->
+              <div style="display:flex; justify-content:flex-start; margin-bottom: 8px;">
+                <button class="back-circle-btn" onclick="navigateToScreen('04')" aria-label="Go back">
+                  <img src="assets/icons/arrow_back.svg" alt="Back">
+                </button>
+              </div>
+
+              <!-- Big Hero Koala "You Got This" Illustration -->
+              <img src="assets/koala/koala_you_got_this.svg" class="check-end-hero-art" alt="You Got This">
+
+              <!-- Dynamic Stress Risk Alert Banner (Activated when stress signals detected) -->
+              <div id="checkinStressRiskBanner" style="display:none; text-align:left; margin-bottom:14px;">
+                <div class="stress-alert-banner">
+                  <div class="stress-alert-badge">⚠️ Elevated Stress Risk Detected</div>
+                  <div class="stress-alert-msg" id="stressAlertDynamicMsg">
+                    Koazy's Behavioral Analytics identified strain from irregular sleep and duty demands. Immediate stress-free calming activities and a private CBT session have been arranged for you.
+                  </div>
+                  <button class="btn-cbt-chat" onclick="navigateToScreen('09')">
+                    <span>🤖 Talk to Koazy — CBT Coping Session</span>
+                    <span>→</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Thank you message -->
+              <h2 class="check-end-title" id="checkinEndTitle">Thanks for Checking in,<br>Sara</h2>
+              <p class="check-end-subtitle" id="checkinEndSubtitle">
+                Your wellbeing matters. Here are some things that might help you right now.
+              </p>
+
+              <!-- Helpful Action Cards -->
+              <div class="end-action-pill-card relaxation" onclick="navigateToScreen('08')">
+                <div>
+                  <div class="end-action-title">Relaxation</div>
+                  <div class="end-action-sub">Take a 5-min breathing exercise</div>
+                </div>
+                <span class="end-action-arrow">→</span>
+              </div>
+
+              <div class="end-action-pill-card meditation" onclick="navigateToScreen('08')">
+                <div>
+                  <div class="end-action-title">Start Meditation</div>
+                  <div class="end-action-sub">Box breathing &amp; sensory calm</div>
+                </div>
+                <span class="end-action-arrow">→</span>
+              </div>
+
+              <!-- View Full Insights Button -->
+              <button class="btn-pill-outline-insights" onclick="navigateToScreen('10')">
+                View My Journal &amp; Analytics
+              </button>
+
+              <!-- AI Decision Explanation Accordion (Judge Demonstration) -->
+              <div class="ai-explanation-accordion" id="aiResultAccordion" style="margin-top: 16px;">
+                <div class="ai-accordion-header" onclick="toggleAIExplanation()">
+                  <div class="ai-accordion-title">
+                    <span>🧠 Why Koazy Recommended This</span>
+                    <span id="aiSufficiencyBadge" style="font-size:10px; font-weight:800; background:#C9EBD2; padding:2px 8px; border-radius:99px; color:#23392E;">AI Verified</span>
+                  </div>
+                  <span id="aiAccordionChevron" style="font-size:12px; font-weight:800;">▼</span>
+                </div>
+                <div class="ai-accordion-body" id="aiAccordionBody">
+                  <p id="aiWhyText" style="margin-bottom:8px;">Recent check-in confirms balanced recovery with positive family signals.</p>
+                  <div style="font-size:10.5px; font-weight:700; color:var(--text-muted); margin-bottom:4px; text-transform:uppercase;">Signals Used:</div>
+                  <div class="signals-tag-list" id="aiSignalsList">
+                    <span class="signal-tag">Mood: Good</span>
+                    <span class="signal-tag">Focus: Family & Duty</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- SCREEN 08: SELF CARE & ACTIVITIES -->
+          <section id="screen-08" class="screen">
+            <div class="app-top-bar">
+              <button class="back-circle-btn" onclick="navigateToScreen('04')" aria-label="Go back">
+                <img src="assets/icons/arrow_back.svg" alt="Back">
+              </button>
+              <div class="app-top-title">Self Care & Calm</div>
+              <div style="width:36px"></div>
+            </div>
+
+            <!-- Breathing Pacer Box -->
+            <div class="breathing-card">
+              <span class="hero-card-tag">Interactive Pacer</span>
+              <h3 style="font-size:16px; font-weight:800; color:var(--text-primary); margin:6px 0 12px;">
+                Box Breathing (4-4-4)
+              </h3>
+              <div class="breathing-pacer-circle" id="breathingPacer">
+                <span id="breathingText">Breathe In</span>
+              </div>
+              <p style="font-size:12px; color:var(--text-secondary); margin-top:8px;">
+                Focus gently on the circle expanding and settling.
+              </p>
+            </div>
+
+            <div class="section-title" style="margin-bottom:10px;">Calming Sessions</div>
+
+            <div class="activities-list">
+              <div class="activity-item">
+                <div class="activity-icon-sq" style="background:#EAF2ED;">
+                  <img src="assets/icons/breath.svg" width="20" height="20" alt="breath">
+                </div>
+                <div class="activity-info">
+                  <h4>Post-Duty Decompression</h4>
+                  <p>Shift mental gear after intense vigilance</p>
+                </div>
+                <span class="activity-duration">3 min</span>
+              </div>
+
+              <div class="activity-item">
+                <div class="activity-icon-sq" style="background:#FDECE9;">
+                  <img src="assets/icons/heart.svg" width="20" height="20" alt="heart">
+                </div>
+                <div class="activity-info">
+                  <h4>Body Scan Relaxation</h4>
+                  <p>Release muscle tension in shoulders & back</p>
+                </div>
+                <span class="activity-duration">5 min</span>
+              </div>
+
+              <div class="activity-item">
+                <div class="activity-icon-sq" style="background:#E7F1F6;">
+                  <img src="assets/icons/moon.svg" width="20" height="20" alt="moon">
+                </div>
+                <div class="activity-info">
+                  <h4>Barrack Sleep Soundscape</h4>
+                  <p>Soft rainfall & white noise for rest</p>
+                </div>
+                <span class="activity-duration">15 min</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- SCREEN 09: TALK TO KOAZY -->
+          <section id="screen-09" class="screen">
+            <div class="app-top-bar">
+              <button class="back-circle-btn" onclick="navigateToScreen('04')" aria-label="Go back">
+                <img src="assets/icons/arrow_back.svg" alt="Back">
+              </button>
+              <div class="app-top-title">Talk to Koazy</div>
+              <div style="width:36px"></div>
+            </div>
+
+            <div class="chat-container">
+              <div class="chat-banner-disclaimer">
+                <img src="assets/icons/shield.svg" width="16" height="16" alt="shield">
+                <span>Private & non-judgmental space. Not clinical therapy.</span>
+              </div>
+
+              <div class="chat-messages-area" id="chatMessagesArea">
+                <div class="chat-bubble-row">
+                  <img src="assets/mascot/koala_happy.svg" class="chat-koala-avatar" alt="Koazy">
+                  <div class="chat-bubble koazy">
+                    Hello Sara! I'm Koazy. Whenever things feel heavy or you just need a quiet moment to unpack, I'm here. How is your shift going today?
+                  </div>
+                </div>
+              </div>
+
+              <!-- Suggested quick prompt chips -->
+              <div class="chat-suggested-prompts">
+                <button class="prompt-pill-btn" onclick="sendQuickPrompt('Feeling worn out after my duty shift')">Feeling worn out</button>
+                <button class="prompt-pill-btn" onclick="sendQuickPrompt('Having trouble winding down for sleep')">Trouble sleeping</button>
+                <button class="prompt-pill-btn" onclick="sendQuickPrompt('Just need a calming moment')">Need a calm moment</button>
+              </div>
+
+              <div class="chat-input-bar">
+                <input type="text" id="chatInputField" placeholder="Write whatever feels comfortable..." onkeydown="if(event.key==='Enter') sendChatMessage()">
+                <button class="chat-send-btn" onclick="sendChatMessage()" aria-label="Send message">↑</button>
+              </div>
+
+              <!-- Crisis Safety Modal Overlay (Engaged on safety detection) -->
+              <div id="mobileCrisisModal" class="mobile-crisis-modal-overlay">
+                <div class="mobile-crisis-card">
+                  <div class="mobile-crisis-icon">🛡️</div>
+                  <div class="mobile-crisis-title">You Are Not Alone</div>
+                  <p class="mobile-crisis-desc" id="mobileCrisisDesc">
+                    We hear how heavy this feels. Your wellbeing and safety are our highest priority. Immediate, confidential support is available right now.
+                  </p>
+                  <div class="mobile-crisis-options" id="mobileCrisisOptionsContainer">
+                    <button class="crisis-option-btn primary-alert" onclick="triggerCrisisAction('medical')">
+                      <span>🚑 Call 24/7 Armed Forces Helpline</span>
+                    </button>
+                    <button class="crisis-option-btn" onclick="triggerCrisisAction('family')">
+                      <span>📞 Call Trusted Family Member</span>
+                    </button>
+                    <button class="crisis-option-btn" onclick="triggerCrisisAction('officer')">
+                      <span>🛡️ Notify Unit Welfare Officer</span>
+                    </button>
+                    <button class="crisis-option-btn" onclick="triggerCrisisAction('listener')">
+                      <span>💬 Connect with Peer Listener</span>
+                    </button>
+                  </div>
+                  <button class="btn-secondary" onclick="closeCrisisModal()" style="margin-top:6px; font-size:11.5px; padding:7px 12px;">
+                    Close Safety Screen
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- SCREEN 10: MY JOURNAL & WELLBEING ANALYTICS -->
+          <section id="screen-10" class="screen">
+            <div class="analytics-screen-wrapper">
+              <!-- Top Bar -->
+              <div class="app-top-bar" style="margin-bottom:8px;">
+                <button class="back-circle-btn" onclick="navigateToScreen('04')" aria-label="Go back">
+                  <img src="assets/icons/arrow_back.svg" alt="Back">
+                </button>
+                <div class="app-top-title" style="font-weight:700;">My Journal</div>
+                <div style="width:36px"></div>
+              </div>
+
+              <!-- Main Title -->
+              <h2 class="analytics-main-headline">Understand your<br>wellbeing over time.</h2>
+
+              <!-- Timeframe Tabs Ribbon (Today, 7 Days, 30 Days, 3 Months) -->
+              <div class="timeframe-tabs-ribbon">
+                <button class="timeframe-tab-btn active" onclick="selectTimeframeTab(this, 'today')">Today</button>
+                <button class="timeframe-tab-btn" onclick="selectTimeframeTab(this, '7days')">7 Days</button>
+                <button class="timeframe-tab-btn" onclick="selectTimeframeTab(this, '30days')">30 Days</button>
+                <button class="timeframe-tab-btn" onclick="selectTimeframeTab(this, '3months')">3 Months</button>
+              </div>
+
+              <!-- 70% Progress Ring Score Banner Card -->
+              <div class="journal-progress-banner">
+                <div class="circular-progress-wrap">
+                  <svg class="circular-progress-svg" viewBox="0 0 48 48">
+                    <circle class="progress-bg-circle" cx="24" cy="24" r="20" fill="none" stroke="#BEE3CA" stroke-width="4.5"></circle>
+                    <circle class="progress-fill-circle" cx="24" cy="24" r="20" fill="none" stroke="#2E9B4F" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="125.6" stroke-dashoffset="37.6"></circle>
+                  </svg>
+                  <span class="progress-percent-label">70%</span>
+                </div>
+                <div class="journal-progress-info">
+                  <h4>You're doing great, keep it up</h4>
+                  <p id="checklistCompletedText">2 out of 4 completed!</p>
+                  <button class="btn-log-mood-pill" onclick="startCheckinFlow()">Log in your mood</button>
+                </div>
+              </div>
+
+              <!-- Daily Checklist Section -->
+              <div class="section-heading-row">
+                <span class="section-title">Daily Checklist</span>
+                <a href="javascript:void(0)" onclick="alert('Viewing all personal habits')" class="section-link-muted">See all</a>
+              </div>
+
+              <div class="checklist-items-list">
+                <!-- Water Item -->
+                <div class="checklist-item-card">
+                  <div class="checklist-left-group">
+                    <div class="checklist-icon-circle">
+                      <img src="assets/icons/glass_water.svg" alt="Water" style="width:20px; height:20px;">
+                    </div>
+                    <div>
+                      <div class="checklist-title">Drink Up !</div>
+                      <div class="checklist-meta" id="waterCounterDisplay">4/6 glasses of water</div>
+                    </div>
+                  </div>
+                  <button class="checklist-action-btn" id="waterIncrementBtn" onclick="incrementWaterHabit()" title="Add glass of water">+</button>
+                </div>
+
+                <!-- Sleep Item -->
+                <div class="checklist-item-card">
+                  <div class="checklist-left-group">
+                    <div class="checklist-icon-circle">
+                      <img src="assets/icons/bed_sleep.svg" alt="Sleep" style="width:20px; height:20px;">
+                    </div>
+                    <div>
+                      <div class="checklist-title">Sleep time</div>
+                      <div class="checklist-meta">8/9 Hours of sleep</div>
+                    </div>
+                  </div>
+                  <button class="checklist-action-btn checked" title="Completed">✓</button>
+                </div>
+
+                <!-- Meditation Item -->
+                <div class="checklist-item-card">
+                  <div class="checklist-left-group">
+                    <div class="checklist-icon-circle">
+                      <img src="assets/icons/meditation_lotus.svg" alt="Meditation" style="width:20px; height:20px;">
+                    </div>
+                    <div>
+                      <div class="checklist-title">Meditation</div>
+                      <div class="checklist-meta" id="meditationCounterDisplay">10/30 minutes</div>
+                    </div>
+                  </div>
+                  <button class="checklist-action-btn" id="meditationIncrementBtn" onclick="incrementMeditationHabit()" title="Add 10 min">+</button>
+                </div>
+              </div>
+
+              <!-- My Trackers Section -->
+              <div class="section-heading-row">
+                <span class="section-title">My Trackers</span>
+              </div>
+
+              <div class="trackers-cards-grid">
+                <!-- Sleep Card -->
+                <div class="tracker-card-sleep" onclick="navigateToScreen('08')" title="Sleep tracker & soundscapes">
+                  <div class="tracker-sleep-title">Sleep <span style="font-size:16px; font-weight:600; opacity:0.8;">z</span></div>
+                  <img src="assets/koala/koala_sleep.svg" class="tracker-sleep-art" alt="Sleeping Koala">
+                </div>
+
+                <!-- Goals Card -->
+                <div class="tracker-card-goals" onclick="alert('3 of 4 Weekly Personal Goals Achieved!')" title="Personal Goals">
+                  <div class="tracker-goals-title">Goals</div>
+                  <img src="assets/koala/koala_goals.svg" class="tracker-goals-art" alt="Goals Koala">
+                </div>
+              </div>
+
+              <!-- My Activities Section (Coral Card with Wave Chart & Smileys) -->
+              <div class="section-heading-row">
+                <span class="section-title">My Activities</span>
+              </div>
+
+              <div class="activities-wave-card">
+                <div class="wave-graph-container">
+                  <!-- Y-Axis -->
+                  <div class="wave-y-axis">
+                    <span>3hr</span>
+                    <span>2hr</span>
+                    <span>1hr</span>
+                    <span>0hr</span>
+                  </div>
+
+                  <!-- Wave Chart SVG with Smiley Markers -->
+                  <div class="wave-chart-svg-wrap">
+                    <svg class="wave-chart-svg" viewBox="0 0 240 100" fill="none">
+                      <!-- Soft area fill below wave -->
+                      <path d="M 10 90 Q 25 30, 45 35 T 90 75 T 140 40 T 180 30 T 230 90 L 230 100 L 10 100 Z" fill="rgba(255,255,255,0.15)"/>
+                      <!-- White Wave Curve -->
+                      <path d="M 10 90 Q 25 30, 45 35 T 90 75 T 140 40 T 180 30 T 230 90" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" fill="none"/>
+                      <!-- Smiley Peak 1 (13:00 - Happy) -->
+                      <circle cx="45" cy="35" r="9" fill="#FFDA63"/>
+                      <circle cx="42" cy="33" r="1.2" fill="#242B33"/>
+                      <circle cx="48" cy="33" r="1.2" fill="#242B33"/>
+                      <path d="M 42 37 Q 45 40 48 37" stroke="#242B33" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+
+                      <!-- Smiley Peak 2 (1:00 - Neutral/Content) -->
+                      <circle cx="140" cy="40" r="9" fill="#FFDA63"/>
+                      <circle cx="137" cy="38" r="1.2" fill="#242B33"/>
+                      <circle cx="143" cy="38" r="1.2" fill="#242B33"/>
+                      <path d="M 137 43 L 143 43" stroke="#242B33" stroke-width="1.2" stroke-linecap="round"/>
+
+                      <!-- Smiley Dip (Tired/Sleepy) -->
+                      <circle cx="160" cy="82" r="7.5" fill="#FFDA63"/>
+                      <circle cx="158" cy="80" r="1" fill="#242B33"/>
+                      <circle cx="162" cy="80" r="1" fill="#242B33"/>
+                      <path d="M 158 84 Q 160 82 162 84" stroke="#242B33" stroke-width="1" stroke-linecap="round" fill="none"/>
+                    </svg>
+                  </div>
+                </div>
+
+                <!-- X-Axis Timestamps -->
+                <div class="wave-x-axis">
+                  <span>13:00</span>
+                  <span>12:00</span>
+                  <span>1:00</span>
+                  <span>2:00</span>
+                </div>
+              </div>
+
+              <!-- Recent Reflections Timeline (Preserved) -->
+              <div class="section-title" style="margin: 16px 0 10px;">Recent Reflections</div>
+              <div class="timeline-feed" id="recordsTimelineFeed">
+                <!-- Dynamically populated from StorageService -->
+              </div>
+            </div>
+          </section>
+
+          <!-- SCREEN 11: EMERGENCY SOS & IMMEDIATE CONTACTS (Android Large - 18 & 17) -->
+          <section id="screen-11" class="screen">
+            <!-- Subview 1: Android Large - 18 (Emergency HELP NEEDED?) -->
+            <div id="emergencyHelpMainView" class="emergency-help-screen">
+              <!-- Top bar with Avatar and App Name -->
+              <div class="emergency-top-bar">
+                <div class="emergency-top-avatar" onclick="navigateToScreen('12')" title="View profile">
+                  <img src="assets/koala/sara_avatar.svg" alt="Sara Sharma">
+                </div>
+                <div class="emergency-app-name">Koazy</div>
+                <button class="back-circle-btn" onclick="navigateToScreen('04')" title="Close" aria-label="Close emergency help">✕</button>
+              </div>
+
+              <!-- Coral IMMEDIATE CONTACTS Badge (Switches to Ambulance Map / Response view) -->
+              <div>
+                <button class="immediate-contacts-badge" onclick="showAmbulanceMap(true)" title="View Ambulance & Response Teams">
+                  <span>IMMEDIATE CONTACTS</span>
+                  <span style="font-size:11px;">→</span>
+                </button>
+              </div>
+
+              <!-- Emergency Main Heading -->
+              <h1 class="emergency-help-title">Emergency HELP<br>NEEDED?</h1>
+              <div class="emergency-help-sub">JUST HOLD THE BUTTON TO CALL</div>
+
+              <!-- Huge Glowing Red Circular SOS Button -->
+              <button class="sos-big-circle-button" id="sosBigCallButton" 
+                      onmousedown="startSOSCallHold()" onmouseup="endSOSCallHold()" 
+                      ontouchstart="startSOSCallHold()" ontouchend="endSOSCallHold()" 
+                      onclick="triggerImmediateSOS()" 
+                      title="Hold or Tap to Call Emergency Helpline">
+                <svg class="sos-phone-svg-icon" viewBox="0 0 24 24">
+                  <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-2.2 2.2a15.053 15.053 0 0 1-6.59-6.59l2.2-2.21a.96.96 0 0 0 .25-1.01A11.36 11.36 0 0 1 8.57 3.9c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.52c0-.55-.45-1-1-1z"/>
+                </svg>
+              </button>
+
+              <!-- Not Sure What To Do / Choose Your Help -->
+              <div class="not-sure-help-label">NOT SURE WHAT TO DO</div>
+              <div class="not-sure-help-sub">Choose Your Help</div>
+
+              <!-- 3 Rounded Option Cards -->
+              <div class="help-options-grid">
+                <div class="help-option-card" onclick="navigateToScreen('09')" title="Talk to Counselor Koazy now">
+                  <img src="assets/icons/talk_now.svg" class="help-card-icon" alt="Talk Now">
+                  <span>Talk Now</span>
+                </div>
+                <div class="help-option-card" onclick="navigateToScreen('08')" title="Breathing and self-help grounding">
+                  <img src="assets/icons/self_help.svg" class="help-card-icon" alt="Self-Help">
+                  <span>Self-Help</span>
+                </div>
+                <div class="help-option-card" onclick="openScheduleTherapyModal()" title="Schedule confidential therapy">
+                  <img src="assets/icons/therapy_schedule.svg" class="help-card-icon" alt="Schedule Therapy">
+                  <span>Schedule<br>Therapy</span>
+                </div>
+              </div>
+
+              <!-- Quick Link to Response Teams Away Map -->
+              <div class="ambulance-link-card" onclick="showAmbulanceMap(true)">
+                <div style="display:flex; align-items:center; gap:10px;">
+                  <span style="font-size:20px;">🚑</span>
+                  <div style="text-align:left;">
+                    <div style="font-size:13px; font-weight:800; color:#1A1E24;">Ambulance & QRT Dispatch</div>
+                    <div style="font-size:11px; color:#687482;">Central Hospital unit 2.8 km away</div>
+                  </div>
+                </div>
+                <span style="font-size:14px; font-weight:800; color:#2979FF;">Track →</span>
+              </div>
+            </div>
+
+            <!-- Subview 2: Android Large - 17 (Ambulance And Response Teams Away) -->
+            <div id="emergencyAmbulanceMapView" class="ambulance-screen-wrapper" style="display:none;">
+              <!-- Coral Top Section with Back Button and Header -->
+              <div class="ambulance-coral-header">
+                <div class="ambulance-header-top-row">
+                  <button class="back-circle-btn" onclick="showAmbulanceMap(false)" aria-label="Back to Emergency SOS">
+                    <img src="assets/icons/arrow_back.svg" alt="Back">
+                  </button>
+                  <span onclick="showAmbulanceMap(false)" style="cursor:pointer;">Emergency Palace</span>
+                </div>
+                <h2 class="ambulance-header-headline">Ambulance And Response<br>Teams Away</h2>
+              </div>
+
+              <!-- Map Stage Area with live SVG route -->
+              <div class="ambulance-map-stage">
+                <img src="assets/illustrations/ambulance_map.svg" class="ambulance-map-svg-img" alt="Live Ambulance Dispatch Route">
+
+                <!-- Central Hospital Bottom Sheet Card -->
+                <div class="hospital-bottom-sheet">
+                  <div class="hospital-sheet-row">
+                    <div class="hospital-badge-left">
+                      <div class="red-cross-badge">+</div>
+                      <div>
+                        <div class="hospital-name">Central Hospital</div>
+                        <div class="hospital-address">CMPF Colony, Dhanbad,<br>Jharkhand 826001</div>
+                      </div>
+                    </div>
+                    <div class="turn-direction-icon">↱</div>
+                  </div>
+
+                  <div class="hospital-actions-row">
+                    <button class="btn-hospital-call" onclick="startHelplineCall('0326-220021', 'Central Hospital Emergency Unit')">
+                      Call Now
+                    </button>
+                    <button class="btn-hospital-msg" onclick="alert('Dispatched encrypted situational update to Central Hospital emergency ward.')">
+                      Message
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- SCREEN 12: PROFILE & PRIVACY / CONSENT -->
+          <section id="screen-12" class="screen">
+            <div class="app-top-bar">
+              <button class="back-circle-btn" onclick="navigateToScreen('04')" aria-label="Go back">
+                <img src="assets/icons/arrow_back.svg" alt="Back">
+              </button>
+              <div class="app-top-title">Profile & Privacy</div>
+              <div style="width:36px"></div>
+            </div>
+
+            <div class="profile-hero">
+              <div class="profile-avatar-big">
+                <img src="assets/mascot/koala_happy.svg" alt="Sara Sharma">
+              </div>
+              <div class="profile-name">Sara Sharma</div>
+              <div class="profile-service-id">Sub-Inspector • Sector Delta • Unit #42</div>
+            </div>
+
+            <div class="section-title" style="margin-bottom:10px;">Privacy & Consent Controls</div>
+
+            <div class="privacy-toggle-card">
+              <div class="privacy-toggle-info">
+                <h4>Anonymous Check-in Mode</h4>
+                <p>Hide identifiable personnel markers during daily check-ins</p>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="toggleAnonymous">
+                <span class="slider-toggle"></span>
+              </label>
+            </div>
+
+            <div class="privacy-toggle-card">
+              <div class="privacy-toggle-info">
+                <h4>Share Aggregated Trends</h4>
+                <p>Contribute anonymized unit wellbeing metrics to Welfare Officer</p>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="toggleAggregated" checked>
+                <span class="slider-toggle"></span>
+              </label>
+            </div>
+
+            <div class="privacy-toggle-card">
+              <div class="privacy-toggle-info">
+                <h4>Local Device Storage Only</h4>
+                <p>Never sync personal reflections to central cloud server</p>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="toggleOffline">
+                <span class="slider-toggle"></span>
+              </label>
+            </div>
+
+            <div style="margin-top: 16px;">
+              <button class="btn-secondary" onclick="navigateToScreen('13')" style="border-color:var(--sage-400);">
+                <span>Switch to Welfare Officer Portal</span>
+                <span>🛡️</span>
+              </button>
+            </div>
+          </section>
+
+          <!-- SCREEN 13: WELFARE OFFICER DASHBOARD -->
+          <section id="screen-13" class="screen">
+            <div class="app-top-bar">
+              <button class="back-circle-btn" onclick="navigateToScreen('04')" aria-label="Go back">
+                <img src="assets/icons/arrow_back.svg" alt="Back">
+              </button>
+              <div class="app-top-title">Welfare Dashboard</div>
+              <button class="back-circle-btn" onclick="navigateToScreen('12')" title="Switch back" aria-label="Switch back to profile">✕</button>
+            </div>
+
+            <div class="officer-badge-header">
+              <div class="officer-badge-info">
+                <h3>Sector Delta • Welfare Oversight</h3>
+                <p>Officer: Capt. R. Deshmukh • Confidential Monitor</p>
+              </div>
+              <img src="assets/icons/officer.svg" class="officer-shield-icon" alt="Officer Shield">
+            </div>
+
+            <!-- Aggregated Metrics -->
+            <div class="officer-metrics-grid">
+              <div class="officer-metric-box">
+                <div class="officer-metric-num">88%</div>
+                <div class="officer-metric-lbl">Unit Check-in Rate</div>
+              </div>
+              <div class="officer-metric-box">
+                <div class="officer-metric-num alert" id="highFatigueCountDisplay">3 Cases</div>
+                <div class="officer-metric-lbl">High Fatigue Flags</div>
+              </div>
+            </div>
+
+            <!-- Seasonal Operational Stress Patterns -->
+            <div class="seasonal-stress-card">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:12px; font-weight:800; color:var(--sage-800);">🌦️ Seasonal & Climatic Patterns</span>
+                <span id="seasonHazardBadge" style="font-size:10px; font-weight:700; background:#FDECE9; color:var(--comfort-rose-dark); padding:2px 8px; border-radius:99px;">Sub-Zero Hypoxia</span>
+              </div>
+              <div class="seasonal-selector-pills">
+                <button class="season-pill-btn active" onclick="selectSeasonalPattern('WINTER_HIGH_ALTITUDE', this)">❄️ High Altitude Winter</button>
+                <button class="season-pill-btn" onclick="selectSeasonalPattern('MONSOON_TERRAIN', this)">🌧️ Monsoon Terrain</button>
+                <button class="season-pill-btn" onclick="selectSeasonalPattern('SUMMER_HEATWAVE', this)">☀️ Desert Heatwave</button>
+                <button class="season-pill-btn" onclick="selectSeasonalPattern('FESTIVAL_ELECTION_SURGE', this)">🛡️ Election Surge</button>
+              </div>
+              <div class="season-climate-hazard-box" id="seasonHazardBox">
+                <!-- Dynamically populated via script -->
+              </div>
+            </div>
+
+            <!-- Batch Cohort Filter Bar -->
+            <div style="margin-bottom:6px; display:flex; justify-content:space-between; align-items:center;">
+              <span class="section-title">Cohort & Batch Breakdown</span>
+              <span id="batchSummaryLabel" style="font-size:11px; color:var(--sage-700); font-weight:700;">148 Personnel Active</span>
+            </div>
+            <div class="batch-filter-row">
+              <button class="batch-chip-btn active" onclick="filterByBatch('ALL', this)">All Batches</button>
+              <button class="batch-chip-btn" onclick="filterByBatch('BATCH_2024', this)">Batch 2024 (Recruits)</button>
+              <button class="batch-chip-btn" onclick="filterByBatch('BATCH_2020', this)">Batch 2020 (Mid-Career)</button>
+              <button class="batch-chip-btn" onclick="filterByBatch('BATCH_2015', this)">Batch 2015 (Seniors)</button>
+            </div>
+
+            <!-- Designated Officers Directory -->
+            <div class="officers-directory-section">
+              <span class="section-title">Designated Welfare Team</span>
+              <div class="officers-scroll-grid" id="officersDirectoryGrid">
+                <!-- Dynamically populated via script -->
+              </div>
+            </div>
+
+            <div class="cases-list-header">
+              <span class="section-title">Personnel Welfare Cases & Action Plans</span>
+              <span style="font-size:11px; color:var(--text-muted);">Strict Privacy Firewall</span>
+            </div>
+
+            <div id="welfareCasesListContainer">
+              <!-- Dynamically populated from WelfareService -->
+            </div>
+
+            <!-- Interactive Case Management Sheet / Modal -->
+            <div id="caseManagementModal" class="case-modal-overlay">
+              <div class="case-modal-sheet">
+                <div class="sheet-handle"></div>
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <h3 id="modalCaseIdTitle" style="font-size:15px; font-weight:800; color:var(--text-primary); margin:0;">
+                    Manage Case #402
+                  </h3>
+                  <button class="back-circle-btn" onclick="closeCaseModal()" style="width:28px; height:28px; font-size:12px;">✕</button>
+                </div>
+
+                <div id="modalCaseSummary" style="font-size:12px; color:var(--text-secondary); line-height:1.45; background:var(--sage-50); padding:10px 12px; border-radius:12px;">
+                  High cumulative sleep disruption and low-oxygen headache reported across 4 consecutive border patrol shifts.
+                </div>
+
+                <div class="modal-form-group">
+                  <label class="modal-form-label" for="modalAssignOfficer">Assigned Welfare Officer:</label>
+                  <select id="modalAssignOfficer" class="modal-select-field">
+                    <option value="Capt. R. Deshmukh">Capt. R. Deshmukh (Unit Welfare Officer)</option>
+                    <option value="Subedar Manoj Kumar">Subedar Manoj Kumar (Senior Peer Counselor)</option>
+                    <option value="Dr. Sunita Rao">Dr. Sunita Rao (Base Medical Officer)</option>
+                  </select>
+                </div>
+
+                <div class="modal-form-group">
+                  <label class="modal-form-label" for="modalActionPlan">Prescribed Intervention / Action Plan:</label>
+                  <select id="modalActionPlan" class="modal-select-field">
+                    <option value="Light Duty Reassignment (24h) + Base Medical Review">Light Duty Reassignment (24h) + Base Medical Review</option>
+                    <option value="Compassionate Leave Fast-Track Review">Compassionate Leave Fast-Track Review</option>
+                    <option value="1-on-1 Confidential Peer Mentoring Session">1-on-1 Confidential Peer Mentoring Session</option>
+                    <option value="Compulsory Rotational Rest & Warming Break">Compulsory Rotational Rest & Warming Break</option>
+                    <option value="Physiotherapy Recovery & Ergonomic Duty Adjustment">Physiotherapy Recovery & Ergonomic Duty Adjustment</option>
+                  </select>
+                </div>
+
+                <div class="modal-form-group">
+                  <label class="modal-form-label" for="modalCasePriority">Case Priority & Flag Level:</label>
+                  <select id="modalCasePriority" class="modal-select-field">
+                    <option value="urgent">Urgent / Priority</option>
+                    <option value="moderate">Moderate / Monitoring</option>
+                    <option value="routine">Routine Care</option>
+                  </select>
+                </div>
+
+                <div class="modal-form-group">
+                  <label class="modal-form-label" for="modalCaseNotes">Officer Progress Notes:</label>
+                  <input type="text" id="modalCaseNotes" class="input-field" placeholder="Add confidential case note..." style="padding:10px 12px; font-size:12px;">
+                </div>
+
+                <div style="display:flex; gap:10px; margin-top:6px;">
+                  <button class="btn-primary" onclick="saveCaseManagementChanges()">
+                    Save & Update Action Plan
+                  </button>
+                  <button class="btn-secondary" onclick="closeCaseModal()" style="width:100px;">
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+        </div>
+
+        <!-- Phone Fixed Bottom Navigation Bar -->
+        <nav class="mobile-bottom-nav" id="mainBottomNav">
+          <button class="nav-item active" id="navItemHome" onclick="navigateToScreen('04')" title="Home">
+            <img src="assets/icons/home_nav.svg" alt="Home">
+          </button>
+          <button class="nav-item" id="navItemRecords" onclick="navigateToScreen('10')" title="Journal &amp; Records">
+            <img src="assets/icons/journal_nav.svg" alt="Records">
+          </button>
+          <button class="nav-item center-alert-btn" id="navItemAlert" onclick="navigateToScreen('11')" title="Emergency SOS &amp; Helpline">
+            <img src="assets/icons/emergency_alert_nav.svg" alt="Alert">
+          </button>
+          <button class="nav-item" id="navItemChat" onclick="navigateToScreen('09')" title="Talk to Koazy">
+            <img src="assets/koala/koala_nav.svg" alt="Koazy">
+          </button>
+          <button class="nav-item" id="navItemProfile" onclick="navigateToScreen('12')" title="Profile">
+            <img src="assets/icons/profile.svg" alt="Profile">
+          </button>
+        </nav>
+
+        <!-- Android Gesture Bar (Bottom pill) -->
+        <div class="android-gesture-pill-area" onclick="navigateToScreen('04')" title="Tap gesture pill to go Home">
+          <div class="android-gesture-pill"></div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- 13-SCREEN DESIGN GALLERY MATRIX (SIDE-BY-SIDE INSPECTION MODE) -->
+  <section id="galleryStage" class="gallery-stage">
+    <!-- Screen 01 Card -->
+    <div class="screen-card-wrapper">
+      <div class="screen-card-label">
+        <span class="screen-number">01</span>
+        <span>Intro Screen</span>
+      </div>
+      <div class="android-phone" style="height: 720px; width: 340px;">
+        <div class="phone-viewport" id="gallery-s01"></div>
+      </div>
+    </div>
+
+    <!-- Screen 02 Card -->
+    <div class="screen-card-wrapper">
+      <div class="screen-card-label">
+        <span class="screen-number">02</span>
+        <span>Login</span>
+      </div>
+      <div class="android-phone" style="height: 720px; width: 340px;">
+        <div class="phone-viewport" id="gallery-s02"></div>
+      </div>
+    </div>
+
+    <!-- Screen 03 Card -->
+    <div class="screen-card-wrapper">
+      <div class="screen-card-label">
+        <span class="screen-number">03</span>
+        <span>Sign Up</span>
+      </div>
+      <div class="android-phone" style="height: 720px; width: 340px;">
+        <div class="phone-viewport" id="gallery-s03"></div>
+      </div>
+    </div>
+
+    <!-- Screen 04 Card -->
+    <div class="screen-card-wrapper">
+      <div class="screen-card-label">
+        <span class="screen-number">04</span>
+        <span>Home Dashboard</span>
+      </div>
+      <div class="android-phone" style="height: 720px; width: 340px;">
+        <div class="phone-viewport" id="gallery-s04"></div>
+      </div>
+    </div>
+
+    <!-- Screen 05 Card -->
+    <div class="screen-card-wrapper">
+      <div class="screen-card-label">
+        <span class="screen-number">05</span>
+        <span>Current State of Mind</span>
+      </div>
+      <div class="android-phone" style="height: 720px; width: 340px;">
+        <div class="phone-viewport" id="gallery-s05"></div>
+      </div>
+    </div>
+
+    <!-- Screen 06 Card -->
+    <div class="screen-card-wrapper">
+      <div class="screen-card-label">
+        <span class="screen-number">06</span>
+        <span>Check-in Questions</span>
+      </div>
+      <div class="android-phone" style="height: 720px; width: 340px;">
+        <div class="phone-viewport" id="gallery-s06"></div>
+      </div>
+    </div>
+
+    <!-- Screen 07 Card -->
+    <div class="screen-card-wrapper">
+      <div class="screen-card-label">
+        <span class="screen-number">07</span>
+        <span>Check-in Result</span>
+      </div>
+      <div class="android-phone" style="height: 720px; width: 340px;">
+        <div class="phone-viewport" id="gallery-s07"></div>
+      </div>
+    </div>
+
+    <!-- Screen 08 Card -->
+    <div class="screen-card-wrapper">
+      <div class="screen-card-label">
+        <span class="screen-number">08</span>
+        <span>Self Care</span>
+      </div>
+      <div class="android-phone" style="height: 720px; width: 340px;">
+        <div class="phone-viewport" id="gallery-s08"></div>
+      </div>
+    </div>
+
+    <!-- Screen 09 Card -->
+    <div class="screen-card-wrapper">
+      <div class="screen-card-label">
+        <span class="screen-number">09</span>
+        <span>Talk to Koazy</span>
+      </div>
+      <div class="android-phone" style="height: 720px; width: 340px;">
+        <div class="phone-viewport" id="gallery-s09"></div>
+      </div>
+    </div>
+
+    <!-- Screen 10 Card -->
+    <div class="screen-card-wrapper">
+      <div class="screen-card-label">
+        <span class="screen-number">10</span>
+        <span>Personal Records</span>
+      </div>
+      <div class="android-phone" style="height: 720px; width: 340px;">
+        <div class="phone-viewport" id="gallery-s10"></div>
+      </div>
+    </div>
+
+    <!-- Screen 11 Card -->
+    <div class="screen-card-wrapper">
+      <div class="screen-card-label">
+        <span class="screen-number">11</span>
+        <span>Support</span>
+      </div>
+      <div class="android-phone" style="height: 720px; width: 340px;">
+        <div class="phone-viewport" id="gallery-s11"></div>
+      </div>
+    </div>
+
+    <!-- Screen 12 Card -->
+    <div class="screen-card-wrapper">
+      <div class="screen-card-label">
+        <span class="screen-number">12</span>
+        <span>Profile & Privacy</span>
+      </div>
+      <div class="android-phone" style="height: 720px; width: 340px;">
+        <div class="phone-viewport" id="gallery-s12"></div>
+      </div>
+    </div>
+
+    <!-- Screen 13 Card -->
+    <div class="screen-card-wrapper">
+      <div class="screen-card-label">
+        <span class="screen-number">13</span>
+        <span>Welfare Officer Dashboard</span>
+      </div>
+      <div class="android-phone" style="height: 720px; width: 340px;">
+        <div class="phone-viewport" id="gallery-s13"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI / ANALYTICS / PREDICTIVE ENGINE — SIH JUDGE DEMONSTRATION SUITE -->
+  <section id="aiDemoStage" class="ai-demo-stage">
+    
+    <!-- AI Suite Header Banner -->
+    <div class="ai-header-banner">
+      <div class="ai-banner-title">
+        <h2>
+          <span>🧠 KOAZY AI & Predictive Analytics Engine</span>
+          <span class="ai-badge-demo">SIH 26186 • Decision Intelligence</span>
+        </h2>
+        <p>
+          Context-aware wellbeing intelligence for Armed Forces & CAPFs. Combines self-reported check-ins, authorized organizational signals, and historical trends to deliver personalized non-diagnostic interventions.
+        </p>
+      </div>
+      <div style="text-align:right;">
+        <span style="font-size:11px; color:var(--comfort-sun); font-weight:700;">CORE PRINCIPLE</span>
+        <div style="font-size:15px; font-weight:800; color:white; letter-spacing:-0.2px;">SAME SIGNAL ≠ SAME CONTEXT ≠ SAME RESPONSE</div>
+      </div>
+    </div>
+
+    <!-- AI Navigation Tabs -->
+    <div class="ai-tabs-nav">
+      <button class="ai-tab-btn active" id="tabBtnCaseStudies" onclick="switchAITab('caseStudies')">
+        <span>🧪 10 Case Study Scenarios</span>
+      </button>
+      <button class="ai-tab-btn" id="tabBtnComparison" onclick="switchAITab('comparison')">
+        <span>⚖️ Two-Person Comparison Demo</span>
+      </button>
+      <button class="ai-tab-btn" id="tabBtnCrisis" onclick="switchAITab('crisis')">
+        <span>🚨 Crisis & Safety Protocol Simulator</span>
+      </button>
+      <button class="ai-tab-btn" id="tabBtnAuditLogs" onclick="switchAITab('auditLogs')">
+        <span>📜 AI Decision Audit Logs</span>
+      </button>
+    </div>
+
+    <!-- TAB PANEL 1: CASE STUDY RUNNER & DECISION PIPELINE -->
+    <div id="aiPanelCaseStudies" class="ai-tab-panel active">
+      
+      <!-- Scenario Selector Bar -->
+      <div class="case-selector-bar">
+        <div class="case-selector-group">
+          <label style="font-size:12.5px; font-weight:800; color:var(--text-secondary); text-transform:uppercase;">Select Scenario:</label>
+          <select id="caseStudyDropdown" class="case-select-dropdown" onchange="onCaseStudySelect(this.value)">
+            <!-- Populated via script from CASE_STUDIES -->
+          </select>
+        </div>
+        <button class="btn-run-analysis" onclick="executeCurrentCaseStudy()">
+          <span>▶ Run AI Analysis Pipeline</span>
+        </button>
+      </div>
+
+      <!-- Case Scenario Brief Banner -->
+      <div id="caseBriefCard" class="pipeline-card" style="background:linear-gradient(135deg, #F4F7F5, #EAF2ED); border-color:var(--sage-300);">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:10px;">
+          <div>
+            <span class="pipeline-card-step-badge" id="caseNumberBadge">CASE 01</span>
+            <h3 id="caseTitleDisplay" style="font-size:17px; font-weight:800; color:var(--text-primary); margin:6px 0 2px;">Family Stress (Remote Deployment)</h3>
+            <p id="caseSubtitleDisplay" style="font-size:12.5px; color:var(--text-secondary);">Personnel stationed away from home facing domestic concerns</p>
+          </div>
+          <div style="text-align:right;">
+            <span style="font-size:11px; font-weight:700; color:var(--text-muted);">Personnel Profile:</span>
+            <div id="casePersonnelName" style="font-size:13px; font-weight:800; color:var(--sage-800);">Constable Rajesh M.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VISUAL DECISION PIPELINE -->
+      <div class="pipeline-section">
+        <div class="pipeline-section-title">
+          <span>⚡ Sequential AI Decision Pipeline (11-Stage Intelligence Path)</span>
+        </div>
+
+        <div class="pipeline-grid">
+          <!-- Step 1: Inputs & Normalization -->
+          <div class="pipeline-card">
+            <span class="pipeline-card-step-badge">Stage 01 • Input Normalization</span>
+            <div class="pipeline-card-title">Personal + Org Signals</div>
+            <div class="pipeline-card-content" id="pipeInputsContent">
+              <!-- Populated via script -->
+            </div>
+          </div>
+
+          <!-- Step 2: Current State Assessment -->
+          <div class="pipeline-card">
+            <span class="pipeline-card-step-badge">Stage 02 • State Assessment</span>
+            <div class="pipeline-card-title">Application State</div>
+            <div class="pipeline-card-highlight" id="pipeCurrentState">
+              Stressed (Non-Clinical)
+            </div>
+            <div class="pipeline-card-content">
+              Strictly non-diagnostic. Identifies current operational wellbeing level without psychiatric labeling.
+            </div>
+          </div>
+
+          <!-- Step 3: Historical Trend Analysis -->
+          <div class="pipeline-card">
+            <span class="pipeline-card-step-badge">Stage 03 • Trend Analysis</span>
+            <div class="pipeline-card-title">Multi-Day Trajectory</div>
+            <div class="pipeline-card-highlight" id="pipeTrendDirection">
+              Isolated Negative Signal
+            </div>
+            <div class="pipeline-card-content" id="pipeTrendSummary">
+              Distinguishes one stressful day from persistent multi-week exhaustion.
+            </div>
+          </div>
+
+          <!-- Step 4: Data Sufficiency & Confidence -->
+          <div class="pipeline-card">
+            <span class="pipeline-card-step-badge">Stage 04 • Evidence Quality</span>
+            <div class="pipeline-card-title">Data Sufficiency Rating</div>
+            <div class="pipeline-card-highlight" id="pipeSufficiency">
+              High Confidence (88%)
+            </div>
+            <div class="pipeline-card-content">
+              Evaluates if sufficient data points exist before formulating interventions. Avoids hallucination when data is limited.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTEXT SIGNALS MATRIX -->
+      <div class="pipeline-section">
+        <div class="pipeline-section-title">
+          <span>🧭 Multidimensional Context Matrix (Contributing Signal Strengths)</span>
+        </div>
+        <div class="context-signals-container" id="pipeContextMatrix">
+          <!-- Populated via script -->
+        </div>
+      </div>
+
+      <!-- DECISION & TRANSPARENT EXPLANATION HERO -->
+      <div class="decision-explanation-hero">
+        <div class="decision-hero-header">
+          <div class="decision-hero-title">
+            <span>🎯 Tailored Intervention & Explainability</span>
+          </div>
+          <span id="pipeEscalationBadge" class="signal-strength-badge low">Level 0 — Normal Flow</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:6px;">
+          <div style="font-size:12px; font-weight:800; color:var(--sage-700); text-transform:uppercase;">Selected Support Intervention:</div>
+          <div id="pipeInterventionTitle" style="font-size:19px; font-weight:800; color:var(--text-primary);">
+            Supportive Conversation + Personal Support Pathway
+          </div>
+        </div>
+
+        <div class="decision-rationale-box">
+          <strong style="color:var(--sage-800);">WHY THIS RESPONSE? (Transparent AI Decision Path):</strong>
+          <p id="pipeExplanationText" style="margin-top:6px; margin-bottom:12px;">
+            Recent self-reported information indicates personal/family strain. Duty schedules and sleep indicators remain stable. Recommending supportive conversation over physical recovery.
+          </p>
+          <div style="font-size:11px; font-weight:700; color:var(--text-muted); margin-bottom:6px; text-transform:uppercase;">Primary Signals Utilized:</div>
+          <div class="signals-tag-list" id="pipeSignalsUsedList">
+            <!-- Populated via script -->
+          </div>
+        </div>
+
+        <!-- Feedback Loop Simulator -->
+        <div class="feedback-simulator-box">
+          <div>
+            <div style="font-size:13px; font-weight:800; color:var(--text-primary);">Simulate Personnel Feedback (Continuous Closed Loop):</div>
+            <div style="font-size:11.5px; color:var(--text-secondary); margin-top:2px;" id="feedbackStatusMsg">
+              Test how user response updates subsequent context and model weights.
+            </div>
+          </div>
+          <div class="feedback-buttons-group">
+            <button class="btn-feedback" onclick="simulateFeedback('Helped')">👍 Helped</button>
+            <button class="btn-feedback" onclick="simulateFeedback('Did not help')">👎 Did not help</button>
+            <button class="btn-feedback" onclick="simulateFeedback('Not tried')">⏳ Not tried</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- TAB PANEL 2: TWO-PERSON COMPARISON DEMO -->
+    <div id="aiPanelComparison" class="ai-tab-panel">
+      <div class="pipeline-card" style="background:#FAF7F2; border-color:var(--sand-300);">
+        <h3 style="font-size:17px; font-weight:800; color:var(--text-primary); margin-bottom:4px;">
+          ⚖️ "Same Stress. Different Context. Different Response."
+        </h3>
+        <p style="font-size:13px; color:var(--text-secondary); line-height:1.5;">
+          This demo proves to SIH judges that KOAZY never provides a one-size-fits-all exercise. Two personnel reporting identical high stress receive fundamentally different interventions tailored to their circumstances.
+        </p>
+      </div>
+
+      <div class="comparison-container">
+        <!-- Personnel A Card -->
+        <div class="comparison-card">
+          <div class="comparison-header">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div class="person-avatar-circle">🏡</div>
+              <div>
+                <div class="comparison-headline">Personnel A</div>
+                <div style="font-size:12px; color:var(--text-muted);">Constable (Sector Alpha)</div>
+              </div>
+            </div>
+            <span class="signal-strength-badge high">Stress: High</span>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:4px;">
+            <div class="comparison-signal-row">
+              <span>Reported Mood:</span>
+              <strong>😟 Stressed</strong>
+            </div>
+            <div class="comparison-signal-row">
+              <span>Family Context:</span>
+              <strong style="color:var(--comfort-rose-dark);">High Concern (Domestic Issue)</strong>
+            </div>
+            <div class="comparison-signal-row">
+              <span>Duty / Shift Intensity:</span>
+              <strong>Normal Baseline</strong>
+            </div>
+            <div class="comparison-signal-row">
+              <span>Sleep & Rest:</span>
+              <strong>Adequate (Normal)</strong>
+            </div>
+          </div>
+
+          <div class="comparison-recommendation-box">
+            <span style="font-size:11px; font-weight:800; color:var(--sage-700); text-transform:uppercase;">AI Context Analysis:</span>
+            <div style="font-size:13px; font-weight:800; color:var(--text-primary);">
+              Possible Family / Personal Contributor
+            </div>
+            <div style="font-size:12px; color:var(--text-secondary); margin-top:4px;">
+              <strong>Selected Intervention:</strong> Supportive conversation + personal/family support pathway.
+            </div>
+            <div style="font-size:11.5px; color:var(--text-muted); margin-top:4px; font-style:italic;">
+              Physical breathing exercises alone would not resolve the domestic concern.
+            </div>
+          </div>
+        </div>
+
+        <!-- Personnel B Card -->
+        <div class="comparison-card">
+          <div class="comparison-header">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div class="person-avatar-circle">⚡</div>
+              <div>
+                <div class="comparison-headline">Personnel B</div>
+                <div style="font-size:12px; color:var(--text-muted);">Head Constable (Border Outpost)</div>
+              </div>
+            </div>
+            <span class="signal-strength-badge high">Stress: High</span>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:4px;">
+            <div class="comparison-signal-row">
+              <span>Reported Mood:</span>
+              <strong>😟 Stressed</strong>
+            </div>
+            <div class="comparison-signal-row">
+              <span>Family Context:</span>
+              <strong>No Concern Reported</strong>
+            </div>
+            <div class="comparison-signal-row">
+              <span>Duty / Shift Intensity:</span>
+              <strong style="color:var(--comfort-rose-dark);">High (Long Patrol Duties)</strong>
+            </div>
+            <div class="comparison-signal-row">
+              <span>Sleep & Rest:</span>
+              <strong style="color:var(--comfort-rose-dark);">Poor / Interrupted (3.5 hrs)</strong>
+            </div>
+          </div>
+
+          <div class="comparison-recommendation-box">
+            <span style="font-size:11px; font-weight:800; color:var(--sage-700); text-transform:uppercase;">AI Context Analysis:</span>
+            <div style="font-size:13px; font-weight:800; color:var(--text-primary);">
+              Possible Duty / Workload & Rest Deficit
+            </div>
+            <div style="font-size:12px; color:var(--text-secondary); margin-top:4px;">
+              <strong>Selected Intervention:</strong> Post-duty physical recovery + workload review pathway.
+            </div>
+            <div style="font-size:11.5px; color:var(--text-muted); margin-top:4px; font-style:italic;">
+              Emotional talk therapy is deprioritized in favor of restorative physiological decompression.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB PANEL 3: CRISIS & SAFETY PROTOCOL SIMULATOR -->
+    <div id="aiPanelCrisis" class="ai-tab-panel">
+      <div class="pipeline-card" style="background:#FDF3F1; border-color:rgba(201,104,84,0.3);">
+        <h3 style="font-size:17px; font-weight:800; color:var(--comfort-rose-dark); margin-bottom:4px;">
+          🚨 Safety & Crisis Escalation Protocol (Demo Simulator)
+        </h3>
+        <p style="font-size:13px; color:#5A2B22; line-height:1.5;">
+          When language indicating immediate self-harm appears, the system immediately bypasses wellness exercises and activates the compassionate safety protocol. <em>All actions below are simulated for demonstration purposes.</em>
+        </p>
+      </div>
+
+      <div class="crisis-simulator-wrapper">
+        <!-- Simulator Controls -->
+        <div class="crisis-test-card">
+          <div style="font-size:14px; font-weight:800; color:var(--text-primary);">Test Crisis Detection Triggers:</div>
+          <div class="crisis-phrase-chips">
+            <button class="crisis-trigger-btn" onclick="testCrisisPhrase('I want to quit life.')">"I want to quit life."</button>
+            <button class="crisis-trigger-btn" onclick="testCrisisPhrase('I don\'t want to live anymore.')">"I don't want to live anymore."</button>
+            <button class="crisis-trigger-btn" onclick="testCrisisPhrase('I might hurt myself.')">"I might hurt myself."</button>
+            <button class="crisis-trigger-btn" onclick="testCrisisPhrase('I can\'t keep going.')">"I can't keep going."</button>
+            <button class="crisis-trigger-btn" style="background:var(--sage-100); color:var(--sage-800); border-color:var(--sage-300);" onclick="testCrisisPhrase('Feeling a bit tired after today\'s shift.')">"Normal Tiredness (Reset)"</button>
+          </div>
+
+          <div style="padding-top:10px; border-top:1px dashed var(--surface-border);">
+            <div style="font-size:11px; font-weight:800; color:var(--text-muted); text-transform:uppercase;">Current Escalation Level:</div>
+            <div id="crisisLevelDisplay" class="pipeline-card-highlight" style="margin-top:4px; font-size:14px; color:var(--comfort-rose-dark); background:#FDECE9; border-left-color:var(--comfort-rose-dark);">
+              Level 0 — Normal (No immediate risk detected)
+            </div>
+          </div>
+
+          <div style="font-size:13.5px; font-weight:800; color:var(--text-primary); margin-top:8px;">
+            Simulate Configured Emergency Actions:
+          </div>
+          <div class="demo-emergency-actions-grid">
+            <button class="btn-demo-action" onclick="triggerCrisisAction('family')">
+              <span>📞</span>
+              <span>Simulate Family Call</span>
+            </button>
+            <button class="btn-demo-action" onclick="triggerCrisisAction('medical')">
+              <span>🚑</span>
+              <span>Simulate Medical Help</span>
+            </button>
+            <button class="btn-demo-action" onclick="triggerCrisisAction('officer')">
+              <span>🛡️</span>
+              <span>Simulate Welfare Alert</span>
+            </button>
+            <button class="btn-demo-action" onclick="triggerCrisisAction('listener')">
+              <span>💬</span>
+              <span>Simulate Peer Connect</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Event Timeline -->
+        <div class="crisis-test-card">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div style="font-size:14px; font-weight:800; color:var(--text-primary);">Audit Event Timeline (Demo Log):</div>
+            <button class="btn-secondary" onclick="clearSafetyTimeline()" style="padding:4px 10px; font-size:11px;">Clear Log</button>
+          </div>
+          <div class="timeline-event-list" id="safetyTimelineList">
+            <!-- Populated via script -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB PANEL 4: DECISION AUDIT LOGS -->
+    <div id="aiPanelAuditLogs" class="ai-tab-panel">
+      <div class="pipeline-card">
+        <h3 style="font-size:16px; font-weight:800; color:var(--text-primary); margin-bottom:4px;">
+          📜 System Decision Log History
+        </h3>
+        <p style="font-size:12.5px; color:var(--text-secondary); margin-bottom:14px;">
+          Complete audit trail of every check-in evaluation and case study execution, capturing context inputs, confidence scores, and explanations.
+        </p>
+        <div id="auditDecisionListContainer" style="display:flex; flex-direction:column; gap:10px;">
+          <!-- Populated via script -->
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Prototype Application Controller Script -->
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>

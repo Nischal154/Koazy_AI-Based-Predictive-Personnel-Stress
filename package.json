@@ -1,0 +1,20 @@
+{
+  "name": "koazy",
+  "version": "1.0.0",
+  "description": "KOAZY — AI-Powered Personnel Stress & Welfare Monitoring System (SIH 26186)",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python -m http.server 5173",
+    "serve": "python -m http.server 5173",
+    "start": "python -m http.server 5173"
+  },
+  "keywords": [
+    "koazy",
+    "defense",
+    "sih26186",
+    "stress-monitoring",
+    "personnel-welfare"
+  ],
+  "author": "KOAZY Team",
+  "license": "ISC"
+}

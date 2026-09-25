@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <!-- Ears -->
+  <circle cx="24" cy="36" r="16" fill="#8E99A5"/>
+  <circle cx="24" cy="36" r="10" fill="#F0CED4"/>
+  <circle cx="76" cy="36" r="16" fill="#8E99A5"/>
+  <circle cx="76" cy="36" r="10" fill="#F0CED4"/>
+
+  <!-- Body -->
+  <ellipse cx="50" cy="86" rx="25" ry="18" fill="#8E99A5"/>
+
+  <!-- Head -->
+  <ellipse cx="50" cy="48" rx="32" ry="26" fill="#9DA9B7"/>
+
+  <!-- Cheeks -->
+  <circle cx="32" cy="54" r="5" fill="#FFA5A5" opacity="0.6"/>
+  <circle cx="68" cy="54" r="5" fill="#FFA5A5" opacity="0.6"/>
+
+  <!-- Happy Eyes -->
+  <path d="M37 45 Q41 41 45 45" stroke="#242B33" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+  <path d="M55 45 Q59 41 63 45" stroke="#242B33" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+
+  <!-- Big Nose -->
+  <ellipse cx="50" cy="51" rx="7.5" ry="10" fill="#242B33"/>
+
+  <!-- Open Talking Mouth -->
+  <ellipse cx="50" cy="64" rx="4" ry="3" fill="#D32F2F"/>
+
+  <!-- Microphone held in paw -->
+  <g transform="translate(62, 52) rotate(15)">
+    <rect x="0" y="8" width="5" height="18" rx="2" fill="#37474F"/>
+    <ellipse cx="2.5" cy="6" rx="5" ry="7" fill="#78909C" stroke="#37474F" stroke-width="1.5"/>
+    <line x1="-1" y1="6" x2="6" y2="6" stroke="#37474F" stroke-width="1"/>
+  </g>
+  <!-- Paw holding mic -->
+  <ellipse cx="64" cy="66" rx="6" ry="5" fill="#8E99A5"/>
+</svg>

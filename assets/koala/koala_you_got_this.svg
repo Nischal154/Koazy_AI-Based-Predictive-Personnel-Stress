@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 260" fill="none">
+  <!-- Sky background -->
+  <path d="M40 130 C30 50 100 20 160 20 C220 20 290 50 280 130 C270 170 270 180 270 180 L50 180 Z" fill="#D6EEFC" opacity="0.85"/>
+  <path d="M60 70 C70 55 95 55 105 70 C115 65 130 75 130 85 C130 95 70 95 60 70 Z" fill="#FFFFFF" opacity="0.9"/>
+  <path d="M200 60 C210 45 235 45 245 60 C255 55 270 65 270 75 C270 85 200 85 200 60 Z" fill="#FFFFFF" opacity="0.9"/>
+
+  <!-- Green Grass / Hill -->
+  <path d="M10 210 Q80 170 160 175 Q240 180 310 215 L310 260 L10 260 Z" fill="#99C76F"/>
+  <path d="M20 225 Q90 195 160 200 Q240 205 300 235 L300 260 L20 260 Z" fill="#7FA956"/>
+
+  <!-- Grass Blades / Flowers -->
+  <path d="M50 210 Q53 195 60 198 Q58 206 55 212" stroke="#688C43" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M260 215 Q265 200 272 205 Q268 212 265 218" stroke="#688C43" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <circle cx="275" cy="202" r="3" fill="#FF8370"/>
+  <circle cx="48" cy="198" r="3" fill="#FFDA63"/>
+
+  <!-- Koala Body -->
+  <ellipse cx="160" cy="180" rx="44" ry="40" fill="#94A0AE"/>
+
+  <!-- Koala Legs / Feet -->
+  <ellipse cx="120" cy="205" rx="16" ry="11" fill="#84909E"/>
+  <ellipse cx="200" cy="205" rx="16" ry="11" fill="#84909E"/>
+  <circle cx="114" cy="204" r="2.5" fill="#6B7785"/>
+  <circle cx="120" cy="202" r="2.5" fill="#6B7785"/>
+  <circle cx="126" cy="204" r="2.5" fill="#6B7785"/>
+  <circle cx="194" cy="204" r="2.5" fill="#6B7785"/>
+  <circle cx="200" cy="202" r="2.5" fill="#6B7785"/>
+  <circle cx="206" cy="204" r="2.5" fill="#6B7785"/>
+
+  <!-- Koala Head -->
+  <!-- Left Ear -->
+  <circle cx="106" cy="98" r="28" fill="#84909E"/>
+  <circle cx="106" cy="98" r="17" fill="#F0CED4"/>
+  <!-- Right Ear -->
+  <circle cx="214" cy="98" r="28" fill="#84909E"/>
+  <circle cx="214" cy="98" r="17" fill="#F0CED4"/>
+
+  <!-- Head Base -->
+  <ellipse cx="160" cy="116" rx="54" ry="44" fill="#9DA9B7"/>
+
+  <!-- Cheeks -->
+  <circle cx="128" cy="125" r="9" fill="#FFA5A5" opacity="0.6"/>
+  <circle cx="192" cy="125" r="9" fill="#FFA5A5" opacity="0.6"/>
+
+  <!-- Happy Curved Eyes -->
+  <path d="M136 114 Q142 108 148 114" stroke="#242B33" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <path d="M172 114 Q178 108 184 114" stroke="#242B33" stroke-width="3" stroke-linecap="round" fill="none"/>
+
+  <!-- Big Nose -->
+  <ellipse cx="160" cy="122" rx="13" ry="17" fill="#242B33"/>
+  <ellipse cx="157" cy="117" rx="3.5" ry="5.5" fill="#4B5664" opacity="0.6"/>
+
+  <!-- Cute Smile -->
+  <path d="M154 137 Q160 141 166 137" stroke="#242B33" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+  <!-- Signboard "You Got This ♥" -->
+  <g transform="rotate(-2 160 170)">
+    <!-- Board drop shadow -->
+    <rect x="114" y="146" width="94" height="60" rx="9" fill="#3B2616" opacity="0.12"/>
+    <!-- Board body -->
+    <rect x="112" y="144" width="96" height="58" rx="8" fill="#FFFFFF" stroke="#333333" stroke-width="2"/>
+    <!-- Inner board outline -->
+    <rect x="116" y="148" width="88" height="50" rx="5" fill="#FDFDFD" stroke="#E8E8E8" stroke-width="1"/>
+    
+    <!-- Text: You Got This -->
+    <text x="160" y="165" font-family="'Google Sans Flex', 'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="800" fill="#242B33" text-anchor="middle">You</text>
+    <text x="160" y="179" font-family="'Google Sans Flex', 'Plus Jakarta Sans', sans-serif" font-size="13" font-weight="800" fill="#242B33" text-anchor="middle">Get This</text>
+    <!-- Little Red Heart -->
+    <path d="M160 193 C160 193 154 188 154 185.5 C154 183.8 155.5 182.5 157.2 182.5 C158.5 182.5 159.5 183.3 160 184 C160.5 183.3 161.5 182.5 162.8 182.5 C164.5 182.5 166 183.8 166 185.5 C166 188 160 193 160 193 Z" fill="#FF5252"/>
+  </g>
+
+  <!-- Paws holding the board -->
+  <ellipse cx="115" cy="172" rx="9" ry="8" fill="#84909E"/>
+  <ellipse cx="205" cy="170" rx="9" ry="8" fill="#84909E"/>
+</svg>

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <!-- Ears -->
+  <circle cx="20" cy="36" r="17" fill="#84909E"/>
+  <circle cx="20" cy="36" r="10.5" fill="#E8C3C9"/>
+  <circle cx="80" cy="36" r="17" fill="#84909E"/>
+  <circle cx="80" cy="36" r="10.5" fill="#E8C3C9"/>
+
+  <!-- Body -->
+  <ellipse cx="50" cy="86" rx="26" ry="18" fill="#84909E"/>
+
+  <!-- Head -->
+  <ellipse cx="50" cy="48" rx="34" ry="28" fill="#929FA9"/>
+
+  <!-- Cheeks Flushed -->
+  <circle cx="29" cy="54" r="6" fill="#FF8A80" opacity="0.6"/>
+  <circle cx="71" cy="54" r="6" fill="#FF8A80" opacity="0.6"/>
+
+  <!-- Spiral / Dizzy Stressed Eyes -->
+  <g transform="translate(33, 41)">
+    <circle cx="6" cy="6" r="4.5" stroke="#242B33" stroke-width="1.8" fill="none"/>
+    <circle cx="6" cy="6" r="1.5" fill="#242B33"/>
+  </g>
+  <g transform="translate(55, 41)">
+    <circle cx="6" cy="6" r="4.5" stroke="#242B33" stroke-width="1.8" fill="none"/>
+    <circle cx="6" cy="6" r="1.5" fill="#242B33"/>
+  </g>
+
+  <!-- Sweat Drops -->
+  <!-- Left Sweat Drop -->
+  <path d="M22 25 C22 25 18 30 18 32 C18 34 20 35 22 35 C24 35 26 34 26 32 C26 30 22 25 22 25 Z" fill="#64B5F6"/>
+  <!-- Right Sweat Drop -->
+  <path d="M78 22 C78 22 75 26 75 28 C75 29.5 76.5 30.5 78 30.5 C79.5 30.5 81 29.5 81 28 C81 26 78 22 78 22 Z" fill="#64B5F6"/>
+
+  <!-- Big Nose -->
+  <ellipse cx="50" cy="52" rx="8" ry="11" fill="#242B33"/>
+  <ellipse cx="48" cy="49" rx="2.5" ry="3.5" fill="#4B5664" opacity="0.6"/>
+
+  <!-- Wavy / Trembling Mouth -->
+  <path d="M42 64 Q46 62 50 64 Q54 66 58 64" stroke="#242B33" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+</svg>

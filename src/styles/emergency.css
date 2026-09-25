@@ -1,0 +1,283 @@
+/* KOAZY Interactive Emergency Calling, Silent SOS & Medical Dispatch Styles */
+
+/* Interactive Phone Call Screen Overlay (Inside Android Viewport) */
+.phone-call-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #121F19 0%, #1A2E25 50%, #0D1612 100%);
+  color: white;
+  z-index: 90;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 50px 24px 40px;
+  box-sizing: border-box;
+  animation: fadeIn 0.15s ease-out;
+}
+
+.phone-call-overlay.active {
+  display: flex;
+}
+
+.call-header-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+}
+
+.call-avatar-glow {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: rgba(87, 132, 110, 0.25);
+  border: 2px solid rgba(87, 132, 110, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 38px;
+  margin-bottom: 8px;
+  box-shadow: 0 0 30px rgba(87, 132, 110, 0.4);
+  animation: callPulse 2s infinite ease-in-out;
+}
+
+@keyframes callPulse {
+  0%, 100% { transform: scale(0.96); box-shadow: 0 0 20px rgba(87, 132, 110, 0.3); }
+  50% { transform: scale(1.05); box-shadow: 0 0 40px rgba(87, 132, 110, 0.6); }
+}
+
+.call-party-name {
+  font-size: 19px;
+  font-weight: 800;
+  color: white;
+  letter-spacing: -0.3px;
+}
+
+.call-target-number {
+  font-size: 13px;
+  color: var(--sage-200);
+}
+
+.call-timer-badge {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 5px 14px;
+  border-radius: 99px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #8CE0B5;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.call-dot-live {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #25D366;
+  animation: pulseDot 1s infinite alternate;
+}
+
+@keyframes pulseDot {
+  from { opacity: 0.4; }
+  to { opacity: 1; }
+}
+
+/* Audio Waveform Simulation */
+.call-audio-visualizer {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 40px;
+  margin: 20px 0;
+}
+
+.call-audio-bar {
+  width: 4px;
+  background: #7EA893;
+  border-radius: 99px;
+  animation: audioWave 1.2s infinite ease-in-out;
+}
+
+.call-audio-bar:nth-child(1) { height: 16px; animation-delay: 0.1s; }
+.call-audio-bar:nth-child(2) { height: 28px; animation-delay: 0.3s; }
+.call-audio-bar:nth-child(3) { height: 38px; animation-delay: 0.2s; }
+.call-audio-bar:nth-child(4) { height: 22px; animation-delay: 0.4s; }
+.call-audio-bar:nth-child(5) { height: 34px; animation-delay: 0.15s; }
+.call-audio-bar:nth-child(6) { height: 18px; animation-delay: 0.35s; }
+
+@keyframes audioWave {
+  0%, 100% { transform: scaleY(0.4); opacity: 0.5; }
+  50% { transform: scaleY(1.2); opacity: 1; }
+}
+
+.call-audio-subtext {
+  font-size: 12px;
+  color: var(--sage-200);
+  text-align: center;
+  max-width: 250px;
+  line-height: 1.45;
+}
+
+/* In-Call Action Grid & End Call Button */
+.call-controls-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  width: 100%;
+  max-width: 280px;
+  margin-bottom: 24px;
+}
+
+.call-control-circle {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin: 0 auto;
+}
+
+.call-control-circle span {
+  font-size: 9.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.call-control-circle:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.call-control-circle.active {
+  background: white;
+  color: var(--sage-800);
+}
+
+.btn-end-call {
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  background: #D9381E;
+  border: none;
+  color: white;
+  font-size: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(217, 56, 30, 0.45);
+  transition: transform 0.2s;
+}
+
+.btn-end-call:hover {
+  transform: scale(1.06);
+}
+
+/* Silent SOS Button & Emergency Dispatch Cards */
+.silent-sos-card {
+  background: linear-gradient(135deg, #FFF1EF 0%, #FDE4DF 100%);
+  border: 1.5px solid rgba(217, 56, 30, 0.35);
+  border-radius: 20px;
+  padding: 16px 18px;
+  margin-bottom: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: var(--shadow-sm);
+}
+
+.sos-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sos-title-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #B92E17;
+}
+
+.sos-location-tag {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #7D2819;
+  background: rgba(217, 56, 30, 0.1);
+  padding: 3px 8px;
+  border-radius: 99px;
+}
+
+.btn-silent-sos {
+  background: linear-gradient(135deg, #D9381E, #B92E17);
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 99px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(217, 56, 30, 0.35);
+  transition: all 0.2s;
+}
+
+.btn-silent-sos:active {
+  transform: scale(0.98);
+}
+
+/* Medical / Ambulance Dispatch Card */
+.medical-dispatch-card {
+  background: white;
+  border: 1.5px solid var(--surface-border);
+  border-radius: 18px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow-sm);
+}
+
+.medical-dispatch-info h4 {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.medical-dispatch-info p {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.btn-medical-dispatch {
+  background: var(--comfort-sky);
+  color: var(--comfort-sky-dark);
+  border: 1px solid rgba(74, 122, 140, 0.3);
+  padding: 8px 14px;
+  border-radius: 99px;
+  font-size: 11.5px;
+  font-weight: 800;
+  cursor: pointer;
+  white-space: nowrap;
+}

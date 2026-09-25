@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <!-- Silhouette of person with hand gesture in dark ink #1F1F1F -->
+  <!-- Head with hair bun -->
+  <circle cx="68" cy="34" r="13" fill="#181818"/>
+  <circle cx="82" cy="28" r="7" fill="#181818"/>
+  <path d="M57 32 C57 26 62 22 68 22 C74 22 79 26 79 32" stroke="#181818" stroke-width="2" fill="#181818"/>
+
+  <!-- Face profile pointing left -->
+  <path d="M57 34 Q53 36 55 40 Q57 42 61 44 L61 50 L68 50" fill="#FFE2C6"/>
+
+  <!-- Body / Torso -->
+  <path d="M54 52 C48 56 46 68 46 88 L92 88 C92 70 88 56 78 52 Z" fill="#181818"/>
+
+  <!-- Raised gesturing arm and hand pointing left -->
+  <path d="M54 60 Q34 62 28 54 Q24 50 20 48 Q22 45 27 48 Q32 50 36 51 Q44 52 52 54" fill="#FFE2C6" stroke="#181818" stroke-width="1.5"/>
+  <!-- Speech / wave accent lines -->
+  <path d="M16 42 Q10 46 16 52" stroke="#181818" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <path d="M10 38 Q2 46 10 56" stroke="#181818" stroke-width="2" stroke-linecap="round" fill="none"/>
+</svg>

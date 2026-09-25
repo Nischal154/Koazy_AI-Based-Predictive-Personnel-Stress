@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 100" fill="none">
+  <!-- Ears -->
+  <circle cx="28" cy="38" r="18" fill="#8E99A5"/>
+  <circle cx="28" cy="38" r="11" fill="#F0CED4"/>
+  <circle cx="92" cy="38" r="18" fill="#8E99A5"/>
+  <circle cx="92" cy="38" r="11" fill="#F0CED4"/>
+
+  <!-- Cheering Raised Arms -->
+  <path d="M36 68 Q20 50 14 36 Q18 32 24 38 Q32 50 44 60 Z" fill="#84909E"/>
+  <circle cx="16" cy="34" r="5" fill="#84909E"/>
+  <path d="M84 68 Q100 50 106 36 Q102 32 96 38 Q88 50 76 60 Z" fill="#84909E"/>
+  <circle cx="104" cy="34" r="5" fill="#84909E"/>
+
+  <!-- Body -->
+  <ellipse cx="60" cy="82" rx="28" ry="18" fill="#8E99A5"/>
+
+  <!-- Head -->
+  <ellipse cx="60" cy="50" rx="34" ry="28" fill="#9DA9B7"/>
+
+  <!-- Rosy Cheeks -->
+  <circle cx="39" cy="56" r="6" fill="#FFA5A5" opacity="0.7"/>
+  <circle cx="81" cy="56" r="6" fill="#FFA5A5" opacity="0.7"/>
+
+  <!-- Enthusiastic Happy Eyes -->
+  <path d="M44 46 Q50 40 56 46" stroke="#242B33" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <path d="M64 46 Q70 40 76 46" stroke="#242B33" stroke-width="3" stroke-linecap="round" fill="none"/>
+
+  <!-- Big Nose -->
+  <ellipse cx="60" cy="53" rx="8" ry="11" fill="#242B33"/>
+  <ellipse cx="58" cy="50" rx="2.5" ry="3.5" fill="#4B5664" opacity="0.6"/>
+
+  <!-- Big Wide Cheering Smile -->
+  <path d="M52 63 Q60 73 68 63 Z" fill="#E53935"/>
+  <path d="M54 63 Q60 67 66 63" stroke="#242B33" stroke-width="1.5" fill="none"/>
+
+  <!-- Sparkles around -->
+  <path d="M12 20 L13.5 16 L15 20 L19 21.5 L15 23 L13.5 27 L12 23 L8 21.5 Z" fill="#242B33"/>
+  <path d="M102 18 L103.5 14 L105 18 L109 19.5 L105 21 L103.5 25 L102 21 L98 19.5 Z" fill="#242B33"/>
+</svg>

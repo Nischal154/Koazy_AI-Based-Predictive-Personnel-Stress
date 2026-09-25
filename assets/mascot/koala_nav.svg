@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <!-- Ears -->
+  <circle cx="5" cy="8.5" r="4.2" stroke="currentColor" stroke-width="1.8" fill="none"/>
+  <circle cx="19" cy="8.5" r="4.2" stroke="currentColor" stroke-width="1.8" fill="none"/>
+
+  <!-- Head -->
+  <ellipse cx="12" cy="13" rx="7.8" ry="6.8" stroke="currentColor" stroke-width="1.8" fill="none"/>
+
+  <!-- Eyes -->
+  <circle cx="9.2" cy="11.8" r="0.9" fill="currentColor"/>
+  <circle cx="14.8" cy="11.8" r="0.9" fill="currentColor"/>
+
+  <!-- Nose -->
+  <ellipse cx="12" cy="13.8" rx="2" ry="2.7" fill="currentColor"/>
+</svg>

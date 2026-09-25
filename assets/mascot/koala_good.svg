@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <!-- Ears -->
+  <circle cx="20" cy="36" r="17" fill="#8E99A5"/>
+  <circle cx="20" cy="36" r="10.5" fill="#F0CED4"/>
+  <circle cx="80" cy="36" r="17" fill="#8E99A5"/>
+  <circle cx="80" cy="36" r="10.5" fill="#F0CED4"/>
+
+  <!-- Body -->
+  <ellipse cx="50" cy="86" rx="26" ry="18" fill="#8E99A5"/>
+
+  <!-- Head -->
+  <ellipse cx="50" cy="48" rx="34" ry="28" fill="#9DA9B7"/>
+
+  <!-- Cheeks -->
+  <circle cx="30" cy="54" r="5.5" fill="#FFA5A5" opacity="0.6"/>
+  <circle cx="70" cy="54" r="5.5" fill="#FFA5A5" opacity="0.6"/>
+
+  <!-- Friendly Round Eyes -->
+  <ellipse cx="37" cy="45" rx="3" ry="4" fill="#242B33"/>
+  <ellipse cx="63" cy="45" rx="3" ry="4" fill="#242B33"/>
+  <circle cx="36" cy="43.5" r="1.2" fill="#FFFFFF"/>
+  <circle cx="62" cy="43.5" r="1.2" fill="#FFFFFF"/>
+
+  <!-- Big Nose -->
+  <ellipse cx="50" cy="52" rx="8" ry="11" fill="#242B33"/>
+  <ellipse cx="48" cy="49" rx="2.5" ry="3.5" fill="#4B5664" opacity="0.6"/>
+
+  <!-- Gentle Smile -->
+  <path d="M44 63 Q50 67 56 63" stroke="#242B33" stroke-width="2" stroke-linecap="round" fill="none"/>
+</svg>

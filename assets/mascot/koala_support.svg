@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="100%" height="100%">
+  <defs>
+    <linearGradient id="supportBody" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9CB3A8" />
+      <stop offset="100%" stop-color="#738D81" />
+    </linearGradient>
+    <linearGradient id="heartGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F28B82" />
+      <stop offset="100%" stop-color="#EA5F60" />
+    </linearGradient>
+  </defs>
+  <!-- Outer Ears -->
+  <circle cx="38" cy="46" r="30" fill="url(#supportBody)" />
+  <circle cx="122" cy="46" r="30" fill="url(#supportBody)" />
+  <circle cx="38" cy="46" r="18" fill="#F0DFDC" />
+  <circle cx="122" cy="46" r="18" fill="#F0DFDC" />
+
+  <!-- Head slightly tilted with empathy -->
+  <g transform="rotate(3 80 85)">
+    <ellipse cx="80" cy="85" rx="52" ry="46" fill="url(#supportBody)" />
+    <!-- Cheeks -->
+    <ellipse cx="48" cy="94" rx="9" ry="6" fill="#F7C5B8" opacity="0.7" />
+    <ellipse cx="112" cy="94" rx="9" ry="6" fill="#F7C5B8" opacity="0.7" />
+
+    <!-- Attentive, warm open eyes -->
+    <circle cx="58" cy="78" r="6" fill="#202D27" />
+    <circle cx="60" cy="76" r="2.2" fill="#FFFFFF" />
+    <circle cx="102" cy="78" r="6" fill="#202D27" />
+    <circle cx="104" cy="76" r="2.2" fill="#FFFFFF" />
+
+    <!-- Nose -->
+    <ellipse cx="80" cy="88" rx="14" ry="20" fill="#24332B" />
+
+    <!-- Gentle caring smile -->
+    <path d="M 75 114 Q 80 119 85 114" stroke="#2B3A33" stroke-width="3" stroke-linecap="round" fill="none" />
+  </g>
+
+  <!-- Holding little heart or warm cup -->
+  <path d="M 80 138 C 76 132 68 126 68 120 C 68 114 74 110 80 116 C 86 110 92 114 92 120 C 92 126 84 132 80 138 Z" fill="url(#heartGrad)" />
+</svg>

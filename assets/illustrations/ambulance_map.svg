@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 480" fill="none">
+  <!-- Map Background -->
+  <rect width="380" height="480" fill="#EBF0E9"/>
+
+  <!-- City Blocks & Parks -->
+  <rect x="20" y="240" width="70" height="90" rx="8" fill="#D4E4CE"/>
+  <rect x="15" y="110" width="80" height="100" rx="8" fill="#F4F6F2"/>
+  <rect x="110" y="10" width="130" height="120" rx="8" fill="#F6F7F3"/>
+  <rect x="260" y="20" width="105" height="160" rx="8" fill="#F2F4EF"/>
+  <rect x="115" y="150" width="125" height="150" rx="8" fill="#F4F6F2"/>
+  <rect x="260" y="200" width="110" height="130" rx="8" fill="#F2F4EE"/>
+  <rect x="25" y="350" width="90" height="110" rx="8" fill="#F6F7F4"/>
+  <rect x="135" y="325" width="110" height="120" rx="8" fill="#F3F5EF"/>
+
+  <!-- Minor Streets Grid (Light grey/white) -->
+  <path d="M 0 70 L 380 70 M 0 140 L 380 140 M 0 310 L 380 310 M 0 450 L 380 450" stroke="#FFFFFF" stroke-width="8"/>
+  <path d="M 105 0 L 105 480 M 250 0 L 250 480 M 180 140 L 180 310" stroke="#FFFFFF" stroke-width="8"/>
+  <path d="M 0 230 L 105 230 M 250 210 L 380 210 M 105 380 L 250 380" stroke="#FFFFFF" stroke-width="6"/>
+
+  <!-- Secondary Road Network -->
+  <path d="M 30 0 L 30 480" stroke="#E2E7DF" stroke-width="4"/>
+  <path d="M 320 0 L 320 480" stroke="#E2E7DF" stroke-width="4"/>
+
+  <!-- Active Route Background Glow -->
+  <path d="M 30 250 L 30 270 L 45 400 L 120 400 L 180 310 L 380 310" stroke="#82B1FF" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" opacity="0.4"/>
+
+  <!-- Navigation Route Path (Solid Blue #2962FF as in reference) -->
+  <path id="ambulanceRoutePath" d="M 30 250 L 30 270 L 45 400 L 120 400 L 180 310 L 380 310" stroke="#1A237E" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 30 250 L 30 270 L 45 400 L 120 400 L 180 310 L 380 310" stroke="#2979FF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ETA Badge Overlay on Route -->
+  <g transform="translate(60, 260)">
+    <rect width="90" height="34" rx="8" fill="#FFFFFF" filter="drop-shadow(0 2px 6px rgba(0,0,0,0.15))"/>
+    <text x="10" y="16" font-family="'Google Sans Flex', sans-serif" font-size="11" font-weight="800" fill="#1A237E">🚑 8 min</text>
+    <text x="10" y="28" font-family="'Google Sans Flex', sans-serif" font-size="9.5" font-weight="600" fill="#757575">2.8 km away</text>
+  </g>
+
+  <!-- Origin / Ambulance Icon Pin -->
+  <g transform="translate(20, 240)">
+    <circle cx="10" cy="10" r="14" fill="#2979FF" stroke="#FFFFFF" stroke-width="3"/>
+    <circle cx="10" cy="10" r="18" fill="#2979FF" opacity="0.25">
+      <animate attributeName="r" values="14;24;14" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.4;0;0.4" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <text x="5.5" y="14" font-size="11" fill="#FFFFFF">🚑</text>
+  </g>
+
+  <!-- Destination Marker (Central Hospital) -->
+  <g transform="translate(300, 290)">
+    <circle cx="20" cy="20" r="18" fill="#D32F2F" stroke="#FFFFFF" stroke-width="3"/>
+    <rect x="17" y="11" width="6" height="18" rx="1.5" fill="#FFFFFF"/>
+    <rect x="11" y="17" width="18" height="6" rx="1.5" fill="#FFFFFF"/>
+  </g>
+
+  <!-- User / Personnel Current Location Pin -->
+  <g transform="translate(130, 260)">
+    <circle cx="12" cy="12" r="9" fill="#1E88E5" stroke="#FFFFFF" stroke-width="2.5"/>
+    <circle cx="12" cy="12" r="4" fill="#FFFFFF"/>
+  </g>
+</svg>

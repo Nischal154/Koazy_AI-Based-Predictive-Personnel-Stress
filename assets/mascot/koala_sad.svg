@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <!-- Small Rain Cloud above left -->
+  <path d="M12 18 C12 14 16 11 20 11 C23 8 28 8 31 11 C34 11 36 13 36 16 C38 16 40 18 40 21 C40 24 37 26 34 26 L14 26 C12 26 10 24 10 22 C10 20 11 18 12 18 Z" fill="#90CAF9" opacity="0.8"/>
+  <!-- Raindrops -->
+  <path d="M18 29 L16 33" stroke="#42A5F5" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="M26 29 L24 33" stroke="#42A5F5" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="M34 29 L32 33" stroke="#42A5F5" stroke-width="1.8" stroke-linecap="round"/>
+
+  <!-- Ears (slightly drooped) -->
+  <circle cx="21" cy="40" r="16" fill="#84909E"/>
+  <circle cx="21" cy="40" r="10" fill="#E8C3C9"/>
+  <circle cx="79" cy="40" r="16" fill="#84909E"/>
+  <circle cx="79" cy="40" r="10" fill="#E8C3C9"/>
+
+  <!-- Body -->
+  <ellipse cx="50" cy="87" rx="26" ry="17" fill="#84909E"/>
+
+  <!-- Head -->
+  <ellipse cx="50" cy="50" rx="34" ry="27" fill="#929FA9"/>
+
+  <!-- Cheeks -->
+  <circle cx="31" cy="56" r="5" fill="#FFA5A5" opacity="0.4"/>
+  <circle cx="69" cy="56" r="5" fill="#FFA5A5" opacity="0.4"/>
+
+  <!-- Sad Droopy Eyebrows -->
+  <path d="M34 42 Q39 45 44 42" stroke="#242B33" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <path d="M56 42 Q61 45 66 42" stroke="#242B33" stroke-width="2" stroke-linecap="round" fill="none"/>
+
+  <!-- Sad Eyes -->
+  <ellipse cx="38" cy="48" rx="2.8" ry="3.5" fill="#242B33"/>
+  <ellipse cx="62" cy="48" rx="2.8" ry="3.5" fill="#242B33"/>
+
+  <!-- Teardrop on right cheek -->
+  <path d="M68 53 C68 53 65 57 65 59 C65 60.5 66.5 62 68 62 C69.5 62 71 60.5 71 59 C71 57 68 53 68 53 Z" fill="#42A5F5"/>
+
+  <!-- Big Nose -->
+  <ellipse cx="50" cy="54" rx="8" ry="11" fill="#242B33"/>
+  <ellipse cx="48" cy="51" rx="2.5" ry="3.5" fill="#4B5664" opacity="0.6"/>
+
+  <!-- Sad Downward Curve Mouth -->
+  <path d="M45 67 Q50 63 55 67" stroke="#242B33" stroke-width="2" stroke-linecap="round" fill="none"/>
+</svg>

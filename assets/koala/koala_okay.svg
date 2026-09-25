@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <!-- Ears -->
+  <circle cx="20" cy="36" r="17" fill="#8E99A5"/>
+  <circle cx="20" cy="36" r="10.5" fill="#F0CED4"/>
+  <circle cx="80" cy="36" r="17" fill="#8E99A5"/>
+  <circle cx="80" cy="36" r="10.5" fill="#F0CED4"/>
+
+  <!-- Body -->
+  <ellipse cx="50" cy="86" rx="26" ry="18" fill="#8E99A5"/>
+
+  <!-- Head -->
+  <ellipse cx="50" cy="48" rx="34" ry="28" fill="#9DA9B7"/>
+
+  <!-- Cheeks -->
+  <circle cx="30" cy="54" r="5" fill="#FFA5A5" opacity="0.45"/>
+  <circle cx="70" cy="54" r="5" fill="#FFA5A5" opacity="0.45"/>
+
+  <!-- Calm Blink Eyes -->
+  <path d="M34 46 L42 46" stroke="#242B33" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M58 46 L66 46" stroke="#242B33" stroke-width="2.2" stroke-linecap="round"/>
+
+  <!-- Big Nose -->
+  <ellipse cx="50" cy="52" rx="8" ry="11" fill="#242B33"/>
+  <ellipse cx="48" cy="49" rx="2.5" ry="3.5" fill="#4B5664" opacity="0.6"/>
+
+  <!-- Small Content Line Mouth -->
+  <path d="M46 63 L54 63" stroke="#242B33" stroke-width="2" stroke-linecap="round"/>
+</svg>

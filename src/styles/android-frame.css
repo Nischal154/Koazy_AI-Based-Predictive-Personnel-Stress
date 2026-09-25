@@ -1,0 +1,418 @@
+/* Android Smartphone Shell & Workspace Frame Styling */
+
+/* Main Workspace Canvas */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family);
+  background: #E8EFEA;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(171, 198, 183, 0.35) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(216, 197, 182, 0.3) 0px, transparent 50%);
+  color: var(--text-primary);
+  min-height: 100vh;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Prototype Control Bar (Top) */
+.prototype-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(51, 83, 67, 0.12);
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.prototype-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.prototype-logo-badge {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #7FA793, #57846E);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 800;
+  font-size: 18px;
+  box-shadow: 0 4px 12px rgba(87, 132, 110, 0.3);
+}
+
+.prototype-title-wrap h1 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: var(--text-primary);
+}
+
+.prototype-title-wrap p {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.prototype-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.mode-toggle-group {
+  display: flex;
+  background: var(--sage-100);
+  padding: 4px;
+  border-radius: 99px;
+  border: 1px solid var(--surface-border);
+}
+
+.mode-btn {
+  border: none;
+  background: transparent;
+  padding: 8px 16px;
+  border-radius: 99px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mode-btn.active {
+  background: white;
+  color: var(--sage-700);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.screen-select-dropdown {
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--surface-border-strong);
+  background: white;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  outline: none;
+  cursor: pointer;
+}
+
+/* Device Shell Container */
+.device-stage {
+  padding: 30px 20px 60px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: calc(100vh - 80px);
+  box-sizing: border-box;
+}
+
+/* Realistic Android Smartphone Mockup */
+.android-phone {
+  position: relative;
+  width: 395px;
+  height: 830px;
+  background: #1C2320;
+  border-radius: 46px;
+  padding: 11px;
+  box-shadow: 
+    0 0 0 1px rgba(255, 255, 255, 0.15) inset,
+    0 0 0 2.5px #111614,
+    0 25px 60px -12px rgba(24, 40, 32, 0.4),
+    0 12px 24px -8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+
+/* Phone Bezel Buttons & Sheen */
+.android-phone::before {
+  content: '';
+  position: absolute;
+  top: 130px;
+  right: -13px;
+  width: 3.5px;
+  height: 52px;
+  background: #2D3934;
+  border-radius: 0 3px 3px 0;
+  box-shadow: 1px 0 2px rgba(0,0,0,0.4);
+}
+
+.android-phone::after {
+  content: '';
+  position: absolute;
+  top: 200px;
+  right: -13px;
+  width: 3.5px;
+  height: 85px;
+  background: #2D3934;
+  border-radius: 0 3px 3px 0;
+  box-shadow: 1px 0 2px rgba(0,0,0,0.4);
+}
+
+/* Phone Screen (Glass Viewport) */
+.phone-viewport {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--surface-canvas);
+  border-radius: 36px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Android Status Bar */
+.android-status-bar {
+  height: 38px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  z-index: 50;
+  background: transparent;
+  user-select: none;
+}
+
+.status-bar-camera-notch {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 13px;
+  height: 13px;
+  background: #0D1210;
+  border-radius: 50%;
+  border: 1px solid #2B3832;
+  box-shadow: 0 0 4px rgba(0,0,0,0.6) inset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.status-bar-camera-lens {
+  width: 4.5px;
+  height: 4.5px;
+  background: #1A3C4B;
+  border-radius: 50%;
+}
+
+.status-time {
+  font-size: 13px;
+  letter-spacing: -0.2px;
+}
+
+.status-icons {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+}
+
+.status-signal-icon {
+  width: 14px;
+  height: 11px;
+}
+
+.status-wifi-icon {
+  width: 14px;
+  height: 11px;
+}
+
+.status-battery-pill {
+  width: 22px;
+  height: 11px;
+  border: 1.5px solid currentColor;
+  border-radius: 3.5px;
+  padding: 1px;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.status-battery-pill::after {
+  content: '';
+  position: absolute;
+  right: -3px;
+  top: 2.5px;
+  width: 1.5px;
+  height: 4px;
+  background: currentColor;
+  border-radius: 0 1px 1px 0;
+}
+
+.status-battery-level {
+  width: 82%;
+  height: 100%;
+  background: var(--sage-600);
+  border-radius: 1px;
+}
+
+/* Phone Content Scroll Area */
+.phone-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.phone-content::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+/* Android Gesture Navigation Pill */
+.android-gesture-pill-area {
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  z-index: 50;
+  user-select: none;
+  cursor: pointer;
+}
+
+.android-gesture-pill {
+  width: 84px;
+  height: 4.5px;
+  background: rgba(31, 46, 39, 0.28);
+  border-radius: 99px;
+  transition: all 0.2s ease;
+}
+
+.android-gesture-pill-area:hover .android-gesture-pill {
+  background: rgba(31, 46, 39, 0.5);
+  transform: scaleY(1.2);
+}
+
+/* Sleek Dark Floating Bottom Navigation (Inside Phone) */
+.mobile-bottom-nav {
+  height: 60px;
+  background: var(--nav-bar-dark, #121316);
+  border-radius: 26px 26px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 16px;
+  box-sizing: border-box;
+  z-index: 40;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
+  margin-top: auto;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  color: #8E9297;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  font-family: inherit;
+  position: relative;
+}
+
+.nav-item img,
+.nav-item svg {
+  width: 20px;
+  height: 20px;
+  opacity: 0.65;
+  filter: brightness(0) invert(0.75);
+  transition: all 0.2s ease;
+}
+
+.nav-item.active {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.nav-item.active img,
+.nav-item.active svg {
+  opacity: 1;
+  filter: brightness(0) invert(1);
+}
+
+.nav-item .nav-dot {
+  display: none;
+}
+
+/* Gallery Inspection Matrix View */
+.gallery-stage {
+  display: none;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 40px;
+  padding: 40px 30px 80px;
+  max-width: 1700px;
+  margin: 0 auto;
+  justify-items: center;
+}
+
+.gallery-stage.active {
+  display: grid;
+}
+
+.single-stage.hidden {
+  display: none;
+}
+
+.screen-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.screen-card-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: white;
+  padding: 6px 16px;
+  border-radius: 99px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--surface-border);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--sage-800);
+}
+
+.screen-card-label .screen-number {
+  background: var(--sage-100);
+  color: var(--sage-700);
+  padding: 2px 8px;
+  border-radius: 99px;
+  font-size: 11px;
+}
