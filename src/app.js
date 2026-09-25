@@ -216,6 +216,21 @@ export function selectMoodCard(mood, emoji, el) {
   checkinAnswers.moodEmoji = emoji;
   document.querySelectorAll('.mood-card-item').forEach(c => c.classList.remove('active'));
   if (el) el.classList.add('active');
+
+  // Dynamically map mood to vitality percentage and sync Step 2 slider
+  let energyVal = 70;
+  if (mood === 'Great') energyVal = 92;
+  else if (mood === 'Good') energyVal = 80;
+  else if (mood === 'Okay') energyVal = 65;
+  else if (mood === 'Confused') energyVal = 50;
+  else if (mood === 'Sad') energyVal = 35;
+  else if (mood === 'Stress' || mood === 'Stressed') energyVal = 25;
+
+  checkinAnswers.energyLevel = energyVal;
+
+  const slider = document.getElementById('interactiveEnergySlider');
+  if (slider) slider.value = energyVal;
+  updateInteractiveEnergy(energyVal);
 }
 window.selectMoodCard = selectMoodCard;
 
@@ -446,7 +461,7 @@ export function updateHomeDashboardStats() {
     else if (latest.mood === 'Good') emotional = 82;
     else if (latest.mood === 'Okay') emotional = 66;
     else if (latest.mood === 'Confused') emotional = 52;
-    else if (latest.mood === 'Stressed') emotional = 38;
+    else if (latest.mood === 'Stressed' || latest.mood === 'Stress') emotional = 30;
     else if (latest.mood === 'Sad') emotional = 32;
 
     if (latest.healthIndicators) {
@@ -528,52 +543,56 @@ export function renderDynamicWaveGraph(timeframe = 'today') {
 
   const checkins = StorageService.getCheckins();
   const latest = checkins.length > 0 ? checkins[0] : null;
-  const latestEnergy = latest ? (latest.energyLevel || 75) : 75;
+  const latestEnergy = latest ? (latest.energyLevel !== undefined ? latest.energyLevel : 75) : 75;
   const latestMood = latest ? (latest.mood || 'Good') : 'Good';
+  const latestEmoji = latest ? (latest.moodEmoji || '😊') : '😊';
 
   let dataPoints = [];
   let xLabels = [];
 
   if (timeframe === 'today') {
-    xLabels = ['08:00', '11:30', '14:00', '17:30', '20:00'];
+    xLabels = ['08:00', '11:30', 'Now', '17:00', '20:00'];
+    const afternoonEnergy = latestEnergy < 50 ? 40 : Math.min(92, Math.round(latestEnergy * 0.94));
+    const eveningEnergy = latestEnergy < 50 ? 48 : Math.max(45, Math.round(latestEnergy * 0.88));
+
     dataPoints = [
-      { time: '08:00', energy: 82, mood: 'Good', emoji: '😊' },
-      { time: '11:30', energy: 68, mood: 'Okay', emoji: '🙂' },
-      { time: '14:00', energy: Math.min(95, Math.max(30, latestEnergy + 5)), mood: 'Good', emoji: '😊' },
-      { time: '17:30', energy: latestEnergy, mood: latestMood, emoji: latest ? (latest.moodEmoji || '😊') : '😊' },
-      { time: '20:00', energy: Math.max(25, latestEnergy - 8), mood: 'Resting', emoji: '😴' }
+      { time: '08:00', energy: 82, mood: 'Good', emoji: '😊', isCurrent: false },
+      { time: '11:30', energy: 68, mood: 'Okay', emoji: '🙂', isCurrent: false },
+      { time: 'Now', energy: latestEnergy, mood: latestMood, emoji: latestEmoji, isCurrent: true },
+      { time: '17:00', energy: afternoonEnergy, mood: latestEnergy < 50 ? 'Low' : 'Good', emoji: latestEnergy < 50 ? '😐' : '😊', isCurrent: false },
+      { time: '20:00', energy: eveningEnergy, mood: 'Wind-Down', emoji: '😴', isCurrent: false }
     ];
   } else if (timeframe === '7days') {
     xLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
     dataPoints = [
-      { time: 'Mon', energy: 78, mood: 'Good', emoji: '😊' },
-      { time: 'Tue', energy: 84, mood: 'Great', emoji: '😊' },
-      { time: 'Wed', energy: 62, mood: 'Okay', emoji: '🙂' },
-      { time: 'Thu', energy: 50, mood: 'Low', emoji: '😐' },
-      { time: 'Fri', energy: 72, mood: 'Good', emoji: '😊' },
-      { time: 'Sat', energy: 88, mood: 'Great', emoji: '😊' },
-      { time: 'Sun', energy: latestEnergy, mood: latestMood, emoji: latest ? (latest.moodEmoji || '😊') : '😊' }
+      { time: 'Mon', energy: 78, mood: 'Good', emoji: '😊', isCurrent: false },
+      { time: 'Tue', energy: 84, mood: 'Great', emoji: '😊', isCurrent: false },
+      { time: 'Wed', energy: 62, mood: 'Okay', emoji: '🙂', isCurrent: false },
+      { time: 'Thu', energy: 50, mood: 'Low', emoji: '😐', isCurrent: false },
+      { time: 'Fri', energy: 72, mood: 'Good', emoji: '😊', isCurrent: false },
+      { time: 'Sat', energy: 88, mood: 'Great', emoji: '😊', isCurrent: false },
+      { time: 'Sun', energy: latestEnergy, mood: latestMood, emoji: latestEmoji, isCurrent: true }
     ];
   } else if (timeframe === '30days') {
     xLabels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
     dataPoints = [
-      { time: 'Week 1', energy: 74, mood: 'Good', emoji: '😊' },
-      { time: 'Week 2', energy: 68, mood: 'Okay', emoji: '🙂' },
-      { time: 'Week 3', energy: 82, mood: 'Great', emoji: '😊' },
-      { time: 'Week 4', energy: Math.round((latestEnergy + 76) / 2), mood: latestMood, emoji: '😊' }
+      { time: 'Week 1', energy: 74, mood: 'Good', emoji: '😊', isCurrent: false },
+      { time: 'Week 2', energy: 68, mood: 'Okay', emoji: '🙂', isCurrent: false },
+      { time: 'Week 3', energy: 82, mood: 'Great', emoji: '😊', isCurrent: false },
+      { time: 'Week 4', energy: Math.round((latestEnergy + 76) / 2), mood: latestMood, emoji: latestEmoji, isCurrent: true }
     ];
   } else { // 3months
     xLabels = ['Month 1', 'Month 2', 'Month 3'];
     dataPoints = [
-      { time: 'July', energy: 70, mood: 'Good', emoji: '😊' },
-      { time: 'August', energy: 76, mood: 'Good', emoji: '😊' },
-      { time: 'September', energy: Math.round((latestEnergy + 78) / 2), mood: latestMood, emoji: '😊' }
+      { time: 'July', energy: 70, mood: 'Good', emoji: '😊', isCurrent: false },
+      { time: 'August', energy: 76, mood: 'Good', emoji: '😊', isCurrent: false },
+      { time: 'September', energy: Math.round((latestEnergy + 78) / 2), mood: latestMood, emoji: latestEmoji, isCurrent: true }
     ];
   }
 
   // Update Summary Average
   const avgEnergy = Math.round(dataPoints.reduce((acc, p) => acc + p.energy, 0) / dataPoints.length);
-  if (summaryAvg) summaryAvg.textContent = `Avg Vitality: ${avgEnergy}%`;
+  if (summaryAvg) summaryAvg.textContent = `Avg Vitality: ${avgEnergy}% • Latest: ${latestMood} (${latestEnergy}%)`;
 
   // Update X-Axis
   if (xAxis) {
@@ -588,8 +607,8 @@ export function renderDynamicWaveGraph(timeframe = 'today') {
 
   const points = dataPoints.map((pt, i) => {
     const x = paddingX + (i * stepX);
-    // Map energy 0-100% to Y 85 (low) down to 22 (high)
-    const y = 85 - ((pt.energy / 100) * 60);
+    // Map energy 0-100% to Y 85 (low) down to 20 (high)
+    const y = 85 - ((pt.energy / 100) * 65);
     return { ...pt, x, y };
   });
 
@@ -609,25 +628,38 @@ export function renderDynamicWaveGraph(timeframe = 'today') {
 
   // Generate interactive smileys / markers
   const markersHtml = points.map((pt) => {
-    const isStress = pt.energy < 50 || pt.mood === 'Stressed' || pt.mood === 'Sad' || pt.mood === 'Low';
-    const isNeutral = pt.energy >= 50 && pt.energy < 75;
+    const isStress = pt.energy < 50 || pt.mood === 'Stress' || pt.mood === 'Stressed' || pt.mood === 'Sad' || pt.mood === 'Low' || pt.mood === 'Overwhelmed' || pt.mood === 'Exhausted';
+    const isNeutral = !isStress && (pt.energy < 75 || pt.mood === 'Okay' || pt.mood === 'Confused');
+    const isCurrent = pt.isCurrent;
+
+    const faceColor = isStress ? '#FF6E6A' : isNeutral ? '#FFDA63' : '#10B981';
+    const eyeColor = isNeutral ? '#242B33' : '#FFFFFF';
     const mouth = isStress 
-      ? `<path d="M ${pt.x - 3} ${pt.y + 4} Q ${pt.x} ${pt.y + 1} ${pt.x + 3} ${pt.y + 4}" stroke="#242B33" stroke-width="1.2" stroke-linecap="round" fill="none"/>`
+      ? `<path d="M ${pt.x - 3} ${pt.y + 4} Q ${pt.x} ${pt.y + 1} ${pt.x + 3} ${pt.y + 4}" stroke="${eyeColor}" stroke-width="1.3" stroke-linecap="round" fill="none"/>`
       : isNeutral
-      ? `<line x1="${pt.x - 3}" y1="${pt.y + 3}" x2="${pt.x + 3}" y2="${pt.y + 3}" stroke="#242B33" stroke-width="1.2" stroke-linecap="round"/>`
-      : `<path d="M ${pt.x - 3} ${pt.y + 2} Q ${pt.x} ${pt.y + 5} ${pt.x + 3} ${pt.y + 2}" stroke="#242B33" stroke-width="1.2" stroke-linecap="round" fill="none"/>`;
+      ? `<line x1="${pt.x - 3}" y1="${pt.y + 3}" x2="${pt.x + 3}" y2="${pt.y + 3}" stroke="${eyeColor}" stroke-width="1.3" stroke-linecap="round"/>`
+      : `<path d="M ${pt.x - 3} ${pt.y + 2} Q ${pt.x} ${pt.y + 5.5} ${pt.x + 3} ${pt.y + 2}" stroke="${eyeColor}" stroke-width="1.3" stroke-linecap="round" fill="none"/>`;
+
+    const pulseRing = isCurrent ? `
+      <circle cx="${pt.x}" cy="${pt.y}" r="15" fill="none" stroke="${isStress ? '#FF6E6A' : '#10B981'}" stroke-width="1.5" stroke-dasharray="3,2" opacity="0.9">
+        <animate attributeName="r" values="12;16;12" dur="2s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.9;0.3;0.9" dur="2s" repeatCount="indefinite"/>
+      </circle>
+    ` : '';
 
     return `
       <g class="wave-point-interactive" 
          onclick="showWavePointTooltip('${pt.time}', '${pt.mood}', ${pt.energy})"
-         onmouseenter="showWavePointTooltip('${pt.time}', '${pt.mood}', ${pt.energy})">
+         onmouseenter="showWavePointTooltip('${pt.time}', '${pt.mood}', ${pt.energy})"
+         style="cursor:pointer;">
+        ${pulseRing}
         <!-- Outer Glow -->
-        <circle cx="${pt.x}" cy="${pt.y}" r="11" fill="rgba(255,255,255,0.3)"/>
-        <!-- Yellow Face -->
-        <circle cx="${pt.x}" cy="${pt.y}" r="8.5" fill="#FFDA63" stroke="#FFFFFF" stroke-width="1.2"/>
+        <circle cx="${pt.x}" cy="${pt.y}" r="10" fill="rgba(255,255,255,0.3)"/>
+        <!-- Colored Face Circle -->
+        <circle cx="${pt.x}" cy="${pt.y}" r="8" fill="${faceColor}" stroke="#FFFFFF" stroke-width="1.3"/>
         <!-- Eyes -->
-        <circle cx="${pt.x - 2.8}" cy="${pt.y - 1.5}" r="1.1" fill="#242B33"/>
-        <circle cx="${pt.x + 2.8}" cy="${pt.y - 1.5}" r="1.1" fill="#242B33"/>
+        <circle cx="${pt.x - 2.8}" cy="${pt.y - 1.5}" r="1.1" fill="${eyeColor}"/>
+        <circle cx="${pt.x + 2.8}" cy="${pt.y - 1.5}" r="1.1" fill="${eyeColor}"/>
         <!-- Mouth -->
         ${mouth}
       </g>
@@ -845,6 +877,163 @@ export function refreshSelfCareActivities(checkin = null) {
   `).join('');
 }
 window.refreshSelfCareActivities = refreshSelfCareActivities;
+
+// =========================================================
+// SCREEN 07 DYNAMIC RECOMMENDED ACTIVITIES GENERATOR
+// =========================================================
+export function renderCheckinEndActivities(entry = null) {
+  const container = document.getElementById('checkinEndSuggestedActivities');
+  const subTitle = document.getElementById('endSuggestedSubTitle');
+  if (!container) return;
+
+  const target = entry || (StorageService.getCheckins()[0] || {});
+  const tension = target.tensionArea || checkinAnswers.tensionArea || 'Neck & Shoulders';
+  const driver = target.stressDriver || checkinAnswers.stressDriver || 'High-tempo shifts';
+  const mood = target.mood || checkinAnswers.mood || 'Good';
+  const energy = target.energyLevel !== undefined ? target.energyLevel : 75;
+  const isStress = mood === 'Stress' || mood === 'Stressed' || mood === 'Sad' || mood === 'Overwhelmed' || mood === 'Exhausted' || energy < 50;
+
+  if (subTitle) {
+    subTitle.textContent = isStress 
+      ? `Priority relief targeted for ${tension} & ${driver}`
+      : `Matched to your check-in: ${tension}`;
+  }
+
+  // Tailored activities to do first
+  const suggestions = [];
+
+  // Item 1: Direct Physical / Somatic match for tension area
+  if (tension === 'Neck & Shoulders') {
+    suggestions.push({
+      title: 'Tactical Neck & Trapezoid Release',
+      desc: 'Immediate isometric stretch to release trapezius stiffness & armor burden',
+      duration: '4 min',
+      tag: 'Tension Relief',
+      icon: 'assets/icons/heart.svg',
+      bg: '#E8F5E9',
+      borderColor: '#A5D6A7',
+      tagColor: '#2E7D32',
+      tagBg: '#C8E6C9'
+    });
+  } else if (tension === 'Jaw & Temples') {
+    suggestions.push({
+      title: 'Cranial & Jaw Tension Release',
+      desc: 'Temporomandibular decompression to relieve stress clenching and headaches',
+      duration: '3 min',
+      tag: 'Tension Relief',
+      icon: 'assets/icons/heart.svg',
+      bg: '#FFF3E0',
+      borderColor: '#FFCC80',
+      tagColor: '#E65100',
+      tagBg: '#FFE0B2'
+    });
+  } else if (tension === 'Lower Back') {
+    suggestions.push({
+      title: 'Lumbar & Pelvic Decompression',
+      desc: 'Spine decompression after standing patrols & tactical equipment load',
+      duration: '5 min',
+      tag: 'Posture Reset',
+      icon: 'assets/icons/heart.svg',
+      bg: '#EDE7F6',
+      borderColor: '#D1C4E9',
+      tagColor: '#512DA8',
+      tagBg: '#D1C4E9'
+    });
+  } else if (tension === 'Chest Tightness') {
+    suggestions.push({
+      title: 'Vagus Nerve Chest Expansion',
+      desc: 'Diaphragmatic expansion to release autonomic tightness in the ribcage',
+      duration: '4 min',
+      tag: 'Vagus Reset',
+      icon: 'assets/icons/breath.svg',
+      bg: '#E0F2F1',
+      borderColor: '#80CBC4',
+      tagColor: '#00695C',
+      tagBg: '#B2DFDB'
+    });
+  } else {
+    suggestions.push({
+      title: 'Full-Body Progressive Relaxation',
+      desc: 'Gentle systematic muscle release to maintain peak operational flexibility',
+      duration: '5 min',
+      tag: 'Maintenance',
+      icon: 'assets/icons/heart.svg',
+      bg: '#E3F2FD',
+      borderColor: '#90CAF9',
+      tagColor: '#1565C0',
+      tagBg: '#BBDEFB'
+    });
+  }
+
+  // Item 2: Cognitive / Autonomic calming match
+  if (isStress || driver === 'Sleep fragmentation') {
+    suggestions.push({
+      title: 'NSDR (Non-Sleep Deep Rest)',
+      desc: 'Calibrated guided pause to restore cognitive stamina & down-regulate stress',
+      duration: '12 min',
+      tag: 'Deep Reset',
+      icon: 'assets/icons/moon.svg',
+      bg: '#EDE7F6',
+      borderColor: '#CE93D8',
+      tagColor: '#6A1B9A',
+      tagBg: '#E1BEE7'
+    });
+  } else if (driver === 'High-tempo shifts' || driver === 'Terrain / Weather') {
+    suggestions.push({
+      title: 'Box Breathing (4-4-4-4 Regulation)',
+      desc: 'Tactical autonomic breathing to steady heart rate & operational focus',
+      duration: '3 min',
+      tag: 'Tactical Pacer',
+      icon: 'assets/icons/breath.svg',
+      bg: '#E8F5E9',
+      borderColor: '#A5D6A7',
+      tagColor: '#1B5E20',
+      tagBg: '#C8E6C9'
+    });
+  } else if (driver === 'Family separation') {
+    suggestions.push({
+      title: 'Anchor Grounding & Gratitude',
+      desc: 'Affirming emotional connection with distant family & loved ones',
+      duration: '5 min',
+      tag: 'Emotional Anchor',
+      icon: 'assets/icons/heart.svg',
+      bg: '#FCE4EC',
+      borderColor: '#F48FB1',
+      tagColor: '#880E4F',
+      tagBg: '#F8BBD0'
+    });
+  } else {
+    suggestions.push({
+      title: 'Sensory 5-4-3-2-1 Orientation Reset',
+      desc: 'Rapid sensory reconnection to stay calm and rooted in the present',
+      duration: '4 min',
+      tag: 'Grounding',
+      icon: 'assets/icons/breath.svg',
+      bg: '#E0F7FA',
+      borderColor: '#80DEEA',
+      tagColor: '#006064',
+      tagBg: '#B2EBF2'
+    });
+  }
+
+  container.innerHTML = suggestions.map(item => `
+    <div class="end-suggested-card" style="background:${item.bg}; border-color:${item.borderColor};">
+      <div class="end-suggested-card-top">
+        <span class="end-card-tag" style="color:${item.tagColor}; background:${item.tagBg};">${item.tag}</span>
+        <span class="end-card-duration">⏱ ${item.duration}</span>
+      </div>
+      <div class="end-card-main">
+        <h4 class="end-card-title">${item.title}</h4>
+        <p class="end-card-desc">${item.desc}</p>
+      </div>
+      <button class="end-card-start-btn" onclick="openActivitySession('${escapeHtml(item.title)}', '${item.duration}', '${escapeHtml(item.desc)}')">
+        <span>Start Session</span>
+        <span>▶</span>
+      </button>
+    </div>
+  `).join('');
+}
+window.renderCheckinEndActivities = renderCheckinEndActivities;
 
 // =========================================================
 // INTERACTIVE GUIDED ACTIVITY SESSION MODAL CONTROLLER
@@ -1090,9 +1279,11 @@ function finishCheckin() {
   const indicators = checkinAnswers.healthIndicators || { sleep: '8h+', food: 'regular', family: 'safe' };
   const isStressRisk = (
     checkinAnswers.mood === 'Stressed' || 
+    checkinAnswers.mood === 'Stress' || 
     checkinAnswers.mood === 'Sad' || 
     checkinAnswers.mood === 'Overwhelmed' || 
     checkinAnswers.mood === 'Exhausted' ||
+    checkinAnswers.energyLevel < 40 ||
     indicators.sleep === '<5h' || 
     indicators.food === 'skipped' || 
     indicators.food === 'low' || 
@@ -1115,10 +1306,12 @@ function finishCheckin() {
   };
   StorageService.addCheckin(newEntry);
 
-  // Live Refresh Dashboard Stats, Dynamic Wave Graph & Self Care Activities
+  // Live Refresh Dashboard Stats, Dynamic Wave Graph, Self Care & Screen 07 Activities
   updateHomeDashboardStats();
   renderDynamicWaveGraph('today');
   refreshSelfCareActivities(newEntry);
+  renderCheckinEndActivities(newEntry);
+  renderRecordsTimeline();
 
   // Update Result Screen (Screen 07)
   const banner = document.getElementById('checkinStressRiskBanner');
@@ -1922,5 +2115,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateHomeDashboardStats();
   renderDynamicWaveGraph('today');
   refreshSelfCareActivities();
+  renderCheckinEndActivities();
+  renderRecordsTimeline();
   navigateToScreen('04'); // Launch directly on Home Dashboard per requirements
 });

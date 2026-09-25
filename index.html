@@ -734,27 +734,30 @@
                 Your wellbeing matters. Here are some things that might help you right now.
               </p>
 
-              <!-- Helpful Action Cards -->
-              <div class="end-action-pill-card relaxation" onclick="navigateToScreen('08')">
-                <div>
-                  <div class="end-action-title">Relaxation</div>
-                  <div class="end-action-sub">Take a 5-min breathing exercise</div>
+              <!-- Personalized Suggested Activities Based on Check-in (Do It First) -->
+              <div class="end-suggested-section" id="endSuggestedSection">
+                <div class="end-suggested-header">
+                  <div class="end-suggested-title">
+                    <span>💡 Recommended for You Right Now</span>
+                  </div>
+                  <span class="end-suggested-sub" id="endSuggestedSubTitle">Based on your mood & tension check</span>
                 </div>
-                <span class="end-action-arrow">→</span>
+                <div class="end-suggested-cards-list" id="checkinEndSuggestedActivities">
+                  <!-- Populated dynamically by renderCheckinEndActivities() -->
+                </div>
               </div>
 
-              <div class="end-action-pill-card meditation" onclick="navigateToScreen('08')">
-                <div>
-                  <div class="end-action-title">Start Meditation</div>
-                  <div class="end-action-sub">Box breathing &amp; sensory calm</div>
-                </div>
-                <span class="end-action-arrow">→</span>
+              <!-- Secondary Navigation Actions Row -->
+              <div class="end-nav-actions-row">
+                <button class="btn-sub-pill-link" onclick="navigateToScreen('08')">
+                  <span>🌿 All Calm Activities</span>
+                  <span>→</span>
+                </button>
+                <button class="btn-sub-pill-link secondary" onclick="navigateToScreen('10')">
+                  <span>📈 Mood Analytics</span>
+                  <span>→</span>
+                </button>
               </div>
-
-              <!-- View Full Insights Button -->
-              <button class="btn-pill-outline-insights" onclick="navigateToScreen('10')">
-                View My Journal &amp; Analytics
-              </button>
 
               <!-- AI Decision Explanation Accordion (Judge Demonstration) -->
               <div class="ai-explanation-accordion" id="aiResultAccordion" style="margin-top: 16px;">
@@ -1961,6 +1964,6 @@
   </div>
 
   <!-- Prototype Application Controller Script -->
-  <script type="module" src="src/app.js"></script>
+  <script type="module" src="src/app.js?v=2.2"></script>
 </body>
 </html>
