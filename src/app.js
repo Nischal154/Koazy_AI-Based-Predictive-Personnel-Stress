@@ -25,7 +25,9 @@ const checkinAnswers = {
   mood: 'Good',
   moodEmoji: '😊',
   factors: ['Work / Duty'],
-  energyLevel: 70,
+  energyLevel: 72,
+  tensionArea: 'Neck & Shoulders',
+  stressDriver: 'High-tempo shifts',
   sleepQuality: 'Restful',
   note: '',
   helpfulAction: 'Relax / breathe'
@@ -134,7 +136,12 @@ export function navigateToScreen(screenNumber) {
   if (content) content.scrollTop = 0;
 
   // Refresh dynamic screen content if needed
-  if (screenNumber === '10') renderRecordsTimeline();
+  if (screenNumber === '04') updateHomeDashboardStats();
+  if (screenNumber === '08') refreshSelfCareActivities();
+  if (screenNumber === '10') {
+    renderRecordsTimeline();
+    renderDynamicWaveGraph('today');
+  }
   if (screenNumber === '11') showAmbulanceMap(false);
   if (screenNumber === '13') {
     renderWelfareOfficersDirectory();
@@ -264,6 +271,57 @@ export function setHealthIndicator(type, value, el) {
 }
 window.setHealthIndicator = setHealthIndicator;
 
+// Interactive Adaptive Q&A Handlers
+export function selectAdaptiveChoice(type, val, el) {
+  if (type === 'tension') {
+    checkinAnswers.tensionArea = val;
+    const parent = document.getElementById('somaticTensionChips');
+    if (parent) {
+      parent.querySelectorAll('.qa-choice-chip').forEach(c => c.classList.remove('active'));
+    }
+  } else if (type === 'driver') {
+    checkinAnswers.stressDriver = val;
+    const parent = document.getElementById('stressDriverChips');
+    if (parent) {
+      parent.querySelectorAll('.qa-choice-chip').forEach(c => c.classList.remove('active'));
+    }
+  }
+  if (el) el.classList.add('active');
+}
+window.selectAdaptiveChoice = selectAdaptiveChoice;
+
+export function updateInteractiveEnergy(val) {
+  const num = parseInt(val, 10);
+  checkinAnswers.energyLevel = num;
+  const badge = document.getElementById('vitalityLevelBadge');
+  if (badge) {
+    let label = 'Recharged';
+    let color = '#2B6CB0';
+    let bg = '#EBF8FF';
+    if (num < 35) {
+      label = 'Exhausted';
+      color = '#C53030';
+      bg = '#FFF5F5';
+    } else if (num < 60) {
+      label = 'Moderate Drain';
+      color = '#DD6B20';
+      bg = '#FFFAF0';
+    } else if (num < 85) {
+      label = 'Recharged';
+      color = '#2B6CB0';
+      bg = '#EBF8FF';
+    } else {
+      label = 'Peak Vitality';
+      color = '#22543D';
+      bg = '#F0FFF4';
+    }
+    badge.textContent = `${num}% — ${label}`;
+    badge.style.color = color;
+    badge.style.background = bg;
+  }
+}
+window.updateInteractiveEnergy = updateInteractiveEnergy;
+
 export function goToStep3() {
   const step2 = document.getElementById('checkinSubStep2');
   const step3 = document.getElementById('checkinSubStep3');
@@ -353,13 +411,507 @@ export function openScheduleTherapyModal() {
 }
 window.openScheduleTherapyModal = openScheduleTherapyModal;
 
-// Analytics Screen 10 (My Journal) Handlers
+// =========================================================
+// HOME DASHBOARD LIVE METRICS & READINESS SYNC (SCREEN 04)
+// =========================================================
+export function updateHomeDashboardStats() {
+  const checkins = StorageService.getCheckins();
+  const profile = StorageService.getProfile();
+  const latest = checkins.length > 0 ? checkins[0] : null;
+
+  const statePill = document.getElementById('homeFunctionalStatePill');
+  const stateText = document.getElementById('homeFunctionalStateText');
+  const updateTime = document.getElementById('homeFunctionalUpdateTime');
+  const emotionalScore = document.getElementById('homeEmotionalScoreText');
+  const emotionalBar = document.getElementById('homeEmotionalBarFill');
+  const vitalityScore = document.getElementById('homeVitalityScoreText');
+  const vitalityBar = document.getElementById('homeVitalityBarFill');
+
+  const readinessEl = document.getElementById('homeReadinessScore');
+  const restEl = document.getElementById('homeRestScore');
+  const streakEl = document.getElementById('homeStreakScore');
+  const hydrationEl = document.getElementById('homeHydrationScore');
+
+  // Hydration sync
+  if (hydrationEl) hydrationEl.textContent = `${waterCount}/6`;
+
+  // Default values
+  let energy = latest ? (latest.energyLevel || 75) : 78;
+  let emotional = 82;
+  let isRisk = latest ? !!latest.isStressRisk : false;
+  let sleepHours = '8.0h';
+
+  if (latest) {
+    if (latest.mood === 'Great') emotional = 94;
+    else if (latest.mood === 'Good') emotional = 82;
+    else if (latest.mood === 'Okay') emotional = 66;
+    else if (latest.mood === 'Confused') emotional = 52;
+    else if (latest.mood === 'Stressed') emotional = 38;
+    else if (latest.mood === 'Sad') emotional = 32;
+
+    if (latest.healthIndicators) {
+      if (latest.healthIndicators.sleep === '<5h') sleepHours = '4.5h Deficit';
+      else if (latest.healthIndicators.sleep === '6-7h') sleepHours = '6.5h Steady';
+      else if (latest.healthIndicators.sleep === '8h+') sleepHours = '8.0h Rested';
+    }
+
+    if (updateTime) {
+      updateTime.textContent = latest.date === 'Just now' ? 'Synced just now' : `Synced (${latest.date.split(',')[0]})`;
+    }
+  }
+
+  // Calculate composite readiness score (weighted vitality, emotional balance, hydration)
+  const hydrationPct = (waterCount / 6) * 100;
+  const readiness = Math.round((energy * 0.45) + (emotional * 0.4) + (hydrationPct * 0.15));
+
+  if (readinessEl) readinessEl.textContent = `${readiness}%`;
+  if (restEl) restEl.textContent = sleepHours;
+  if (streakEl) streakEl.textContent = `${profile.streakDays || 5} Days`;
+
+  if (emotionalScore) emotionalScore.textContent = `${emotional}%`;
+  if (emotionalBar) {
+    emotionalBar.style.width = `${emotional}%`;
+    emotionalBar.className = `f-metric-bar-fill ${emotional < 45 ? 'coral' : emotional < 70 ? 'blue' : 'green'}`;
+  }
+
+  if (vitalityScore) vitalityScore.textContent = `${energy}%`;
+  if (vitalityBar) {
+    vitalityBar.style.width = `${energy}%`;
+    vitalityBar.className = `f-metric-bar-fill ${energy < 45 ? 'coral' : energy < 70 ? 'blue' : 'green'}`;
+  }
+
+  if (stateText && statePill) {
+    const dot = statePill.querySelector('.state-dot');
+    if (isRisk || readiness < 50) {
+      stateText.textContent = 'Elevated Strain • Rest Protocol Recommended';
+      if (dot) dot.className = 'state-dot coral';
+    } else if (readiness < 75) {
+      stateText.textContent = 'Vigilant • Stable Duty Readiness';
+      if (dot) dot.className = 'state-dot blue';
+    } else {
+      stateText.textContent = 'Fit for Duty • High Resilience';
+      if (dot) dot.className = 'state-dot green';
+    }
+  }
+}
+window.updateHomeDashboardStats = updateHomeDashboardStats;
+
+// =========================================================
+// DYNAMIC USER ANALYTICS WAVE GRAPH (SCREEN 10)
+// =========================================================
 export function selectTimeframeTab(el, timeframe) {
   document.querySelectorAll('.timeframe-tab-btn').forEach(b => b.classList.remove('active'));
   if (el) el.classList.add('active');
+  renderDynamicWaveGraph(timeframe);
 }
 window.selectTimeframeTab = selectTimeframeTab;
 
+export function renderDynamicWaveGraph(timeframe = 'today') {
+  const svg = document.getElementById('dynamicWaveSvg');
+  const xAxis = document.getElementById('waveXAxis');
+  const summaryAvg = document.getElementById('waveSummaryAvgText');
+  if (!svg) return;
+
+  const checkins = StorageService.getCheckins();
+  const latest = checkins.length > 0 ? checkins[0] : null;
+  const latestEnergy = latest ? (latest.energyLevel || 75) : 75;
+  const latestMood = latest ? (latest.mood || 'Good') : 'Good';
+
+  let dataPoints = [];
+  let xLabels = [];
+
+  if (timeframe === 'today') {
+    xLabels = ['08:00', '11:30', '14:00', '17:30', '20:00'];
+    dataPoints = [
+      { time: '08:00', energy: 82, mood: 'Good', emoji: '😊' },
+      { time: '11:30', energy: 68, mood: 'Okay', emoji: '🙂' },
+      { time: '14:00', energy: Math.min(95, Math.max(30, latestEnergy + 5)), mood: 'Good', emoji: '😊' },
+      { time: '17:30', energy: latestEnergy, mood: latestMood, emoji: latest ? (latest.moodEmoji || '😊') : '😊' },
+      { time: '20:00', energy: Math.max(25, latestEnergy - 8), mood: 'Resting', emoji: '😴' }
+    ];
+  } else if (timeframe === '7days') {
+    xLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    dataPoints = [
+      { time: 'Mon', energy: 78, mood: 'Good', emoji: '😊' },
+      { time: 'Tue', energy: 84, mood: 'Great', emoji: '😊' },
+      { time: 'Wed', energy: 62, mood: 'Okay', emoji: '🙂' },
+      { time: 'Thu', energy: 50, mood: 'Low', emoji: '😐' },
+      { time: 'Fri', energy: 72, mood: 'Good', emoji: '😊' },
+      { time: 'Sat', energy: 88, mood: 'Great', emoji: '😊' },
+      { time: 'Sun', energy: latestEnergy, mood: latestMood, emoji: latest ? (latest.moodEmoji || '😊') : '😊' }
+    ];
+  } else if (timeframe === '30days') {
+    xLabels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
+    dataPoints = [
+      { time: 'Week 1', energy: 74, mood: 'Good', emoji: '😊' },
+      { time: 'Week 2', energy: 68, mood: 'Okay', emoji: '🙂' },
+      { time: 'Week 3', energy: 82, mood: 'Great', emoji: '😊' },
+      { time: 'Week 4', energy: Math.round((latestEnergy + 76) / 2), mood: latestMood, emoji: '😊' }
+    ];
+  } else { // 3months
+    xLabels = ['Month 1', 'Month 2', 'Month 3'];
+    dataPoints = [
+      { time: 'July', energy: 70, mood: 'Good', emoji: '😊' },
+      { time: 'August', energy: 76, mood: 'Good', emoji: '😊' },
+      { time: 'September', energy: Math.round((latestEnergy + 78) / 2), mood: latestMood, emoji: '😊' }
+    ];
+  }
+
+  // Update Summary Average
+  const avgEnergy = Math.round(dataPoints.reduce((acc, p) => acc + p.energy, 0) / dataPoints.length);
+  if (summaryAvg) summaryAvg.textContent = `Avg Vitality: ${avgEnergy}%`;
+
+  // Update X-Axis
+  if (xAxis) {
+    xAxis.innerHTML = xLabels.map(l => `<span>${l}</span>`).join('');
+  }
+
+  // Calculate coordinates in SVG (viewBox 0 0 240 100)
+  const width = 240;
+  const paddingX = 20;
+  const usableWidth = width - (paddingX * 2);
+  const stepX = dataPoints.length > 1 ? usableWidth / (dataPoints.length - 1) : 0;
+
+  const points = dataPoints.map((pt, i) => {
+    const x = paddingX + (i * stepX);
+    // Map energy 0-100% to Y 85 (low) down to 22 (high)
+    const y = 85 - ((pt.energy / 100) * 60);
+    return { ...pt, x, y };
+  });
+
+  // Build smooth cubic bezier curve
+  let dCurve = `M ${points[0].x} ${points[0].y}`;
+  for (let i = 0; i < points.length - 1; i++) {
+    const curr = points[i];
+    const next = points[i + 1];
+    const cpX1 = curr.x + (next.x - curr.x) / 2;
+    const cpY1 = curr.y;
+    const cpX2 = curr.x + (next.x - curr.x) / 2;
+    const cpY2 = next.y;
+    dCurve += ` C ${cpX1} ${cpY1}, ${cpX2} ${cpY2}, ${next.x} ${next.y}`;
+  }
+
+  const dArea = `${dCurve} L ${points[points.length - 1].x} 100 L ${points[0].x} 100 Z`;
+
+  // Generate interactive smileys / markers
+  const markersHtml = points.map((pt) => {
+    const isStress = pt.energy < 50 || pt.mood === 'Stressed' || pt.mood === 'Sad' || pt.mood === 'Low';
+    const isNeutral = pt.energy >= 50 && pt.energy < 75;
+    const mouth = isStress 
+      ? `<path d="M ${pt.x - 3} ${pt.y + 4} Q ${pt.x} ${pt.y + 1} ${pt.x + 3} ${pt.y + 4}" stroke="#242B33" stroke-width="1.2" stroke-linecap="round" fill="none"/>`
+      : isNeutral
+      ? `<line x1="${pt.x - 3}" y1="${pt.y + 3}" x2="${pt.x + 3}" y2="${pt.y + 3}" stroke="#242B33" stroke-width="1.2" stroke-linecap="round"/>`
+      : `<path d="M ${pt.x - 3} ${pt.y + 2} Q ${pt.x} ${pt.y + 5} ${pt.x + 3} ${pt.y + 2}" stroke="#242B33" stroke-width="1.2" stroke-linecap="round" fill="none"/>`;
+
+    return `
+      <g class="wave-point-interactive" 
+         onclick="showWavePointTooltip('${pt.time}', '${pt.mood}', ${pt.energy})"
+         onmouseenter="showWavePointTooltip('${pt.time}', '${pt.mood}', ${pt.energy})">
+        <!-- Outer Glow -->
+        <circle cx="${pt.x}" cy="${pt.y}" r="11" fill="rgba(255,255,255,0.3)"/>
+        <!-- Yellow Face -->
+        <circle cx="${pt.x}" cy="${pt.y}" r="8.5" fill="#FFDA63" stroke="#FFFFFF" stroke-width="1.2"/>
+        <!-- Eyes -->
+        <circle cx="${pt.x - 2.8}" cy="${pt.y - 1.5}" r="1.1" fill="#242B33"/>
+        <circle cx="${pt.x + 2.8}" cy="${pt.y - 1.5}" r="1.1" fill="#242B33"/>
+        <!-- Mouth -->
+        ${mouth}
+      </g>
+    `;
+  }).join('');
+
+  svg.innerHTML = `
+    <!-- Shaded Area Under Wave -->
+    <path d="${dArea}" fill="rgba(255,255,255,0.18)"/>
+    <!-- Crisp White Wave Curve -->
+    <path d="${dCurve}" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <!-- Interactive Markers -->
+    ${markersHtml}
+  `;
+}
+window.renderDynamicWaveGraph = renderDynamicWaveGraph;
+
+export function showWavePointTooltip(time, mood, energy) {
+  const tooltip = document.getElementById('waveTooltipBox');
+  if (!tooltip) return;
+  tooltip.innerHTML = `<strong>${time}</strong>: ${mood} • Vitality ${energy}%`;
+  tooltip.style.opacity = '1';
+  clearTimeout(tooltip._timer);
+  tooltip._timer = setTimeout(() => {
+    tooltip.style.opacity = '0';
+  }, 3200);
+}
+window.showWavePointTooltip = showWavePointTooltip;
+
+// =========================================================
+// DYNAMIC SELF CARE & CALM REFRESH ENGINE (SCREEN 08)
+// =========================================================
+export function refreshSelfCareActivities(checkin = null) {
+  const list = document.getElementById('selfCareActivitiesList');
+  const badgeTitle = document.getElementById('selfCareBadgeTitle');
+  const badgeSub = document.getElementById('selfCareBadgeSubtitle');
+  const badgeCount = document.getElementById('selfCareSessionCount');
+  if (!list) return;
+
+  const checkins = StorageService.getCheckins();
+  const target = checkin || (checkins.length > 0 ? checkins[0] : null);
+
+  const tension = (target && target.tensionArea) ? target.tensionArea : (checkinAnswers.tensionArea || 'Neck & Shoulders');
+  const driver = (target && target.stressDriver) ? target.stressDriver : (checkinAnswers.stressDriver || 'High-tempo shifts');
+  const sleepRest = target && target.healthIndicators ? target.healthIndicators.sleep : '8h+';
+  const isStress = target ? !!target.isStressRisk : false;
+
+  if (badgeTitle && badgeSub) {
+    if (isStress || sleepRest === '<5h') {
+      badgeTitle.textContent = `Priority Recovery: ${tension}`;
+      badgeSub.textContent = `Tailored somatic down-regulation to relieve ${driver.toLowerCase()} and sleep deficit.`;
+    } else {
+      badgeTitle.textContent = `Tailored to Your Check-In: ${tension}`;
+      badgeSub.textContent = `Optimal maintenance routines targeted for ${tension.toLowerCase()} & sustained clarity.`;
+    }
+  }
+
+  // Build 4 adaptive activity items
+  const activities = [];
+
+  // 1. Somatic physical release
+  if (tension === 'Neck & Shoulders') {
+    activities.push({
+      title: 'Tactical Neck & Trapezoid Release',
+      desc: 'Gentle isometric stretches to release trapezius stiffness and body armor burden',
+      duration: '4 min',
+      icon: 'assets/icons/heart.svg',
+      bg: '#FDECE9',
+      tag: 'Tension Relief',
+      tagColor: '#C53030',
+      tagBg: '#FFF5F5',
+      highlighted: true
+    });
+  } else if (tension === 'Jaw & Temples') {
+    activities.push({
+      title: 'Cranial & Jaw Tension Release',
+      desc: 'Temporomandibular decompression to relieve stress clenching and headaches',
+      duration: '3 min',
+      icon: 'assets/icons/heart.svg',
+      bg: '#FDECE9',
+      tag: 'Tension Relief',
+      tagColor: '#C53030',
+      tagBg: '#FFF5F5',
+      highlighted: true
+    });
+  } else if (tension === 'Lower Back') {
+    activities.push({
+      title: 'Lumbar & Pelvic Decompression',
+      desc: 'Decompress spine after standing patrols and heavy field equipment load',
+      duration: '5 min',
+      icon: 'assets/icons/heart.svg',
+      bg: '#FDECE9',
+      tag: 'Somatic Posture',
+      tagColor: '#DD6B20',
+      tagBg: '#FFFAF0',
+      highlighted: true
+    });
+  } else if (tension === 'Chest Tightness') {
+    activities.push({
+      title: 'Vagus Nerve Chest Expansion',
+      desc: 'Diaphragmatic expansion to release autonomic tightness in the ribcage',
+      duration: '4 min',
+      icon: 'assets/icons/breath.svg',
+      bg: '#EAF2ED',
+      tag: 'Breath Reset',
+      tagColor: '#2F855A',
+      tagBg: '#F0FFF4',
+      highlighted: true
+    });
+  } else {
+    activities.push({
+      title: 'Full-Body Progressive Relaxation',
+      desc: 'Gentle systematic muscle release to maintain peak operational flexibility',
+      duration: '5 min',
+      icon: 'assets/icons/heart.svg',
+      bg: '#FDECE9',
+      tag: 'Maintenance',
+      tagColor: '#2B6CB0',
+      tagBg: '#EBF8FF',
+      highlighted: false
+    });
+  }
+
+  // 2. Cognitive / Demand specific
+  if (driver === 'Sleep fragmentation' || sleepRest === '<5h') {
+    activities.push({
+      title: 'NSDR (Non-Sleep Deep Rest)',
+      desc: 'Scientifically calibrated guided pause to restore mental clarity in 12 minutes',
+      duration: '12 min',
+      icon: 'assets/icons/moon.svg',
+      bg: '#E7F1F6',
+      tag: 'Rest Recovery',
+      tagColor: '#3182CE',
+      tagBg: '#EBF8FF',
+      highlighted: true
+    });
+  } else if (driver === 'High-tempo shifts') {
+    activities.push({
+      title: 'Post-Duty Cognitive Decompression',
+      desc: 'Mental gear-shift to step down hypervigilance after intense operational tempo',
+      duration: '5 min',
+      icon: 'assets/icons/breath.svg',
+      bg: '#EAF2ED',
+      tag: 'Decompression',
+      tagColor: '#2F855A',
+      tagBg: '#F0FFF4',
+      highlighted: true
+    });
+  } else if (driver === 'Family separation') {
+    activities.push({
+      title: 'Anchor Grounding & Gratitude',
+      desc: 'Affirming emotional connection with distant family & loved ones',
+      duration: '6 min',
+      icon: 'assets/icons/heart.svg',
+      bg: '#FDECE9',
+      tag: 'Emotional Anchor',
+      tagColor: '#805AD5',
+      tagBg: '#FAF5FF',
+      highlighted: true
+    });
+  } else {
+    activities.push({
+      title: 'Sensory 5-4-3-2-1 Orientation Reset',
+      desc: 'Rapid sensory reconnection to stay calm and rooted in the present environment',
+      duration: '4 min',
+      icon: 'assets/icons/breath.svg',
+      bg: '#EAF2ED',
+      tag: 'Sensory Grounding',
+      tagColor: '#2F855A',
+      tagBg: '#F0FFF4',
+      highlighted: false
+    });
+  }
+
+  // 3. Autonomic Breath Pacer Session
+  activities.push({
+    title: 'Box Breathing (4-4-4-4 Regulation)',
+    desc: 'Equal-ratio tactical breathing to balance sympathetic & parasympathetic tone',
+    duration: '3 min',
+    icon: 'assets/icons/breath.svg',
+    bg: '#EAF2ED',
+    tag: 'Autonomic Pacer',
+    tagColor: '#2F855A',
+    tagBg: '#F0FFF4',
+    highlighted: false
+  });
+
+  // 4. Barrack Sleep Soundscape
+  activities.push({
+    title: 'Barrack Sleep Soundscape',
+    desc: 'Soft Himalayan rainfall and white noise tailored for military barracks',
+    duration: '15 min',
+    icon: 'assets/icons/moon.svg',
+    bg: '#E7F1F6',
+    tag: 'Soundscape',
+    tagColor: '#6B46C1',
+    tagBg: '#FAF5FF',
+    highlighted: false
+  });
+
+  if (badgeCount) badgeCount.textContent = `${activities.length} tailored`;
+
+  list.innerHTML = activities.map(act => `
+    <div class="activity-item ${act.highlighted ? 'highlighted' : ''}" onclick="openActivitySession('${escapeHtml(act.title)}', '${act.duration}', '${escapeHtml(act.desc)}')">
+      <div class="activity-icon-sq" style="background:${act.bg};">
+        <img src="${act.icon}" width="20" height="20" alt="activity">
+      </div>
+      <div class="activity-info" style="flex:1;">
+        <span class="activity-tag-pill" style="color:${act.tagColor}; background:${act.tagBg};">${act.tag}</span>
+        <h4>${act.title}</h4>
+        <p>${act.desc}</p>
+      </div>
+      <span class="activity-duration">${act.duration}</span>
+    </div>
+  `).join('');
+}
+window.refreshSelfCareActivities = refreshSelfCareActivities;
+
+// =========================================================
+// INTERACTIVE GUIDED ACTIVITY SESSION MODAL CONTROLLER
+// =========================================================
+let activityPacerInterval = null;
+let activityCountdownInterval = null;
+let activitySecondsRemaining = 180;
+let isActivityPaused = false;
+
+export function openActivitySession(title, durationStr, desc) {
+  const modal = document.getElementById('activitySessionModal');
+  const modalTitle = document.getElementById('activityModalTitle');
+  const modalDesc = document.getElementById('activityModalDesc');
+  const modalTimer = document.getElementById('activityModalTimer');
+  const pacerText = document.getElementById('activityModalPacerText');
+  const toggleBtn = document.getElementById('activityModalToggleBtn');
+
+  if (modalTitle) modalTitle.textContent = title;
+  if (modalDesc) modalDesc.textContent = desc;
+
+  // Parse minutes from duration string e.g. "4 min"
+  const mins = parseInt(durationStr, 10) || 3;
+  activitySecondsRemaining = mins * 60;
+  isActivityPaused = false;
+
+  if (modalTimer) {
+    const m = String(Math.floor(activitySecondsRemaining / 60)).padStart(2, '0');
+    const s = String(activitySecondsRemaining % 60).padStart(2, '0');
+    modalTimer.textContent = `${m}:${s}`;
+  }
+
+  if (toggleBtn) toggleBtn.textContent = 'Pause';
+  if (modal) modal.classList.add('active');
+
+  // Start Pacer Rhythm (Inhale 4s -> Hold 4s -> Exhale 4s)
+  const phases = ['Inhale gently (4s)', 'Hold steady (4s)', 'Exhale slowly (4s)', 'Rest & clear (4s)'];
+  let phaseIdx = 0;
+  if (pacerText) pacerText.textContent = phases[phaseIdx];
+
+  clearInterval(activityPacerInterval);
+  activityPacerInterval = setInterval(() => {
+    if (!isActivityPaused) {
+      phaseIdx = (phaseIdx + 1) % phases.length;
+      if (pacerText) pacerText.textContent = phases[phaseIdx];
+    }
+  }, 4000);
+
+  // Start Countdown Timer
+  clearInterval(activityCountdownInterval);
+  activityCountdownInterval = setInterval(() => {
+    if (!isActivityPaused) {
+      if (activitySecondsRemaining > 0) {
+        activitySecondsRemaining--;
+        const m = String(Math.floor(activitySecondsRemaining / 60)).padStart(2, '0');
+        const s = String(activitySecondsRemaining % 60).padStart(2, '0');
+        if (modalTimer) modalTimer.textContent = `${m}:${s}`;
+      } else {
+        closeActivitySession();
+        alert(`Session Completed!\nGreat work taking time for your wellbeing.`);
+      }
+    }
+  }, 1000);
+}
+window.openActivitySession = openActivitySession;
+
+export function closeActivitySession() {
+  clearInterval(activityPacerInterval);
+  clearInterval(activityCountdownInterval);
+  const modal = document.getElementById('activitySessionModal');
+  if (modal) modal.classList.remove('active');
+}
+window.closeActivitySession = closeActivitySession;
+
+export function toggleActivitySessionPlay() {
+  isActivityPaused = !isActivityPaused;
+  const toggleBtn = document.getElementById('activityModalToggleBtn');
+  if (toggleBtn) toggleBtn.textContent = isActivityPaused ? 'Resume' : 'Pause';
+}
+window.toggleActivitySessionPlay = toggleActivitySessionPlay;
+
+// Daily Habit Counters
 let waterCount = 4;
 export function incrementWaterHabit() {
   waterCount = Math.min(6, waterCount + 1);
@@ -370,6 +922,7 @@ export function incrementWaterHabit() {
     btn.textContent = '✓';
     btn.classList.add('checked');
   }
+  updateHomeDashboardStats();
 }
 window.incrementWaterHabit = incrementWaterHabit;
 
@@ -539,12 +1092,19 @@ function finishCheckin() {
     mood: checkinAnswers.mood,
     moodEmoji: checkinAnswers.moodEmoji,
     energyLevel: checkinAnswers.energyLevel,
+    tensionArea: checkinAnswers.tensionArea || 'Neck & Shoulders',
+    stressDriver: checkinAnswers.stressDriver || 'High-tempo shifts',
     factors: [...checkinAnswers.factors],
     healthIndicators: { ...indicators },
     isStressRisk,
     note: checkinAnswers.note || 'Private personal reflection completed.'
   };
   StorageService.addCheckin(newEntry);
+
+  // Live Refresh Dashboard Stats, Dynamic Wave Graph & Self Care Activities
+  updateHomeDashboardStats();
+  renderDynamicWaveGraph('today');
+  refreshSelfCareActivities(newEntry);
 
   // Update Result Screen (Screen 07)
   const banner = document.getElementById('checkinStressRiskBanner');
@@ -1345,5 +1905,8 @@ document.addEventListener('DOMContentLoaded', () => {
   setupBreathingPacer();
   setupViewModeSwitcher();
   initCaseStudiesDropdown();
+  updateHomeDashboardStats();
+  renderDynamicWaveGraph('today');
+  refreshSelfCareActivities();
   navigateToScreen('04'); // Launch directly on Home Dashboard per requirements
 });

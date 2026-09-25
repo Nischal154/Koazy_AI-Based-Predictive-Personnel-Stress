@@ -298,6 +298,61 @@
               </div>
             </div>
 
+            <!-- Functional Mood & Readiness State Card (Real Data) -->
+            <div class="home-functional-mood-card" id="homeFunctionalMoodCard">
+              <div class="functional-mood-header">
+                <div class="functional-mood-pill" id="homeFunctionalStatePill">
+                  <span class="state-dot green"></span>
+                  <span id="homeFunctionalStateText">Fit for Duty • High Resilience</span>
+                </div>
+                <span class="functional-update-time" id="homeFunctionalUpdateTime">Synced just now</span>
+              </div>
+              <div class="functional-metric-bars">
+                <div class="f-metric-row">
+                  <div class="f-metric-info">
+                    <span>Emotional Balance</span>
+                    <strong id="homeEmotionalScoreText">84%</strong>
+                  </div>
+                  <div class="f-metric-bar-track">
+                    <div class="f-metric-bar-fill green" id="homeEmotionalBarFill" style="width: 84%;"></div>
+                  </div>
+                </div>
+                <div class="f-metric-row">
+                  <div class="f-metric-info">
+                    <span>Vigilance &amp; Vitality</span>
+                    <strong id="homeVitalityScoreText">78%</strong>
+                  </div>
+                  <div class="f-metric-bar-track">
+                    <div class="f-metric-bar-fill blue" id="homeVitalityBarFill" style="width: 78%;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Home Metrics Quad Grid (Readiness, Rest, Streak, Hydration) -->
+            <div class="home-metrics-quad-grid">
+              <div class="metric-quad-card" onclick="navigateToScreen('10')" title="View Readiness in Journal">
+                <div class="quad-icon-badge" style="background:#EBF8FF; color:#2B6CB0;">⚡</div>
+                <div class="quad-num" id="homeReadinessScore">84%</div>
+                <div class="quad-label">Readiness</div>
+              </div>
+              <div class="metric-quad-card" onclick="navigateToScreen('08')" title="Rest rhythm">
+                <div class="quad-icon-badge" style="background:#FAF5FF; color:#6B46C1;">🌙</div>
+                <div class="quad-num" id="homeRestScore">8.0h</div>
+                <div class="quad-label">Rest Rhythm</div>
+              </div>
+              <div class="metric-quad-card" onclick="startCheckinFlow()" title="Daily Streak">
+                <div class="quad-icon-badge" style="background:#FEFCBF; color:#B7791F;">🔥</div>
+                <div class="quad-num" id="homeStreakScore">5 Days</div>
+                <div class="quad-label">Streak</div>
+              </div>
+              <div class="metric-quad-card" onclick="incrementWaterHabit(); updateHomeDashboardStats();" title="Tap to log water intake">
+                <div class="quad-icon-badge" style="background:#E6FFFA; color:#234E52;">💧</div>
+                <div class="quad-num" id="homeHydrationScore">4/6</div>
+                <div class="quad-label">Hydration</div>
+              </div>
+            </div>
+
             <!-- Quick Stats Section -->
             <div class="section-heading-row">
               <span class="section-title">Quick Stats</span>
@@ -441,7 +496,48 @@
                     <span class="cat-item-name">Duty</span>
                     <span class="cat-item-icon">
                       <img src="assets/icons/duty_medal.svg" alt="Duty">
-                    </span>
+                  </div>
+                </div>
+
+                <!-- Interactive Adaptive Q&A Session (Somatic Tension, Stress Drivers, Real-time Vitality) -->
+                <div class="checkin-qa-card" id="checkinAdaptiveQuestionBox">
+                  <div class="checkin-qa-title">
+                    <span>🧘 Physical Tension Check</span>
+                    <span class="qa-tag-badge">Adaptive Q&amp;A</span>
+                  </div>
+                  <div class="checkin-qa-sub">Where is your body holding strain or vigilance right now?</div>
+                  <div class="qa-chips-flex" id="somaticTensionChips">
+                    <button type="button" class="qa-choice-chip active" onclick="selectAdaptiveChoice('tension', 'Neck & Shoulders', this)">Neck &amp; Shoulders</button>
+                    <button type="button" class="qa-choice-chip" onclick="selectAdaptiveChoice('tension', 'Jaw & Temples', this)">Jaw &amp; Temples</button>
+                    <button type="button" class="qa-choice-chip" onclick="selectAdaptiveChoice('tension', 'Lower Back', this)">Lower Back</button>
+                    <button type="button" class="qa-choice-chip" onclick="selectAdaptiveChoice('tension', 'Chest Tightness', this)">Chest / Breathing</button>
+                    <button type="button" class="qa-choice-chip" onclick="selectAdaptiveChoice('tension', 'No Physical Tension', this)">No Tension 🌿</button>
+                  </div>
+
+                  <div class="checkin-qa-title" style="margin-top:14px;">
+                    <span>🎯 Focus &amp; Cognitive Demands</span>
+                  </div>
+                  <div class="checkin-qa-sub">What has required the most operational or mental stamina today?</div>
+                  <div class="qa-chips-flex" id="stressDriverChips">
+                    <button type="button" class="qa-choice-chip active" onclick="selectAdaptiveChoice('driver', 'High-tempo shifts', this)">High-tempo shifts</button>
+                    <button type="button" class="qa-choice-chip" onclick="selectAdaptiveChoice('driver', 'Sleep fragmentation', this)">Sleep fragmentation</button>
+                    <button type="button" class="qa-choice-chip" onclick="selectAdaptiveChoice('driver', 'Family separation', this)">Family separation</button>
+                    <button type="button" class="qa-choice-chip" onclick="selectAdaptiveChoice('driver', 'Terrain / Weather', this)">Terrain / Weather</button>
+                    <button type="button" class="qa-choice-chip" onclick="selectAdaptiveChoice('driver', 'Balanced & steady', this)">Balanced &amp; steady ⚖️</button>
+                  </div>
+
+                  <!-- Real-time Vitality Slider -->
+                  <div class="vitality-slider-wrap">
+                    <div class="vitality-slider-header">
+                      <span style="font-size:12px; font-weight:700; color:#2D3748;">Energy &amp; Vitality Meter</span>
+                      <span class="vitality-level-badge" id="vitalityLevelBadge">72% — Recharged</span>
+                    </div>
+                    <input type="range" class="interactive-energy-slider" id="interactiveEnergySlider" min="10" max="100" value="72" oninput="updateInteractiveEnergy(this.value)">
+                    <div style="display:flex; justify-content:space-between; font-size:10px; color:#A0AEC0; font-weight:700; margin-top:4px;">
+                      <span>Depleted (10%)</span>
+                      <span>Moderate (50%)</span>
+                      <span>Peak (100%)</span>
+                    </div>
                   </div>
                 </div>
 
@@ -633,41 +729,22 @@
               </p>
             </div>
 
-            <div class="section-title" style="margin-bottom:10px;">Calming Sessions</div>
-
-            <div class="activities-list">
-              <div class="activity-item">
-                <div class="activity-icon-sq" style="background:#EAF2ED;">
-                  <img src="assets/icons/breath.svg" width="20" height="20" alt="breath">
-                </div>
-                <div class="activity-info">
-                  <h4>Post-Duty Decompression</h4>
-                  <p>Shift mental gear after intense vigilance</p>
-                </div>
-                <span class="activity-duration">3 min</span>
+            <!-- Personalized recommendation banner based on Q/A -->
+            <div class="selfcare-personalized-banner" id="selfCarePersonalizedBadge">
+              <span class="selfcare-badge-icon">🌿</span>
+              <div class="selfcare-badge-text">
+                <h5 id="selfCareBadgeTitle">Tailored to Your Check-In</h5>
+                <p id="selfCareBadgeSubtitle">Prioritizing neck/shoulder decompression &amp; steady recovery.</p>
               </div>
+            </div>
 
-              <div class="activity-item">
-                <div class="activity-icon-sq" style="background:#FDECE9;">
-                  <img src="assets/icons/heart.svg" width="20" height="20" alt="heart">
-                </div>
-                <div class="activity-info">
-                  <h4>Body Scan Relaxation</h4>
-                  <p>Release muscle tension in shoulders & back</p>
-                </div>
-                <span class="activity-duration">5 min</span>
-              </div>
+            <div class="section-title" style="margin-bottom:10px; display:flex; justify-content:space-between; align-items:center;">
+              <span>Targeted Calming Sessions</span>
+              <span style="font-size:11px; font-weight:700; color:var(--sage-700);" id="selfCareSessionCount">4 available</span>
+            </div>
 
-              <div class="activity-item">
-                <div class="activity-icon-sq" style="background:#E7F1F6;">
-                  <img src="assets/icons/moon.svg" width="20" height="20" alt="moon">
-                </div>
-                <div class="activity-info">
-                  <h4>Barrack Sleep Soundscape</h4>
-                  <p>Soft rainfall & white noise for rest</p>
-                </div>
-                <span class="activity-duration">15 min</span>
-              </div>
+            <div class="activities-list" id="selfCareActivitiesList">
+              <!-- Dynamically populated by refreshSelfCareActivities() based on Q/A -->
             </div>
           </section>
 
@@ -846,55 +923,36 @@
                 </div>
               </div>
 
-              <!-- My Activities Section (Coral Card with Wave Chart & Smileys) -->
+              <!-- My Activities Section (Coral Card with Dynamic Wave Chart & Smileys) -->
               <div class="section-heading-row">
                 <span class="section-title">My Activities</span>
+                <span style="font-size:11.5px; color:var(--text-secondary); font-weight:700;" id="waveSummaryAvgText">Avg Vitality: 78%</span>
               </div>
 
               <div class="activities-wave-card">
+                <!-- Tooltip for interactive point inspection -->
+                <div class="wave-tooltip-box" id="waveTooltipBox">Tap a marker to view details</div>
+
                 <div class="wave-graph-container">
                   <!-- Y-Axis -->
-                  <div class="wave-y-axis">
-                    <span>3hr</span>
-                    <span>2hr</span>
-                    <span>1hr</span>
-                    <span>0hr</span>
+                  <div class="wave-y-axis" id="waveYAxis">
+                    <span>100%</span>
+                    <span>75%</span>
+                    <span>50%</span>
+                    <span>25%</span>
                   </div>
 
-                  <!-- Wave Chart SVG with Smiley Markers -->
-                  <div class="wave-chart-svg-wrap">
-                    <svg class="wave-chart-svg" viewBox="0 0 240 100" fill="none">
-                      <!-- Soft area fill below wave -->
-                      <path d="M 10 90 Q 25 30, 45 35 T 90 75 T 140 40 T 180 30 T 230 90 L 230 100 L 10 100 Z" fill="rgba(255,255,255,0.15)"/>
-                      <!-- White Wave Curve -->
-                      <path d="M 10 90 Q 25 30, 45 35 T 90 75 T 140 40 T 180 30 T 230 90" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" fill="none"/>
-                      <!-- Smiley Peak 1 (13:00 - Happy) -->
-                      <circle cx="45" cy="35" r="9" fill="#FFDA63"/>
-                      <circle cx="42" cy="33" r="1.2" fill="#242B33"/>
-                      <circle cx="48" cy="33" r="1.2" fill="#242B33"/>
-                      <path d="M 42 37 Q 45 40 48 37" stroke="#242B33" stroke-width="1.2" stroke-linecap="round" fill="none"/>
-
-                      <!-- Smiley Peak 2 (1:00 - Neutral/Content) -->
-                      <circle cx="140" cy="40" r="9" fill="#FFDA63"/>
-                      <circle cx="137" cy="38" r="1.2" fill="#242B33"/>
-                      <circle cx="143" cy="38" r="1.2" fill="#242B33"/>
-                      <path d="M 137 43 L 143 43" stroke="#242B33" stroke-width="1.2" stroke-linecap="round"/>
-
-                      <!-- Smiley Dip (Tired/Sleepy) -->
-                      <circle cx="160" cy="82" r="7.5" fill="#FFDA63"/>
-                      <circle cx="158" cy="80" r="1" fill="#242B33"/>
-                      <circle cx="162" cy="80" r="1" fill="#242B33"/>
-                      <path d="M 158 84 Q 160 82 162 84" stroke="#242B33" stroke-width="1" stroke-linecap="round" fill="none"/>
+                  <!-- Wave Chart SVG with dynamic spline & interactive markers -->
+                  <div class="wave-chart-svg-wrap" id="waveChartWrap">
+                    <svg class="wave-chart-svg" id="dynamicWaveSvg" viewBox="0 0 240 100" fill="none">
+                      <!-- Dynamically rendered via renderDynamicWaveGraph() -->
                     </svg>
                   </div>
                 </div>
 
                 <!-- X-Axis Timestamps -->
-                <div class="wave-x-axis">
-                  <span>13:00</span>
-                  <span>12:00</span>
-                  <span>1:00</span>
-                  <span>2:00</span>
+                <div class="wave-x-axis" id="waveXAxis">
+                  <!-- Dynamically rendered according to timeframe -->
                 </div>
               </div>
 
@@ -1756,6 +1814,26 @@
     </div>
 
   </section>
+
+  <!-- Interactive Activity Session Modal (Guided Pacer) -->
+  <div id="activitySessionModal" class="activity-session-modal">
+    <div class="activity-session-card">
+      <div style="display:flex; justify-content:flex-end; width:100%;">
+        <button class="back-circle-btn" onclick="closeActivitySession()" style="width:30px; height:30px; font-size:14px;">✕</button>
+      </div>
+      <div style="font-size:38px; margin: 6px 0;" id="activityModalIcon">🌿</div>
+      <h3 style="font-size:18px; font-weight:800; color:#1A202C; margin:0 0 4px;" id="activityModalTitle">Tactical Box Breathing</h3>
+      <p style="font-size:12px; color:#718096; margin:0 0 16px; line-height:1.4;" id="activityModalDesc">Regulate heart rate variability and down-regulate sympathetic arousal.</p>
+      <div class="breathing-pacer-circle" id="activityModalPacerCircle" style="width:110px; height:110px; margin:10px auto;">
+        <span id="activityModalPacerText" style="font-size:13px; font-weight:800; color:#234E52;">Inhale (4s)</span>
+      </div>
+      <div style="font-size:22px; font-weight:900; color:#2B6CB0; margin:14px 0 6px;" id="activityModalTimer">03:00</div>
+      <div style="display:flex; gap:10px; width:100%; margin-top:10px;">
+        <button class="btn-primary" id="activityModalToggleBtn" onclick="toggleActivitySessionPlay()" style="flex:1; padding:10px;">Pause</button>
+        <button class="btn-secondary" onclick="closeActivitySession()" style="flex:1; padding:10px;">Finish</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Prototype Application Controller Script -->
   <script type="module" src="src/app.js"></script>

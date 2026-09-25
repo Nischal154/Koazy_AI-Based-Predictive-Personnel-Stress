@@ -3056,3 +3056,348 @@ body, button, input, textarea, select {
   background: #10239E;
 }
 
+/* =========================================================
+   HOME PAGE FUNCTIONAL REAL-DATA STATS & MOOD INDICATOR
+========================================================= */
+.home-functional-mood-card {
+  background: #FFFFFF;
+  border-radius: 20px;
+  padding: 16px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.functional-mood-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.functional-mood-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #E8F5E9;
+  color: #1B5E20;
+  padding: 5px 12px;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+
+.functional-mood-badge.warning {
+  background: #FFEBEE;
+  color: #C62828;
+}
+
+.functional-mood-time {
+  font-size: 11px;
+  font-weight: 600;
+  color: #8C96A1;
+}
+
+.functional-mood-desc {
+  font-size: 12.5px;
+  color: #4A5568;
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* 4-Metric Functional Stats Grid on Home */
+.home-metrics-quad-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.metric-quad-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 18px;
+  padding: 12px 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 78px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.metric-quad-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+}
+
+.metric-quad-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.metric-quad-label {
+  font-size: 10.5px;
+  font-weight: 800;
+  color: #718096;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.metric-quad-icon {
+  font-size: 14px;
+}
+
+.metric-quad-value {
+  font-size: 18px;
+  font-weight: 800;
+  color: #1A202C;
+  line-height: 1.1;
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.metric-quad-sub {
+  font-size: 10px;
+  font-weight: 700;
+  color: #38A169;
+  margin-top: 2px;
+}
+
+.metric-quad-sub.alert {
+  color: #E53E3E;
+}
+
+/* =========================================================
+   INTERACTIVE Q&A SESSION IN DAILY CHECK-IN
+========================================================= */
+.checkin-qa-card {
+  background: #FFFFFF;
+  border-radius: 20px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.checkin-qa-title {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #1A1E24;
+  margin-bottom: 2px;
+}
+
+.checkin-qa-sub {
+  font-size: 11px;
+  color: #718096;
+  margin-bottom: 10px;
+}
+
+.qa-chips-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.qa-choice-chip {
+  background: #F7FAFC;
+  border: 1.5px solid #EDF2F7;
+  color: #2D3748;
+  padding: 7px 12px;
+  border-radius: 99px;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.qa-choice-chip:hover {
+  background: #EDF2F7;
+  border-color: #CBD5E0;
+}
+
+.qa-choice-chip.selected {
+  background: #1A202C;
+  color: #FFFFFF;
+  border-color: #1A202C;
+  box-shadow: 0 3px 10px rgba(26, 32, 44, 0.25);
+}
+
+.qa-choice-chip.alert.selected {
+  background: #E53E3E;
+  color: #FFFFFF;
+  border-color: #E53E3E;
+  box-shadow: 0 3px 10px rgba(229, 62, 62, 0.3);
+}
+
+/* Vitality / Energy Slider Box */
+.vitality-slider-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.vitality-slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.vitality-level-badge {
+  font-size: 11.5px;
+  font-weight: 800;
+  color: #2B6CB0;
+  background: #EBF8FF;
+  padding: 3px 10px;
+  border-radius: 99px;
+  transition: all 0.2s ease;
+}
+
+.interactive-energy-slider {
+  width: 100%;
+  accent-color: #EB7958;
+  cursor: pointer;
+  height: 6px;
+  border-radius: 99px;
+}
+
+/* =========================================================
+   DYNAMIC SELF CARE & CALM (SCREEN 08)
+========================================================= */
+.selfcare-personalized-banner {
+  background: linear-gradient(135deg, #E6FFFA 0%, #EBF8FF 100%);
+  border: 1px solid #B2F5EA;
+  border-radius: 16px;
+  padding: 10px 14px;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.selfcare-badge-icon {
+  font-size: 18px;
+}
+
+.selfcare-badge-text h5 {
+  font-size: 12px;
+  font-weight: 800;
+  color: #234E52;
+  margin: 0 0 2px;
+}
+
+.selfcare-badge-text p {
+  font-size: 10.5px;
+  color: #2C7A7B;
+  margin: 0;
+}
+
+.activity-item {
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 18px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+.activity-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+  border-color: #CBD5E0;
+}
+
+.activity-item.highlighted {
+  border-color: #38B2AC;
+  background: #F0FFF4;
+}
+
+.activity-tag-pill {
+  font-size: 9.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  margin-bottom: 4px;
+  display: inline-block;
+}
+
+/* Interactive Session Fullscreen Modal */
+.activity-session-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(18, 19, 22, 0.85);
+  backdrop-filter: blur(10px);
+  z-index: 100;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.activity-session-modal.active {
+  display: flex;
+}
+
+.activity-session-card {
+  background: #FFFFFF;
+  border-radius: 26px;
+  padding: 24px 20px;
+  width: 100%;
+  max-width: 320px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+
+/* =========================================================
+   DYNAMIC WAVE GRAPH & TOOLTIP (SCREEN 10)
+========================================================= */
+.wave-tooltip-box {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  background: rgba(26, 32, 44, 0.88);
+  backdrop-filter: blur(4px);
+  color: #FFFFFF;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 5;
+}
+
+.wave-point-interactive {
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.wave-point-interactive:hover {
+  transform: scale(1.18);
+  filter: drop-shadow(0 3px 8px rgba(0,0,0,0.35));
+}
+
+
